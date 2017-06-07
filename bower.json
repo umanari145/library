@@ -1,0 +1,23 @@
+{
+  "name": "library",
+  "homepage": "https://github.com/umanari145/library",
+  "description": "javascrit utility library",
+  "main": "",
+  "authors": [
+    "matsumoto"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "datatables.net": "^1.10.15"
+  }
+}

@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule public/address/(\d+)  public/address\.php?zip=$1
+RewriteRule public/address/  public/address\.php?offset=10
+</IfModule>
