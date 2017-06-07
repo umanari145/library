@@ -45,7 +45,16 @@ switch ($_SERVER ['REQUEST_METHOD']) {
         //暫定的にzipをoffsetとして扱う
         $zip = ( isset($_GET['zip']) && preg_match( '/^\d{1,7}$/',$_GET['zip']) === 1 ) ? $_GET['zip']:'';
         $offset = ( isset($_GET['offset']) && preg_match( '/^\d+$/',$_GET['offset']) === 1 ) ? $_GET['offset']:0;
-        $addressinfo = getAddress ($zip, $offset);
+
+        $sEcho = ( isset($_GET['sEcho']) && preg_match( '/^\d+$/',$_GET['sEcho']) === 1 ) ? $_GET['sEcho']:1;
+
+        $limit = ( isset($_GET['iDisplayLength']) && preg_match( '/^\d+$/',$_GET['iDisplayLength']) === 1 ) ? $_GET['iDisplayLength']:100;
+        if($sEcho === "1") {
+            $limit = 1000;
+        }
+
+        $offset = ( isset($_GET['iDisplayStart']) && preg_match( '/^\d+$/',$_GET['iDisplayStart']) === 1 ) ? $_GET['iDisplayStart']:0;
+        $addressinfo = getAddress ($offset, $limit);
         $jsonData = formatDataTables($addressinfo);
         header('content-type: application/json; charset=utf-8');
         echo json_encode ( $jsonData);
@@ -53,8 +62,11 @@ switch ($_SERVER ['REQUEST_METHOD']) {
      break;
 }
 
-function getAddress ($zip, $offset) {
+function getAddress ($offset, $limit) {
+
     $datas =[];
+
+
 
     $query = ORM::for_table ( 'zip' )
              ->select_many ( 'id', 'zip', 'address1', 'address2', 'address3');
@@ -63,7 +75,7 @@ function getAddress ($zip, $offset) {
         $query->where_like('zip',  $zip.'%');
     }
 
-    $datas = $query->limit(1000)
+    $datas = $query->limit($limit)
            ->offset($offset)
            ->find_array ();
     return $datas;
@@ -73,11 +85,12 @@ function formatDataTables($addressinfo) {
     $data = _::map($addressinfo, function($address) {
         return array_values($address);
     });
+
     return [
         'iTotalRecords' => "100000",
         'aaData' => $data,
-        "iTotalDisplayRecords"=>"500",
+        "iTotalDisplayRecords"=>"100000",
         "aoColumns"=>["id","zip","address1","address2","address3"],
-        "sEcho"=>1
+        "sEcho"=> $sEcho
     ];
 }

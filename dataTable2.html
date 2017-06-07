@@ -12,16 +12,20 @@
 
     $(document).ready(function() {
         $('#address').DataTable({
-            "bScrollInfinite": true,
-            "bScrollCollapse": true,
-            "bProcessing": true,
             "bServerSide": true,
-            "sScrollY": "100px",
-            "sAjaxSource": "http://192.168.1.28/library/public/address/",
+            "sScrollY": "300px",
+            "sDom":"ti",
+            "sAjaxSource": "http://192.168.1.28/library/public/address.php",
             "scroller": {
                 loadingIndicator: true
-            }
-        });
+            },
+           "language": {
+               "emptyTable" : "データが登録されていません。",
+               "info" : "_TOTAL_ 件中 _START_ 件から _END_ 件までを表示",
+               "infoEmpty" : "",
+               "loadingRecords" : "ロード中",
+               "processing" : "処理中...",
+           }});
     });
 
     </script>
@@ -38,6 +42,5 @@
                 </tr>
             </thead>
         </table>
-        <h:link outcome="index.xhtml">トップページへ戻る</h:link>
     </body>
 </html>
