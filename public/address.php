@@ -63,7 +63,7 @@ function getAddress ($zip, $offset) {
         $query->where_like('zip',  $zip.'%');
     }
 
-    $datas = $query->limit(10)
+    $datas = $query->limit(1000)
            ->offset($offset)
            ->find_array ();
     return $datas;
@@ -73,5 +73,11 @@ function formatDataTables($addressinfo) {
     $data = _::map($addressinfo, function($address) {
         return array_values($address);
     });
-    return ['data' => $data];
+    return [
+        'iTotalRecords' => "100000",
+        'aaData' => $data,
+        "iTotalDisplayRecords"=>"500",
+        "aoColumns"=>["id","zip","address1","address2","address3"],
+        "sEcho"=>1
+    ];
 }

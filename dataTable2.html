@@ -7,13 +7,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
     <script src="./bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="./bower_components/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
     <script type="text/javascript" >
 
     $(document).ready(function() {
         $('#address').DataTable({
-            "ajax": 'http://192.168.1.28/library/public/address/',
-            "scrollY":        "200px",
-            "scrollCollapse": true,
+            "bScrollInfinite": true,
+            "bScrollCollapse": true,
+            "bProcessing": true,
+            "bServerSide": true,
+            "sScrollY": "100px",
+            "sAjaxSource": "http://192.168.1.28/library/public/address/",
+            "scroller": {
+                loadingIndicator: true
+            }
         });
     });
 
