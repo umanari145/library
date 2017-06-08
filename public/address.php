@@ -66,8 +66,6 @@ function getAddress ($offset, $limit) {
 
     $datas =[];
 
-
-
     $query = ORM::for_table ( 'zip' )
              ->select_many ( 'id', 'zip', 'address1', 'address2', 'address3');
 
