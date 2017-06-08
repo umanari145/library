@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/jquery-leanmodal/jquery.leanModal.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() {
+
+    $("#open_modal").leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
+});
+</script>
+<style type="text/css">
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}
+
+#form_block{
+   height:400px;
+   width: 400px;
+   display:none;
+   padding-bottom: 2px;
+   background:#157;
+}
+
+</style>
+
+<body>
+    <p><a id="open_modal" href="#form_block">ボタン開く</p>
+
+    <div id="form_block">
+    <input type="button" class="modal_close">
+    <form>
+        <dl>
+        <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+        <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+        </dl>
+        <p><input type="submit" value="ログイン"></p>
+    </form>
+    </div>
+
+</body>
+</html>
