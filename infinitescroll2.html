@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function() {
+
+        //スクロールしたとき
+        $(window).scroll(function() {
+            //カーソルも含めた全体のサイズ
+            var documentHeight = $(document).height();
+            //windowサイズ　大抵800～1100
+            var windowHeight =  $(window).height();
+            //スクロールカーソルの横軸の上点の位置(一番下までいくと
+            //documentHeightからwindowHeightを差し引いた分になる)
+            var windowScrollTop = $(window).scrollTop();
+
+            //カーソルが一番下にいったとき
+            if ($(document).height() - $(window).height() == $(window).scrollTop()) {
+             //loading and 新データ読み込み
+            }
+        });
+});
+</script>
+<style type="text/css">
+.article{
+  height:150px;
+}
+</style>
+<body>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+    <div class="article">
+        本日は晴天なり
+    </div>
+</body>
+</html>
