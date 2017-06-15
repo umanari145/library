@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href=" twitter_typeahead.css">
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        var substringMatcher = function(strs) {
+            return function findMatches(q, cb) {
+                var matches, substringRegex;
+
+                matches = [];
+                substrRegex = new RegExp(q, 'i');
+
+                $.each(strs, function(i, str) {
+                    if (substrRegex.test(str)) {
+                        matches.push(str);
+                    }
+                });
+                cb(matches);
+            };
+        };
+
+        var states = [ '山田','山本' ];
+
+        $('.zip .typeahead').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+          },
+          {
+            name: 'states',
+            source: substringMatcher(states)
+          });
+    });
+</script>
+<style type="text/css">
+</style>
+<body>
+	<div id="form_block">
+		<form>
+			<dl>
+				<dt>入力欄1:</dt>
+				<dd class="zip">
+					<input type="text" class="typeahead" name="zip" value="">
+				</dd>
+				<dt>入力欄2:</dt>
+				<dd class="address"></dd>
+			</dl>
+		</form>
+</body>
+</html>

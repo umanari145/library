@@ -21,6 +21,7 @@
     "datatables.net": "^1.10.15",
     "datatables.net-scroller": "^1.4.2",
     "jquery-infinite-scroll": "2.1.0",
-    "jquery-leanmodal": "*"
+    "jquery-leanmodal": "*",
+    "typeahead.js": "^0.11.1"
   }
 }
