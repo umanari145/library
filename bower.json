@@ -22,6 +22,7 @@
     "datatables.net-scroller": "^1.4.2",
     "jquery-infinite-scroll": "2.1.0",
     "jquery-leanmodal": "*",
-    "typeahead.js": "^0.11.1"
+    "typeahead.js": "^0.11.1",
+    "slider-pro":"*"
   }
 }
