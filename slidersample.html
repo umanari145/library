@@ -5,43 +5,88 @@
 <link rel="stylesheet" href="./bower_components/slider-pro/dist/css/slider-pro.min.css" />
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 <script src="./bower_components/slider-pro/dist/js/jquery.sliderPro.min.js"></script>
+
+<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css" />
+<link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css" />
+<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
+
 <script type="text/javascript">
 $(function() {
   $('#wide').sliderPro({
-    width: 100,//横幅
-    height:100,
+    width: 300,//横幅
+    height:500,
     arrows: true,//左右の矢印
-    autoplay:false,
+    autoplay:true,
     buttons: true,//ナビゲーションボタンを出す
     slideDistance:10,//スライド同士の距離
     visibleSize: '100%',//前後のスライドを表示
   });
+
+  $('.slicker').slick({
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    centerMode: true,
+    autoplay:false,
+  });
+
 });
 </script>
 <style>
-#wide{
-  width:100%;
-}
 
 li{
   list-style-type:none;
 }
+
+.slicker {
+  width:700px;
+}
+
+.slicker img{
+  width: 100%;
+}
+
 </style>
 <div id="wide" class="slider-pro">
-	<ul class="sp-slides">
+  slider-pro
+  <ul class="sp-slides">
 		<li class="sp-slide">
-			<img class="sp-image" src="images/01.jpg" />
+      <img class="sp-image" src="images/01.jpeg" />
 		</li>
 		<li class="sp-slide">
-			<img class="sp-image" src="images/02.jpg" />
+			<img class="sp-image" src="images/02.jpeg" />
 		</li>
 		<li class="sp-slide">
-			<img class="sp-image" src="images/03.jpg" />
+			<img class="sp-image" src="images/03.jpeg" />
 		</li>
 		<li class="sp-slide">
-			<img class="sp-image" src="images/04.jpg" />
+			<img class="sp-image" src="images/04.jpeg" />
+		</li>
+    <li class="sp-slide">
+			<img class="sp-image" src="images/05.jpg" />
 		</li>
 		<!--/ sp-slides-->
 	</ul>
 	<!--/ wide-->
 </div>
+
+  slicker
+	<ul class="slicker">
+		<li>
+			<img src="images/01.jpeg"/>
+		</li>
+		<li>
+			<img src="images/02.jpeg" />
+		</li>
+		<li>
+			<img src="images/03.jpeg" />
+		</li>
+		<li>
+			<img src="images/04.jpeg" />
+		</li>
+    <li>
+			<img src="images/05.jpg" />
+		</li>
+		<!--/ slicker-->
+	</ul>

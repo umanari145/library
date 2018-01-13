@@ -23,6 +23,7 @@
     "jquery-infinite-scroll": "2.1.0",
     "jquery-leanmodal": "*",
     "typeahead.js": "^0.11.1",
-    "slider-pro":"*"
+    "slider-pro": "*",
+    "slick-carousel": "^1.8.1"
   }
 }
