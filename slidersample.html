@@ -17,12 +17,14 @@
 <script type="text/javascript">
 $(function() {
   $('#wide').sliderPro({
-    width: 300,//横幅
+    width: 200,//横幅
     height:500,
-    arrows: true,//左右の矢印
+    arrows: true,//左右の矢印 ただしかなり見えにくい
     autoplay:true,
-    buttons: true,//ナビゲーションボタンを出す
+    buttons: false,//true ナビゲーションボタンを出す false ボタンを止める
     slideDistance:10,//スライド同士の距離
+    autoplayDelay:2000,//感覚
+    autoplayOnHover:'pause',//画像ホバーじに止まる(離すとまた動くstopだと完全停止)
     visibleSize: '100%',//前後のスライドを表示
   });
 
@@ -36,6 +38,7 @@ $(function() {
   });
 
     var swiper = new Swiper('.swiper-container', {
+     slidesPerView: 3,
       pagination: '.swiper-pagination',
       nextButton: '.swiper-button-next',
       prevButton: '.swiper-button-prev',
@@ -58,10 +61,6 @@ li{
 
 .slicker img{
   width: 100%;
-}
-
-.swiper-container{
-  width: 800px;
 }
 
 
