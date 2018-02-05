@@ -1,0 +1,211 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>文書のタイトル</title>
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  //スティッキーヘッダー
+  var $window = $(window), //ウィンドウを指定
+  $content = $("#content"), //#content部分
+  $chenge = $("#change"), //#change部分
+  topContent = $content.offset().top; //#contentの位置を取得
+
+  var sticky = false;
+   $window.on("scroll", function () {
+        if ($window.scrollTop() > topContent) {　//scroll位置が#contentの上にある場合
+          console.log('scroll point ' + $window.scrollTop());
+
+          console.log('scroll point ' + $window.scrollTop());
+          console.log('topContent ' + topContent);
+
+             if ( sticky === false ){
+                  $chenge.slideDown();　//#change部分が上がる。
+                  sticky = true;
+             }
+        } else {
+          console.log('scroll point ' + $window.scrollTop());
+          console.log('topContent ' + topContent);
+
+             if ( sticky === true ){　//scroll位置が下にある場合
+                  $chenge.slideUp();//#change部分が降りてくる。
+                  sticky = false;
+             }
+        }
+   });
+   $window.trigger("scroll");
+});
+</script>
+<style>
+#header {
+  background: #1c262f;
+}
+#header .inner {
+  overflow: hidden;
+  padding: 8px 0px 10px 0;
+}
+#header .inner h1 {
+  float: left;
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  font-size: 2rem;
+}
+#header .inner ul {
+  float: left;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 8px;
+  font-size: 0.8rem;
+  margin: 20px 0 10px 20px;
+}
+#header .inner ul li {
+  float: left;
+  margin-right: 20px;
+}
+#header .inner ul li a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#header {
+  background: #1c262f;
+}
+#header .inner {
+  overflow: hidden;
+  padding: 8px 0px 10px 0;
+}
+#header .inner h1 {
+  float: left;
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  font-size: 2rem;
+}
+#header .inner ul {
+  float: left;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 8px;
+  font-size: 0.8rem;
+  margin: 20px 0 10px 20px;
+}
+#header .inner ul li {
+  float: left;
+  margin-right: 20px;
+}
+#header .inner ul li a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#change {
+  background: #f66f6f;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  display: none;
+  z-index: 9999;
+  padding: 8px 0 10px 0px;
+}
+#change h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  font-size: 2rem;
+  float: left;
+  font-weight: bold;
+  color: #1c262f;
+}
+#change ul {
+  float: left;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 8px;
+  font-size: 0.8rem;
+  margin: 20px 0 10px 20px;
+}
+#change ul li {
+  float: left;
+  margin-right: 20px;
+}
+#change ul li a {
+  color: #1c262f;
+  text-decoration: none;
+}
+#change h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  font-size: 2rem;
+  float: left;
+  font-weight: bold;
+  color: #1c262f;
+}
+#change ul {
+  float: left;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 8px;
+  font-size: 0.8rem;
+  margin: 20px 0 10px 20px;
+}
+#change ul li {
+  float: left;
+  margin-right: 20px;
+}
+#change ul li a {
+  color: #1c262f;
+  text-decoration: none;
+}
+</style>
+<body>
+  サンプル
+  https://liginc.co.jp/web/html-css/html/92474
+  	<div id="wrapper">
+  		<header id="header">
+  			<div class="inner">
+  				<h1>Demo</h1>
+  				<ul>
+  					<li><a href="#">HOME</a></li>
+  					<li><a href="#">ABOUT</a></li>
+  					<li><a href="#">COMPANY</a></li>
+  					<li><a href="#">CONTACT</a></li>
+  				</ul>
+  			</div><!-- /inner -->
+  		</header>
+  		<div id="change">
+  			<div class="inner">
+  				<h1>sticky header top</h1>
+  				<ul>
+  					<li><a href="#">sticky HOME</a></li>
+  					<li><a href="#">sticky ABOUT</a></li>
+  					<li><a href="#">sticky COMPANY</a></li>
+  					<li><a href="#">sticky CONTACT</a></li>
+  				</ul>
+  			</div><!-- /inner -->
+  		</div>
+  		<section id="top">
+  			<div class="inner">
+  				<h1><span>Demo</span></h1>
+  			</div>
+  		</section><!--/top-->
+  		<section id="content">
+  			<div class="inner">
+  				<div id="arrow">
+  					<span class="left"></span>
+  					<span class="right"></span>
+  					<span class="icon"></span>
+  				</div><!-- /arrow -->
+  				<h1>Title</h1>
+  				<p>sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.</p>
+
+  				<h1>Title</h1>
+  				<p>sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.</p>
+
+  				<h1>Title</h1>
+  				<p>sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.</p>
+
+  				<h1>Title</h1>
+  				<p>sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.</p>
+
+  				<h1>Title</h1>
+  				<p>sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.sample text.</p>
+  			</div><!-- /inner -->
+  		</section>
+  	</div><!-- /wrapper -->
+</body>
+</html>
