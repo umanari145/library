@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  var func1 = $.ajax({
+      type:'GET',
+      url:'/library/ajaxpost2.json',
+      dataType:'json'
+  }).done((res1) => {
+    return res1
+  });
+
+  var func2 = $.ajax({
+      type:'GET',
+      url:'/library/ajaxpost3.json',
+      dataType:'json'
+  }).done((res2) => {
+    return res2
+  });
+
+  $.when(func1, func2).done(function(res1, res2){
+    //下記のように書いておくとres1の結果を処理したあと、res2が処理される
+    //ajaxを並列的に行っておきながら実行後は同期的にres1,res2の順に処理がされる
+    console.log(res1)
+    console.log(res2)
+  })
+
+})
+</script>
+<body>
+	<div id="form_block">
+</body>
+</html>
