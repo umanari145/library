@@ -7,6 +7,7 @@ var config = require('./resources/config.js');
 gulp.task('webpack',function(){
     gulp.src(config.webpack.entry)
     .pipe(webpack(config.webpack))
-    .pipe(gulpif(config.js.uglify, uglify()))
+    //ckeditor発生時エラー
+    //.pipe(gulpif(config.js.uglify, uglify()))
     .pipe(gulp.dest(config.js.dest));
 });

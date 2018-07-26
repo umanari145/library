@@ -20,6 +20,7 @@
 
 - testtool テストデータの入力
 - resources コンパイルを使ったJSのサンプル
+    - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
 - public dataTable.htmlを受け付けるプログラムのサンプル
 - gulpfile.js 下記コマンドでwebpackを使ったコンパイル　
 ```
