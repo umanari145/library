@@ -1,5 +1,10 @@
 var dest = './resources'; // 出力先ディレクトリ
 var src = './resources';  // ソースディレクトリ
+var loadenv = require('node-env-file')
+
+loadenv('.env')
+//envを読み込める
+console.log('---' + process.env.DBNAME)
 
 module.exports = {
   // 出力先の指定
@@ -19,6 +24,9 @@ module.exports = {
     },
     resolve: {
       extensions: ['', '.js']
+    },
+    node:{
+      fs: 'empty'
     }
   }
 }
