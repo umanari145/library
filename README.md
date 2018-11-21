@@ -8,6 +8,16 @@
     - js/bundle.js main.jsがコンパイルされたもの
     - js/main.js requireされたライブラリ
 
+- es6sample ECMAScript2015について
+    - lib/PersonClass.js exportするクラス
+    - es6sample.js let,const,アロー演算子,classの新しい書き方など
+    - es6load.js importを使った他ファイルの読み込み
+    - es6class.js classの書き方
+    - es6modules.js exportを使った関数
+    - es6sample.html ブラウザへのデバッグ用のhtml
+
+
+
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
 - infinitescroll2.html 無限スクロール　オリジナル
