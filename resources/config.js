@@ -22,6 +22,7 @@ module.exports = {
     output: {
       filename: 'build.js'
     },
+    devtool: 'source-map',
     resolve: {
       extensions: ['', '.js']
     },
