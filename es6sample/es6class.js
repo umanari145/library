@@ -25,4 +25,5 @@ class StudentClass extends PersonClass{
 }
 
 let stundent = new StudentClass(2, '松井', 35)
+stundent.printName()
 stundent.sendMessage()

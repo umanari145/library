@@ -1,6 +1,6 @@
 let name = "太朗"
 console.log(name)
-//再代入は下記のようなエラーが起きる Uncaught SyntaxError: Identifier 'name' has already been declared
+//再宣言は下記のようなエラーが起きる Uncaught SyntaxError: Identifier 'name' has already been declared
 //let name = "二郎"
 //再宣言は問題ない
 name = "二郎"
@@ -61,7 +61,7 @@ const person2 = {
   name: '太郎',
   lazy_hello:function(){
     setTimeout(function(){
-      //thisが指しているのはwindow
+      //thisが指しているのはwindowなため画面に出ない
       console.log(`${this.name}を画面に出力します。2`)
     }, 1000)
   }
