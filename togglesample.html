@@ -25,6 +25,14 @@ $(document).ready(function() {
   .dis_css + .children{
     display: block;
   }
+
+  #toggle_check:not(:checked) +label .close{
+       display: none;
+  }
+
+  #toggle_check:checked + label .open {
+       display: none;
+  }
 </style>
 
 <body>
@@ -47,6 +55,14 @@ $(document).ready(function() {
    <div class="children3">
       ボタンを押すと開閉します
    </div>
+
+   <p>CSSのみでのtoggle</p>
+   <input type="checkbox" id="toggle_check" style="display: none;">
+   <label for="toggle_check">
+       <span class="open">開け</span>
+       <span class="close">閉じろ</span>
+   </label>
+
  </div>
 </body>
 </html>
