@@ -9,7 +9,6 @@ console.log('---' + process.env.DBNAME)
 module.exports = {
   // 出力先の指定
   dest: dest,
-
   // jsのビルド設定
   js: {
     src: src + '/**',
@@ -18,16 +17,11 @@ module.exports = {
   },
   // webpackの設定
   webpack: {
+    mode: 'development',
     entry: src + '/sample_rs.js',
     output: {
       filename: 'build.js'
     },
     devtool: 'source-map',
-    resolve: {
-      extensions: ['', '.js']
-    },
-    node:{
-      fs: 'empty'
-    }
   }
 }

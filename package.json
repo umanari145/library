@@ -21,9 +21,7 @@
     "gulp": "^3.9.1",
     "gulp-if": "^2.0.2",
     "gulp-uglify": "^3.0.1",
-    "gulp-webpack": "^1.5.0",
     "jquery": "^3.3.1",
-    "node-env-file": "^0.1.8",
     "webpack": "^4.16.2",
     "webpack-cli": "^2.1.5"
   },
@@ -33,6 +31,8 @@
     "jquery-ui": "^1.12.1",
     "jquery-ui-sass": "0.0.1",
     "moment": "^2.22.2",
-    "select2": "^4.0.6-rc.1"
+    "node-env-file": "^0.1.8",
+    "select2": "^4.0.6-rc.1",
+    "webpack-stream": "^5.2.1"
   }
 }
