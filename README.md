@@ -25,7 +25,7 @@
 - makeFormFromJS.js フォームにデータを自動入力するサンプル
 - slidersample.html slider-pro slicker swiperを使ったスライダーのサンプル
 - sticky.html スティッキーヘッダーのサンプル(一定スクロール量を越えるとヘッダに固定されるタイプのヘッダー)
-- togglesample.html toggleClass, slideToggle, fadeToggleのサンプル
+- togglesample.html toggleClass, slideToggle, fadeToggle, CSSのみでのtoggleのサンプル
 - typeahead.html 入力補完用のライブラリ
 
 - testtool テストデータの入力
