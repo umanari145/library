@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+https://qiita.com/hikarut/items/6c236b6d6ff6ec10cd7a
+function hidouki1() {
+  return new Promise(function(resolve){
+    setTimeout(function(){
+        resolve(console.log('aaaa'))
+    },3000)})
+}
+
+function hidouki2() {
+  return new Promise(function(resolve){
+      setTimeout(function(){
+          resolve(console.log('bbb'))
+      },2000)})
+}
+
+Promise.resolve()
+    .then(hidouki1)
+    .then(hidouki2)
+
+
+function geturl(url) {
+    return new Promise(function(resolve,reject) {
+        $.ajax({
+           'url':url,
+           'type':'GET',
+       }).done((data) =>{
+           resolve(console.log(data))
+       }).fail((data) =>{
+           reject(console.log('fail!' + url))
+       })
+    })
+}
+
+let url1 = 'http://localhost/library/jsondata2.json'
+let url2 = 'http://localhost/library/jsondata.json'
+Promise.resolve()
+    .then(geturl(url1))
+    .then(geturl(url2))
+
+</script>
+<body>
+	<div id="form_block"></div>
+</body>
+</html>
