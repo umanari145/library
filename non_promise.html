@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+//https://qiita.com/natsuki_summer/items/50a2f5981f757dfe81c7
+const apiKey = 'ucC12wVgsngvVL8gxokroFuHSgMgvgem5ZTL3LnA';
+const apiUrl = "https://opendata.resas-portal.go.jp/api/v1/";
+
+let ajaxPrefProp = {
+    url:apiUrl + 'prefectures',
+    type:'GET',
+    headers:{
+        'X-API-KEY':apiKey
+    }
+}
+
+let ajaxCityProp = {
+    url:apiUrl + "cities",
+    type:'GET',
+    headers:{
+        'X-API-KEY':apiKey
+    }
+}
+
+function getPref() {
+    $.ajax(ajaxPrefProp).done((data) => {
+        if (data['result'] !== undefined) {
+            let length = data['result'].length
+            for(var i = 0; i < length; i++) {
+                if (data['result'][i]['prefName'] == '千葉県') {
+                    $('#pref_area').html(data['result'][i]['prefName'] + ':' +data['result'][i]['prefCode'])
+                    getShiku(data['result'][i]['prefCode'])
+                }
+            }
+        }
+    }).fail((data) => {
+        console.log('サーバーとの通信に失敗しました。')
+    })
+}
+
+function getShiku(pref_val) {
+    ajaxCityProp['data'] = {
+        'prefCode':pref_val
+    }
+    $.ajax(ajaxCityProp).done((data) => {
+        let length = data['result'].length
+        let cityStr = ''
+        for(var i = 0; i < length; i++) {
+            cityStr += data['result'][i]['cityName'] + '<br>'
+        }
+        $('#city_area').html(cityStr)
+    }).fail((data) => {
+        console.log('サーバーとの通信に失敗しました。')
+    })
+
+}
+
+</script>
+<body>
+	<div id="pref_area"></div>
+    <div id="city_area"></div>
+</body>
+</html>
