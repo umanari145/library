@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+//https://qiita.com/soarflat/items/1a9613e023200bbebcb3
+//promise
+function sampleResolve(value) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(value*2)
+        }, 2000)
+    })
+}
+
+function sample() {
+    return sampleResolve(5).then(result => {
+        return result + 3
+    })
+}
+
+sample(5)
+ .then((res) => {
+    console.log('promise only')
+    console.log(res)
+ })
+
+/////////////////////////////////////////////////////////////////////////
+
+function sampleResolve(value) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(value*2)
+        }, 2000)
+    })
+}
+
+async function sample() {
+    const result = await sampleResolve(5)
+    return result + 5
+}
+
+sample(5)
+ .then((res) => {
+    console.log('async_awit')
+    console.log(res)
+ })
+
+
+</script>
+<body>
+	<div id="pref_area"></div>
+    <div id="city_area"></div>
+</body>
+</html>

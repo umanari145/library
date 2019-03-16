@@ -5,6 +5,7 @@
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 //https://qiita.com/natsuki_summer/items/50a2f5981f757dfe81c7
+//https://qiita.com/soarflat/items/1a9613e023200bbebcb3
 const apiKey = 'ucC12wVgsngvVL8gxokroFuHSgMgvgem5ZTL3LnA';
 const apiUrl = "https://opendata.resas-portal.go.jp/api/v1/";
 
@@ -23,51 +24,35 @@ let ajaxCityProp = {
         'X-API-KEY':apiKey
     }
 }
-
-function getPref() {
-    return new Promise((resolve, reject) => {
-        $.ajax(ajaxPrefProp).done((data) => {
-            resolve(data)
-        }).fail((data) => {
-            reject(data)
-        })
-    })
-}
-
-function getShiku(pref_val) {
-    return new Promise((resolve, reject) => {
-        ajaxCityProp['data'] = {
-            'prefCode':pref_val
-        }
-        $.ajax(ajaxCityProp).done((data) => {
-            resolve(data)
-        }).fail((data) => {
-            reject(data)
-        })
-    })
-}
-
-//Promise使用時
-getPref()
-.then((data) => {
+async function getPref() {
+    let data = await $.ajax(ajaxPrefProp)
     if (data['result'] !== undefined) {
         let length = data['result'].length
         for(var i = 0; i < length; i++) {
             if (data['result'][i]['prefName'] == '千葉県') {
                 $('#pref_area').html(data['result'][i]['prefName'] + ':' +data['result'][i]['prefCode'])
-                return getShiku(data['result'][i]['prefCode'])
+                return data['result'][i]['prefCode']
             }
         }
     }
-}).then((data) => {
+}
+
+async function getShiku(pref_val) {
+    ajaxCityProp['data'] = {
+        'prefCode':pref_val
+    }
+    let data = await $.ajax(ajaxCityProp)
     let length = data['result'].length
     let cityStr = ''
     for(var i = 0; i < length; i++) {
         cityStr += data['result'][i]['cityName'] + '<br>'
     }
     $('#city_area').html(cityStr)
-},(err, msg) => {
-    console.log('サーバーとの通信に失敗しました。')
+}
+
+getPref()
+.then((prefCode) =>{
+    getShiku(prefCode)
 })
 
 </script>
