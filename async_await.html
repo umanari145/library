@@ -25,6 +25,8 @@ let ajaxCityProp = {
     }
 }
 async function getPref() {
+    //文字通りwait=まつ
+    //awaitを書かないと取得前に処理が走ってしまう
     let data = await $.ajax(ajaxPrefProp)
     if (data['result'] !== undefined) {
         let length = data['result'].length
@@ -41,6 +43,7 @@ async function getShiku(pref_val) {
     ajaxCityProp['data'] = {
         'prefCode':pref_val
     }
+    //文字通りwait=まつ
     let data = await $.ajax(ajaxCityProp)
     let length = data['result'].length
     let cityStr = ''
