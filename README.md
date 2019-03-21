@@ -25,6 +25,7 @@
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
 - infinitescroll2.html 無限スクロール　オリジナル
 - modal.html leanModalを使ったモーダルウィンドウ
+- modal.html 独自モーダルウィンドウ
 - makeFormFromJS.js フォームにデータを自動入力するサンプル
 - slidersample.html slider-pro slicker swiperを使ったスライダーのサンプル
 - sticky.html スティッキーヘッダーのサンプル(一定スクロール量を越えるとヘッダに固定されるタイプのヘッダー)

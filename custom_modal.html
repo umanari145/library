@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" >
+$(function() {
+    $('.mdOpen').click(function(){
+        $('#totalwrapper').show()
+    })
+    $('#mdOverlay, .mdClose').click(function(){
+        $('#totalwrapper').hide()
+    })
+});
+</script>
+<style type="text/css">
+
+#mdOverlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    opacity: 0.6;
+}
+
+#mdWindow{
+    position:absolute;
+    z-index: 101;
+    top:5%;
+    left:5%;
+    width: 90%;
+    height: 90%;
+    background: #fff;
+}
+
+.mdClose{
+    position: absolute;
+    top:2px;
+    right:2px;
+}
+
+#modalInclude{
+    margin-top: 30px;
+    margin-left:auto;
+    margin-right:auto;
+    width: 90%;
+    height: 70%;
+    overflow-y: scroll;
+    background: #f0f8ff
+}
+
+
+</style>
+
+<body>
+    <p><a href="#modalInclude" class="mdOpen">ボタン開く</a></p>
+
+    <div id="totalwrapper" style="display:none;">
+
+        <div id="mdOverlay"></div>
+
+        <div id="mdWindow">
+            <div class="mdClose">×</div>
+
+            <!--modalOverlayの子供にしないのはopacityが引き継がれ、click→閉じるイベントが発動するから-->
+            <div id="modalInclude">
+                <h2>モーダルウィンドウ</h2>
+                <form>
+                    <dl>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    <dt>userID:</dt><dd><input type="text" name="name" value=""></dd>
+                    <dt>email:</dt><dd><input type="text" name="email" value=""></dd>
+                    </dl>
+                    <p><input type="submit" value="ログイン"></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
