@@ -7,6 +7,7 @@
 - non_promise.html 非同期処理、Promiseを使わないパターン(Promiseを書かない時との比較)
 - async_await_basic.html async_awaitを使った基本サンプル
 - async_await.html api連携でのサンプル
+- dataTable.html 一般ページャー　https://datatables.net/　活用
 - dataTable(2).html 無限スクロールサンプル　https://datatables.net/　活用
 - datepicker.html datepickerとselect2の活用
     - js/bundle.js main.jsがコンパイルされたもの

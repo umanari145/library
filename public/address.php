@@ -9,9 +9,17 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;
 
+$logging_dir = dirname(__DIR__) . '/public/logs';
+$logging_path = sprintf('%s/%s', $logging_dir, 'test.log');
+if (!file_exists($logging_dir)) {
+    mkdir($logging_dir, '777');
+}
 
+if (!file_exists($logging_path)) {
+    touch($logging_dir);
+    chmod($logging_dir, 0777);
+}
 
-$logging_path = dirname(__DIR__) . '/logs/test_log.log';
 $stream = new StreamHandler($logging_path, Logger::INFO);
 $logger = new Logger('foo_test');
 $logger->pushHandler($stream);
@@ -26,61 +34,61 @@ $logger->pushProcessor(function ($record) {
  */
 try {
     //メインのDB
-    ORM::configure( sprintf('%s:host=%s;dbname=%s;port=%d', DB_DSN, DB_HOST, DB_NAME, DB_PORT));
-    ORM::configure('username', DB_USER );
-    ORM::configure('password', DB_PASS );
+    ORM::configure(sprintf('%s:host=%s;dbname=%s;port=%d', DB_DSN, DB_HOST, DB_NAME, DB_PORT));
+    ORM::configure('username', DB_USER);
+    ORM::configure('password', DB_PASS);
     ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     ORM::configure('logging', true);
 
-    ORM::configure('logger', function($log_string) use ($logger) {
-        $logger->addInfo('sql ' . $log_string );
+    ORM::configure('logger', function ($log_string) use ($logger) {
+        $logger->addInfo('sql ' . $log_string);
     });
-
 } catch (Exception $e) {
     $app->halt(500, $e->getMessage());
 }
 
 switch ($_SERVER ['REQUEST_METHOD']) {
-     case 'GET' :
+     case 'GET':
         //暫定的にzipをoffsetとして扱う
-        $zip = ( isset($_GET['zip']) && preg_match( '/^\d{1,7}$/',$_GET['zip']) === 1 ) ? $_GET['zip']:'';
-        $offset = ( isset($_GET['offset']) && preg_match( '/^\d+$/',$_GET['offset']) === 1 ) ? $_GET['offset']:0;
+        $zip = (isset($_GET['zip']) && preg_match('/^\d{1,7}$/', $_GET['zip']) === 1) ? $_GET['zip']:'';
+        $offset = (isset($_GET['offset']) && preg_match('/^\d+$/', $_GET['offset']) === 1) ? $_GET['offset']:0;
 
-        $sEcho = ( isset($_GET['sEcho']) && preg_match( '/^\d+$/',$_GET['sEcho']) === 1 ) ? $_GET['sEcho']:1;
+        $sEcho = (isset($_GET['sEcho']) && preg_match('/^\d+$/', $_GET['sEcho']) === 1) ? $_GET['sEcho']:1;
 
-        $limit = ( isset($_GET['iDisplayLength']) && preg_match( '/^\d+$/',$_GET['iDisplayLength']) === 1 ) ? $_GET['iDisplayLength']:100;
-        if($sEcho === "1") {
+        $limit = (isset($_GET['iDisplayLength']) && preg_match('/^\d+$/', $_GET['iDisplayLength']) === 1) ? $_GET['iDisplayLength']:100;
+        if ($sEcho === "1") {
             $limit = 1000;
         }
 
-        $offset = ( isset($_GET['iDisplayStart']) && preg_match( '/^\d+$/',$_GET['iDisplayStart']) === 1 ) ? $_GET['iDisplayStart']:0;
-        $addressinfo = getAddress ($offset, $limit);
+        $offset = (isset($_GET['iDisplayStart']) && preg_match('/^\d+$/', $_GET['iDisplayStart']) === 1) ? $_GET['iDisplayStart']:0;
+        $addressinfo = getAddress($offset, $limit);
         $jsonData = formatDataTables($addressinfo);
         header('content-type: application/json; charset=utf-8');
-        echo json_encode ( $jsonData);
+        echo json_encode($jsonData);
         exit();
      break;
 }
 
-function getAddress ($offset, $limit) {
-
+function getAddress($offset, $limit)
+{
     $datas =[];
 
-    $query = ORM::for_table ( 'zip' )
-             ->select_many ( 'id', 'zip', 'address1', 'address2', 'address3');
+    $query = ORM::for_table('postcode')
+             ->select_many('zip', 'pref', 'city', 'town');
 
-    if( !empty($zip)) {
-        $query->where_like('zip',  $zip.'%');
+    if (!empty($zip)) {
+        $query->where_like('zip', $zip.'%');
     }
 
     $datas = $query->limit($limit)
            ->offset($offset)
-           ->find_array ();
+           ->find_array();
     return $datas;
 }
 
-function formatDataTables($addressinfo) {
-    $data = _::map($addressinfo, function($address) {
+function formatDataTables($addressinfo)
+{
+    $data = _::map($addressinfo, function ($address) {
         return array_values($address);
     });
 
@@ -88,7 +96,7 @@ function formatDataTables($addressinfo) {
         'iTotalRecords' => "100000",
         'aaData' => $data,
         "iTotalDisplayRecords"=>"100000",
-        "aoColumns"=>["id","zip","address1","address2","address3"],
+        "aoColumns"=>["zip","pref","city","town"],
         "sEcho"=> $sEcho
     ];
 }
