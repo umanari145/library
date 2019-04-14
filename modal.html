@@ -2,12 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8" />
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
-<script src="./bower_components/jquery-leanmodal/jquery.leanModal.js"></script>
+<script src="./libs/js/main.js"></script>
 <script type="text/javascript" >
 $(document).ready(function() {
+//    #bindを使う方法
+//    var leanModal2 =  leanModal.bind($('#open_modal'))
+//    leanModal2({top : 200, overlay : 0.4, closeButton: ".modal_close"})
 
-    $("#open_modal").leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
+//    callはbind+関数実行
+      leanModal.call($('#open_modal'), {top : 200, overlay : 0.4, closeButton: ".modal_close"})
+
+//    通常のjQuery
+//    $("#open_modal").leanModal({top : 200, overlay : 0.4, closeButton: ".modal_close"});
 });
 </script>
 <style type="text/css">

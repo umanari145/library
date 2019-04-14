@@ -10,5 +10,15 @@
     </div>
     </body>
     <!-- jsはhtmlの後に読み込ませないとエラーになるので注意 -->
-    <script src="build.js"></script>
+    <script src="/library/libs/js/main.js"></script>
+    <script type="text/javascript">
+    ClassicEditor
+    .create( document.querySelector( '#editor' ) )
+    .then( editor => {
+            console.log( editor );
+    } )
+    .catch( error => {
+            console.log( error );
+    } );
+    </script>
 </html>
