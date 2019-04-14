@@ -9,9 +9,9 @@
 - async_await.html api連携でのサンプル
 - dataTable.html 一般ページャー　https://datatables.net/　活用
 - dataTable(2).html 無限スクロールサンプル　https://datatables.net/　活用
-- datepicker.html datepickerとselect2の活用
-    - js/bundle.js main.jsがコンパイルされたもの
-    - js/main.js requireされたライブラリ
+- datepicker_select2.html datepickerとselect2の活用
+- js/bundle.js main.jsがコンパイルされたもの(現在未使用)
+- js/main.js requireされたライブラリ(現在未使用)
 
 - es6sample ECMAScript2015について
     - lib/PersonClass.js exportするクラス
@@ -21,12 +21,11 @@
     - es6modules.js exportを使った関数
     - es6sample.html ブラウザへのデバッグ用のhtml
 
-
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
 - infinitescroll2.html 無限スクロール　オリジナル
 - modal.html leanModalを使ったモーダルウィンドウ
-- modal.html 独自モーダルウィンドウ
+- custom_modal.html 独自モーダルウィンドウ
 - makeFormFromJS.js フォームにデータを自動入力するサンプル
 - slidersample.html slider-pro slicker swiperを使ったスライダーのサンプル
 - sticky.html スティッキーヘッダーのサンプル(一定スクロール量を越えるとヘッダに固定されるタイプのヘッダー)
@@ -35,7 +34,13 @@
 
 - testtool テストデータの入力
 - resources コンパイルを使ったJSのサンプル
-    - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
+- ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
+- libs
+    - css select2やjquery-uiのCSS
+        - common.scss(css) jquery-uiやselect2のcss読み込み
+    - js  色々なライブラリをインポート
+    - webpack.mix.js laravel-mixを使ったコンパイラ
+
 - public dataTable.htmlを受け付けるプログラムのサンプル
 - gulpfile.js 下記コマンドでwebpackを使ったコンパイル　
 ```

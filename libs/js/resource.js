@@ -17,6 +17,7 @@ const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic');
 //lean-modal
 var leanModal = require("lean-modal");
 
+
 //スコープが閉じているのでグローバルオブジェクト(windowに格納)
 window.$ = window.jQuery = $;
 window.ClassicEditor = ClassicEditor;
