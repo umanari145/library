@@ -18,9 +18,11 @@ const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic');
 var leanModal = require("lean-modal");
 
 const Sugar = require('Sugar');
+const SugarLanguage =  require("sugar-language")
 
 //スコープが閉じているのでグローバルオブジェクト(windowに格納)
 window.$ = window.jQuery = $;
 window.ClassicEditor = ClassicEditor;
 window.leanModal = leanModal;
 window.Sugar = Sugar;
+window.SugarLanguage = SugarLanguage;

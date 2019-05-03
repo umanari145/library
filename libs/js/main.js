@@ -125,13 +125,16 @@ var ClassicEditor = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */
 
 var leanModal = __webpack_require__(/*! lean-modal */ "./node_modules/lean-modal/jquery.leanModal.js");
 
-var Sugar = __webpack_require__(/*! Sugar */ "./node_modules/Sugar/index.js"); //スコープが閉じているのでグローバルオブジェクト(windowに格納)
+var Sugar = __webpack_require__(/*! Sugar */ "./node_modules/Sugar/index.js");
+
+var SugarLanguage = __webpack_require__(/*! sugar-language */ "./node_modules/sugar-language/index.js"); //スコープが閉じているのでグローバルオブジェクト(windowに格納)
 
 
 window.$ = window.jQuery = $;
 window.ClassicEditor = ClassicEditor;
 window.leanModal = leanModal;
 window.Sugar = Sugar;
+window.SugarLanguage = SugarLanguage;
 
 /***/ }),
 
@@ -62603,6 +62606,1667 @@ S2.define('jquery.select2',[
 
 }).call(this);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/collectSimilarMethods.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/collectSimilarMethods.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var forEach = __webpack_require__(/*! ./forEach */ "./node_modules/sugar-language/common/internal/forEach.js"),
+    spaceSplit = __webpack_require__(/*! ./spaceSplit */ "./node_modules/sugar-language/common/internal/spaceSplit.js"),
+    classChecks = __webpack_require__(/*! ../var/classChecks */ "./node_modules/sugar-language/common/var/classChecks.js");
+
+var isString = classChecks.isString;
+
+function collectSimilarMethods(set, fn) {
+  var methods = {};
+  if (isString(set)) {
+    set = spaceSplit(set);
+  }
+  forEach(set, function(el, i) {
+    fn(methods, el, i);
+  });
+  return methods;
+}
+
+module.exports = collectSimilarMethods;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/defineInstanceSimilar.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/defineInstanceSimilar.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var methodDefineAliases = __webpack_require__(/*! ../var/methodDefineAliases */ "./node_modules/sugar-language/common/var/methodDefineAliases.js"),
+    collectSimilarMethods = __webpack_require__(/*! ./collectSimilarMethods */ "./node_modules/sugar-language/common/internal/collectSimilarMethods.js");
+
+var defineInstance = methodDefineAliases.defineInstance;
+
+function defineInstanceSimilar(sugarNamespace, set, fn, flags) {
+  defineInstance(sugarNamespace, collectSimilarMethods(set, fn), flags);
+}
+
+module.exports = defineInstanceSimilar;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/forEach.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/forEach.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var iterateOverSparseArray = __webpack_require__(/*! ./iterateOverSparseArray */ "./node_modules/sugar-language/common/internal/iterateOverSparseArray.js");
+
+function forEach(arr, fn) {
+  for (var i = 0, len = arr.length; i < len; i++) {
+    if (!(i in arr)) {
+      return iterateOverSparseArray(arr, fn, i);
+    }
+    fn(arr[i], i);
+  }
+}
+
+module.exports = forEach;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/getSparseArrayIndexes.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/getSparseArrayIndexes.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isArrayIndex = __webpack_require__(/*! ./isArrayIndex */ "./node_modules/sugar-language/common/internal/isArrayIndex.js");
+
+function getSparseArrayIndexes(arr, fromIndex, loop, fromRight) {
+  var indexes = [], i;
+  for (i in arr) {
+    // istanbul ignore next
+    if (isArrayIndex(i) && (loop || (fromRight ? i <= fromIndex : i >= fromIndex))) {
+      indexes.push(+i);
+    }
+  }
+  indexes.sort(function(a, b) {
+    var aLoop = a > fromIndex;
+    var bLoop = b > fromIndex;
+    // This block cannot be reached unless ES5 methods are being shimmed.
+    // istanbul ignore if
+    if (aLoop !== bLoop) {
+      return aLoop ? -1 : 1;
+    }
+    return a - b;
+  });
+  return indexes;
+}
+
+module.exports = getSparseArrayIndexes;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/hasOwnEnumeratedProperties.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/hasOwnEnumeratedProperties.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var coreUtilityAliases = __webpack_require__(/*! ../var/coreUtilityAliases */ "./node_modules/sugar-language/common/var/coreUtilityAliases.js");
+
+var hasOwn = coreUtilityAliases.hasOwn;
+
+function hasOwnEnumeratedProperties(obj) {
+  // Plain objects are generally defined as having enumerated properties
+  // all their own, however in early IE environments without defineProperty,
+  // there may also be enumerated methods in the prototype chain, so check
+  // for both of these cases.
+  var objectProto = Object.prototype;
+  for (var key in obj) {
+    var val = obj[key];
+    if (!hasOwn(obj, key) && val !== objectProto[key]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+module.exports = hasOwnEnumeratedProperties;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/hasValidPlainObjectPrototype.js":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/hasValidPlainObjectPrototype.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var coreUtilityAliases = __webpack_require__(/*! ../var/coreUtilityAliases */ "./node_modules/sugar-language/common/var/coreUtilityAliases.js");
+
+var hasOwn = coreUtilityAliases.hasOwn;
+
+function hasValidPlainObjectPrototype(obj) {
+  var hasToString = 'toString' in obj;
+  var hasConstructor = 'constructor' in obj;
+  // An object created with Object.create(null) has no methods in the
+  // prototype chain, so check if any are missing. The additional hasToString
+  // check is for false positives on some host objects in old IE which have
+  // toString but no constructor. If the object has an inherited constructor,
+  // then check if it is Object (the "isPrototypeOf" tapdance here is a more
+  // robust way of ensuring this if the global has been hijacked). Note that
+  // accessing the constructor directly (without "in" or "hasOwnProperty")
+  // will throw a permissions error in IE8 on cross-domain windows.
+  return (!hasConstructor && !hasToString) ||
+          (hasConstructor && !hasOwn(obj, 'constructor') &&
+           hasOwn(obj.constructor.prototype, 'isPrototypeOf'));
+}
+
+module.exports = hasValidPlainObjectPrototype;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/isArrayIndex.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/isArrayIndex.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function isArrayIndex(n) {
+  return n >>> 0 == n && n != 0xFFFFFFFF;
+}
+
+module.exports = isArrayIndex;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/isClass.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/isClass.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var coreUtilityAliases = __webpack_require__(/*! ../var/coreUtilityAliases */ "./node_modules/sugar-language/common/var/coreUtilityAliases.js");
+
+var classToString = coreUtilityAliases.classToString;
+
+function isClass(obj, className, str) {
+  if (!str) {
+    str = classToString(obj);
+  }
+  return str === '[object '+ className +']';
+}
+
+module.exports = isClass;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/isObjectType.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/isObjectType.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function isObjectType(obj, type) {
+  return !!obj && (type || typeof obj) === 'object';
+}
+
+module.exports = isObjectType;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/isPlainObject.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/isPlainObject.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isClass = __webpack_require__(/*! ./isClass */ "./node_modules/sugar-language/common/internal/isClass.js"),
+    isObjectType = __webpack_require__(/*! ./isObjectType */ "./node_modules/sugar-language/common/internal/isObjectType.js"),
+    hasOwnEnumeratedProperties = __webpack_require__(/*! ./hasOwnEnumeratedProperties */ "./node_modules/sugar-language/common/internal/hasOwnEnumeratedProperties.js"),
+    hasValidPlainObjectPrototype = __webpack_require__(/*! ./hasValidPlainObjectPrototype */ "./node_modules/sugar-language/common/internal/hasValidPlainObjectPrototype.js");
+
+function isPlainObject(obj, className) {
+  return isObjectType(obj) &&
+         isClass(obj, 'Object', className) &&
+         hasValidPlainObjectPrototype(obj) &&
+         hasOwnEnumeratedProperties(obj);
+}
+
+module.exports = isPlainObject;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/iterateOverSparseArray.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/iterateOverSparseArray.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var getSparseArrayIndexes = __webpack_require__(/*! ./getSparseArrayIndexes */ "./node_modules/sugar-language/common/internal/getSparseArrayIndexes.js");
+
+function iterateOverSparseArray(arr, fn, fromIndex, loop) {
+  var indexes = getSparseArrayIndexes(arr, fromIndex, loop), index;
+  for (var i = 0, len = indexes.length; i < len; i++) {
+    index = indexes[i];
+    fn.call(arr, arr[index], index, arr);
+  }
+  return arr;
+}
+
+module.exports = iterateOverSparseArray;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/simpleRepeat.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/simpleRepeat.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function simpleRepeat(n, fn) {
+  for (var i = 0; i < n; i++) {
+    fn(i);
+  }
+}
+
+module.exports = simpleRepeat;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/spaceSplit.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/spaceSplit.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function spaceSplit(str) {
+  return str.split(' ');
+}
+
+module.exports = spaceSplit;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/trim.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/trim.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function trim(str) {
+  return str.trim();
+}
+
+module.exports = trim;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/internal/wrapNamespace.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/internal/wrapNamespace.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function wrapNamespace(method) {
+  return function(sugarNamespace, arg1, arg2) {
+    sugarNamespace[method](arg1, arg2);
+  };
+}
+
+module.exports = wrapNamespace;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/var/NATIVE_TYPES.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/sugar-language/common/var/NATIVE_TYPES.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = 'Boolean Number String Date RegExp Function Array Error Set Map';
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/var/chr.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/common/var/chr.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = String.fromCharCode;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/var/classChecks.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/sugar-language/common/var/classChecks.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var NATIVE_TYPES = __webpack_require__(/*! ./NATIVE_TYPES */ "./node_modules/sugar-language/common/var/NATIVE_TYPES.js"),
+    forEach = __webpack_require__(/*! ../internal/forEach */ "./node_modules/sugar-language/common/internal/forEach.js"),
+    isClass = __webpack_require__(/*! ../internal/isClass */ "./node_modules/sugar-language/common/internal/isClass.js"),
+    spaceSplit = __webpack_require__(/*! ../internal/spaceSplit */ "./node_modules/sugar-language/common/internal/spaceSplit.js"),
+    isPlainObject = __webpack_require__(/*! ../internal/isPlainObject */ "./node_modules/sugar-language/common/internal/isPlainObject.js");
+
+var isSerializable,
+    isBoolean, isNumber, isString,
+    isDate, isRegExp, isFunction,
+    isArray, isSet, isMap, isError;
+
+function buildClassChecks() {
+
+  var knownTypes = {};
+
+  function addCoreTypes() {
+
+    var names = spaceSplit(NATIVE_TYPES);
+
+    isBoolean = buildPrimitiveClassCheck(names[0]);
+    isNumber  = buildPrimitiveClassCheck(names[1]);
+    isString  = buildPrimitiveClassCheck(names[2]);
+
+    isDate   = buildClassCheck(names[3]);
+    isRegExp = buildClassCheck(names[4]);
+
+    // Wanted to enhance performance here by using simply "typeof"
+    // but Firefox has two major issues that make this impossible,
+    // one fixed, the other not, so perform a full class check here.
+    //
+    // 1. Regexes can be typeof "function" in FF < 3
+    //    https://bugzilla.mozilla.org/show_bug.cgi?id=61911 (fixed)
+    //
+    // 2. HTMLEmbedElement and HTMLObjectElement are be typeof "function"
+    //    https://bugzilla.mozilla.org/show_bug.cgi?id=268945 (won't fix)
+    isFunction = buildClassCheck(names[5]);
+
+    // istanbul ignore next
+    isArray = Array.isArray || buildClassCheck(names[6]);
+    isError = buildClassCheck(names[7]);
+
+    isSet = buildClassCheck(names[8], typeof Set !== 'undefined' && Set);
+    isMap = buildClassCheck(names[9], typeof Map !== 'undefined' && Map);
+
+    // Add core types as known so that they can be checked by value below,
+    // notably excluding Functions and adding Arguments and Error.
+    addKnownType('Arguments');
+    addKnownType(names[0]);
+    addKnownType(names[1]);
+    addKnownType(names[2]);
+    addKnownType(names[3]);
+    addKnownType(names[4]);
+    addKnownType(names[6]);
+
+  }
+
+  function addArrayTypes() {
+    var types = 'Int8 Uint8 Uint8Clamped Int16 Uint16 Int32 Uint32 Float32 Float64';
+    forEach(spaceSplit(types), function(str) {
+      addKnownType(str + 'Array');
+    });
+  }
+
+  function addKnownType(className) {
+    var str = '[object '+ className +']';
+    knownTypes[str] = true;
+  }
+
+  function isKnownType(className) {
+    return knownTypes[className];
+  }
+
+  function buildClassCheck(className, globalObject) {
+    // istanbul ignore if
+    if (globalObject && isClass(new globalObject, 'Object')) {
+      return getConstructorClassCheck(globalObject);
+    } else {
+      return getToStringClassCheck(className);
+    }
+  }
+
+  // Map and Set may be [object Object] in certain IE environments.
+  // In this case we need to perform a check using the constructor
+  // instead of Object.prototype.toString.
+  // istanbul ignore next
+  function getConstructorClassCheck(obj) {
+    var ctorStr = String(obj);
+    return function(obj) {
+      return String(obj.constructor) === ctorStr;
+    };
+  }
+
+  function getToStringClassCheck(className) {
+    return function(obj, str) {
+      // perf: Returning up front on instanceof appears to be slower.
+      return isClass(obj, className, str);
+    };
+  }
+
+  function buildPrimitiveClassCheck(className) {
+    var type = className.toLowerCase();
+    return function(obj) {
+      var t = typeof obj;
+      return t === type || t === 'object' && isClass(obj, className);
+    };
+  }
+
+  addCoreTypes();
+  addArrayTypes();
+
+  isSerializable = function(obj, className) {
+    // Only known objects can be serialized. This notably excludes functions,
+    // host objects, Symbols (which are matched by reference), and instances
+    // of classes. The latter can arguably be matched by value, but
+    // distinguishing between these and host objects -- which should never be
+    // compared by value -- is very tricky so not dealing with it here.
+    return isKnownType(className) || isPlainObject(obj, className);
+  };
+
+}
+
+buildClassChecks();
+
+module.exports = {
+  isSerializable: isSerializable,
+  isBoolean: isBoolean,
+  isNumber: isNumber,
+  isString: isString,
+  isDate: isDate,
+  isRegExp: isRegExp,
+  isFunction: isFunction,
+  isArray: isArray,
+  isSet: isSet,
+  isMap: isMap,
+  isError: isError
+};
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/var/coreUtilityAliases.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/var/coreUtilityAliases.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+module.exports = {
+  hasOwn: Sugar.util.hasOwn,
+  getOwn: Sugar.util.getOwn,
+  setProperty: Sugar.util.setProperty,
+  classToString: Sugar.util.classToString,
+  defineProperty: Sugar.util.defineProperty,
+  forEachProperty: Sugar.util.forEachProperty,
+  mapNativeToChainable: Sugar.util.mapNativeToChainable
+};
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/var/methodDefineAliases.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/var/methodDefineAliases.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var wrapNamespace = __webpack_require__(/*! ../internal/wrapNamespace */ "./node_modules/sugar-language/common/internal/wrapNamespace.js");
+
+module.exports = {
+  alias: wrapNamespace('alias'),
+  defineStatic: wrapNamespace('defineStatic'),
+  defineInstance: wrapNamespace('defineInstance'),
+  defineStaticPolyfill: wrapNamespace('defineStaticPolyfill'),
+  defineInstancePolyfill: wrapNamespace('defineInstancePolyfill'),
+  defineInstanceAndStatic: wrapNamespace('defineInstanceAndStatic'),
+  defineInstanceWithArguments: wrapNamespace('defineInstanceWithArguments')
+};
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/common/var/namespaceAliases.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/sugar-language/common/var/namespaceAliases.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+module.exports = {
+  sugarObject: Sugar.Object,
+  sugarArray: Sugar.Array,
+  sugarDate: Sugar.Date,
+  sugarString: Sugar.String,
+  sugarNumber: Sugar.Number,
+  sugarFunction: Sugar.Function,
+  sugarRegExp: Sugar.RegExp
+};
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/index.js":
+/*!**********************************************!*\
+  !*** ./node_modules/sugar-language/index.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(/*! ./language */ "./node_modules/sugar-language/language/index.js");
+
+module.exports = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var buildUnicodeScripts = __webpack_require__(/*! ../internal/buildUnicodeScripts */ "./node_modules/sugar-language/language/internal/buildUnicodeScripts.js");
+
+buildUnicodeScripts();
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/language/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Instance Methods
+__webpack_require__(/*! ../string/hankaku */ "./node_modules/sugar-language/string/hankaku.js");
+__webpack_require__(/*! ../string/hasArabic */ "./node_modules/sugar-language/string/hasArabic.js");
+__webpack_require__(/*! ../string/hasCyrillic */ "./node_modules/sugar-language/string/hasCyrillic.js");
+__webpack_require__(/*! ../string/hasDevanagari */ "./node_modules/sugar-language/string/hasDevanagari.js");
+__webpack_require__(/*! ../string/hasGreek */ "./node_modules/sugar-language/string/hasGreek.js");
+__webpack_require__(/*! ../string/hasHan */ "./node_modules/sugar-language/string/hasHan.js");
+__webpack_require__(/*! ../string/hasHangul */ "./node_modules/sugar-language/string/hasHangul.js");
+__webpack_require__(/*! ../string/hasHebrew */ "./node_modules/sugar-language/string/hasHebrew.js");
+__webpack_require__(/*! ../string/hasHiragana */ "./node_modules/sugar-language/string/hasHiragana.js");
+__webpack_require__(/*! ../string/hasKana */ "./node_modules/sugar-language/string/hasKana.js");
+__webpack_require__(/*! ../string/hasKanji */ "./node_modules/sugar-language/string/hasKanji.js");
+__webpack_require__(/*! ../string/hasKatakana */ "./node_modules/sugar-language/string/hasKatakana.js");
+__webpack_require__(/*! ../string/hasLatin */ "./node_modules/sugar-language/string/hasLatin.js");
+__webpack_require__(/*! ../string/hasThai */ "./node_modules/sugar-language/string/hasThai.js");
+__webpack_require__(/*! ../string/hiragana */ "./node_modules/sugar-language/string/hiragana.js");
+__webpack_require__(/*! ../string/isArabic */ "./node_modules/sugar-language/string/isArabic.js");
+__webpack_require__(/*! ../string/isCyrillic */ "./node_modules/sugar-language/string/isCyrillic.js");
+__webpack_require__(/*! ../string/isDevanagari */ "./node_modules/sugar-language/string/isDevanagari.js");
+__webpack_require__(/*! ../string/isGreek */ "./node_modules/sugar-language/string/isGreek.js");
+__webpack_require__(/*! ../string/isHan */ "./node_modules/sugar-language/string/isHan.js");
+__webpack_require__(/*! ../string/isHangul */ "./node_modules/sugar-language/string/isHangul.js");
+__webpack_require__(/*! ../string/isHebrew */ "./node_modules/sugar-language/string/isHebrew.js");
+__webpack_require__(/*! ../string/isHiragana */ "./node_modules/sugar-language/string/isHiragana.js");
+__webpack_require__(/*! ../string/isKana */ "./node_modules/sugar-language/string/isKana.js");
+__webpack_require__(/*! ../string/isKanji */ "./node_modules/sugar-language/string/isKanji.js");
+__webpack_require__(/*! ../string/isKatakana */ "./node_modules/sugar-language/string/isKatakana.js");
+__webpack_require__(/*! ../string/isLatin */ "./node_modules/sugar-language/string/isLatin.js");
+__webpack_require__(/*! ../string/isThai */ "./node_modules/sugar-language/string/isThai.js");
+__webpack_require__(/*! ../string/katakana */ "./node_modules/sugar-language/string/katakana.js");
+__webpack_require__(/*! ../string/zenkaku */ "./node_modules/sugar-language/string/zenkaku.js");
+
+module.exports = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/internal/buildUnicodeScripts.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/internal/buildUnicodeScripts.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var UNICODE_SCRIPTS = __webpack_require__(/*! ../var/UNICODE_SCRIPTS */ "./node_modules/sugar-language/language/var/UNICODE_SCRIPTS.js"),
+    trim = __webpack_require__(/*! ../../common/internal/trim */ "./node_modules/sugar-language/common/internal/trim.js"),
+    forEach = __webpack_require__(/*! ../../common/internal/forEach */ "./node_modules/sugar-language/common/internal/forEach.js"),
+    spaceSplit = __webpack_require__(/*! ../../common/internal/spaceSplit */ "./node_modules/sugar-language/common/internal/spaceSplit.js"),
+    namespaceAliases = __webpack_require__(/*! ../../common/var/namespaceAliases */ "./node_modules/sugar-language/common/var/namespaceAliases.js"),
+    defineInstanceSimilar = __webpack_require__(/*! ../../common/internal/defineInstanceSimilar */ "./node_modules/sugar-language/common/internal/defineInstanceSimilar.js");
+
+var sugarString = namespaceAliases.sugarString;
+
+function buildUnicodeScripts() {
+  defineInstanceSimilar(sugarString, UNICODE_SCRIPTS, function(methods, script) {
+    var is = RegExp('^['+ script.src +'\\s]+$');
+    var has = RegExp('['+ script.src +']');
+    forEach(spaceSplit(script.name), function(name) {
+      methods['is' + name] = function(str) {
+        return is.test(trim(str));
+      };
+      methods['has' + name] = function(str) {
+        return has.test(trim(str));
+      };
+    });
+  });
+}
+
+module.exports = buildUnicodeScripts;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/internal/convertCharacterWidth.js":
+/*!********************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/internal/convertCharacterWidth.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var widthConversionTable = __webpack_require__(/*! ../var/widthConversionTable */ "./node_modules/sugar-language/language/var/widthConversionTable.js");
+
+function convertCharacterWidth(str, mode, reg, type) {
+  var table = widthConversionTable[type];
+  mode = (mode || '').replace(/all/, '').replace(/(\w)lphabet|umbers?|atakana|paces?|unctuation/g, '$1');
+  return str.replace(reg, function(c) {
+    var entry = table[c], to;
+    if (entry) {
+      if (mode === '' && entry.all) {
+        return entry.all;
+      } else {
+        for (var i = 0, len = mode.length; i < len; i++) {
+          to = entry[mode.charAt(i)];
+          if (to) {
+            return to;
+          }
+        }
+      }
+    }
+    return c;
+  });
+}
+
+module.exports = convertCharacterWidth;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/internal/shiftChar.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/sugar-language/language/internal/shiftChar.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var chr = __webpack_require__(/*! ../../common/var/chr */ "./node_modules/sugar-language/common/var/chr.js");
+
+function shiftChar(str, n) {
+  return chr(str.charCodeAt(0) + n);
+}
+
+module.exports = shiftChar;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/internal/zenkaku.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/sugar-language/language/internal/zenkaku.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ALL_HANKAKU_REG = __webpack_require__(/*! ../var/ALL_HANKAKU_REG */ "./node_modules/sugar-language/language/var/ALL_HANKAKU_REG.js"),
+    convertCharacterWidth = __webpack_require__(/*! ./convertCharacterWidth */ "./node_modules/sugar-language/language/internal/convertCharacterWidth.js");
+
+function zenkaku(str, mode) {
+  return convertCharacterWidth(str, mode, ALL_HANKAKU_REG, 'zenkaku');
+}
+
+module.exports = zenkaku;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/ALL_HANKAKU_REG.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/ALL_HANKAKU_REG.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = /[\u0020-\u00A5]|[\uFF61-\uFF9F][ﾞﾟ]?/g;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/ALL_ZENKAKU_REG.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/ALL_ZENKAKU_REG.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = /[\u2212\u3000-\u301C\u301A-\u30FC\uFF01-\uFF60\uFFE0-\uFFE6]/g;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/FULL_WIDTH_OFFSET.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/FULL_WIDTH_OFFSET.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = 65248;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/HANKAKU_KATAKANA.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/HANKAKU_KATAKANA.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = 'ｱｲｳｴｵｧｨｩｪｫｶｷｸｹｺｻｼｽｾｿﾀﾁﾂｯﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔｬﾕｭﾖｮﾗﾘﾙﾚﾛﾜｦﾝｰ･';
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/HANKAKU_PUNCTUATION.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/HANKAKU_PUNCTUATION.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = '｡､｢｣¥¢£';
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/SEMI_VOICED_KATAKANA_REG.js":
+/*!******************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/SEMI_VOICED_KATAKANA_REG.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = /[ハヒフヘホヲ]/;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/UNICODE_SCRIPTS.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/UNICODE_SCRIPTS.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var UNICODE_SCRIPTS = [
+  { name: 'Arabic',     src: '\u0600-\u06FF' },
+  { name: 'Cyrillic',   src: '\u0400-\u04FF' },
+  { name: 'Devanagari', src: '\u0900-\u097F' },
+  { name: 'Greek',      src: '\u0370-\u03FF' },
+  { name: 'Hangul',     src: '\uAC00-\uD7AF\u1100-\u11FF' },
+  { name: 'Han Kanji',  src: '\u4E00-\u9FFF\uF900-\uFAFF' },
+  { name: 'Hebrew',     src: '\u0590-\u05FF' },
+  { name: 'Hiragana',   src: '\u3040-\u309F\u30FB-\u30FC' },
+  { name: 'Kana',       src: '\u3040-\u30FF\uFF61-\uFF9F' },
+  { name: 'Katakana',   src: '\u30A0-\u30FF\uFF61-\uFF9F' },
+  { name: 'Latin',      src: '\u0001-\u007F\u0080-\u00FF\u0100-\u017F\u0180-\u024F' },
+  { name: 'Thai',       src: '\u0E00-\u0E7F' }
+];
+
+module.exports = UNICODE_SCRIPTS;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/VOICED_KATAKANA_REG.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/VOICED_KATAKANA_REG.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = /[カキクケコサシスセソタチツテトハヒフヘホ]/;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/WIDTH_CONVERSION_RANGES.js":
+/*!*****************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/WIDTH_CONVERSION_RANGES.js ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var WIDTH_CONVERSION_RANGES = [
+  { type: 'a', start: 65,  end: 90  },
+  { type: 'a', start: 97,  end: 122 },
+  { type: 'n', start: 48,  end: 57  },
+  { type: 'p', start: 33,  end: 47  },
+  { type: 'p', start: 58,  end: 64  },
+  { type: 'p', start: 91,  end: 96  },
+  { type: 'p', start: 123, end: 126 }
+];
+
+module.exports = WIDTH_CONVERSION_RANGES;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/ZENKAKU_KATAKANA.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/ZENKAKU_KATAKANA.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = 'アイウエオァィゥェォカキクケコサシスセソタチツッテトナニヌネノハヒフヘホマミムメモヤャユュヨョラリルレロワヲンー・';
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/ZENKAKU_PUNCTUATION.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/ZENKAKU_PUNCTUATION.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = '。、「」￥￠￡';
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/language/var/widthConversionTable.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/sugar-language/language/var/widthConversionTable.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var ZENKAKU_KATAKANA = __webpack_require__(/*! ./ZENKAKU_KATAKANA */ "./node_modules/sugar-language/language/var/ZENKAKU_KATAKANA.js"),
+    HANKAKU_KATAKANA = __webpack_require__(/*! ./HANKAKU_KATAKANA */ "./node_modules/sugar-language/language/var/HANKAKU_KATAKANA.js"),
+    FULL_WIDTH_OFFSET = __webpack_require__(/*! ./FULL_WIDTH_OFFSET */ "./node_modules/sugar-language/language/var/FULL_WIDTH_OFFSET.js"),
+    ZENKAKU_PUNCTUATION = __webpack_require__(/*! ./ZENKAKU_PUNCTUATION */ "./node_modules/sugar-language/language/var/ZENKAKU_PUNCTUATION.js"),
+    VOICED_KATAKANA_REG = __webpack_require__(/*! ./VOICED_KATAKANA_REG */ "./node_modules/sugar-language/language/var/VOICED_KATAKANA_REG.js"),
+    HANKAKU_PUNCTUATION = __webpack_require__(/*! ./HANKAKU_PUNCTUATION */ "./node_modules/sugar-language/language/var/HANKAKU_PUNCTUATION.js"),
+    WIDTH_CONVERSION_RANGES = __webpack_require__(/*! ./WIDTH_CONVERSION_RANGES */ "./node_modules/sugar-language/language/var/WIDTH_CONVERSION_RANGES.js"),
+    SEMI_VOICED_KATAKANA_REG = __webpack_require__(/*! ./SEMI_VOICED_KATAKANA_REG */ "./node_modules/sugar-language/language/var/SEMI_VOICED_KATAKANA_REG.js"),
+    chr = __webpack_require__(/*! ../../common/var/chr */ "./node_modules/sugar-language/common/var/chr.js"),
+    forEach = __webpack_require__(/*! ../../common/internal/forEach */ "./node_modules/sugar-language/common/internal/forEach.js"),
+    shiftChar = __webpack_require__(/*! ../internal/shiftChar */ "./node_modules/sugar-language/language/internal/shiftChar.js"),
+    simpleRepeat = __webpack_require__(/*! ../../common/internal/simpleRepeat */ "./node_modules/sugar-language/common/internal/simpleRepeat.js");
+
+var widthConversionTable;
+
+function buildWidthConversion() {
+  var hankaku;
+
+  widthConversionTable = {
+    'zenkaku': {},
+    'hankaku': {}
+  };
+
+  function setWidthConversion(type, half, full) {
+    setConversionTableEntry('zenkaku', type, half, full);
+    setConversionTableEntry('hankaku', type, full, half);
+  }
+
+  function setConversionTableEntry(width, type, from, to, all) {
+    var obj = widthConversionTable[width][from] || {};
+    if (all !== false) {
+      obj.all = to;
+    }
+    obj[type]  = to;
+    widthConversionTable[width][from] = obj;
+  }
+
+  function setKatakanaConversion() {
+    for (var i = 0; i < ZENKAKU_KATAKANA.length; i++) {
+      var c = ZENKAKU_KATAKANA.charAt(i);
+      hankaku = HANKAKU_KATAKANA.charAt(i);
+      setWidthConversion('k', hankaku, c);
+      if (c.match(VOICED_KATAKANA_REG)) {
+        setWidthConversion('k', hankaku + 'ﾞ', shiftChar(c, 1));
+      }
+      if (c.match(SEMI_VOICED_KATAKANA_REG)) {
+        setWidthConversion('k', hankaku + 'ﾟ', shiftChar(c, 2));
+      }
+    }
+  }
+
+  function setPunctuationConversion() {
+    for (var i = 0; i < ZENKAKU_PUNCTUATION.length; i++) {
+      setWidthConversion('p', HANKAKU_PUNCTUATION.charAt(i), ZENKAKU_PUNCTUATION.charAt(i));
+    }
+  }
+
+  forEach(WIDTH_CONVERSION_RANGES, function(r) {
+    simpleRepeat(r.end - r.start + 1, function(n) {
+      n += r.start;
+      setWidthConversion(r.type, chr(n), chr(n + FULL_WIDTH_OFFSET));
+    });
+  });
+
+  setKatakanaConversion();
+  setPunctuationConversion();
+
+  setWidthConversion('s', ' ', '　');
+  setWidthConversion('k', 'ｳﾞ', 'ヴ');
+  setWidthConversion('k', 'ｦﾞ', 'ヺ');
+  setConversionTableEntry('hankaku', 'n', '−', '-');
+  setConversionTableEntry('hankaku', 'n', 'ー', '-', false);
+  setConversionTableEntry('zenkaku', 'n', '-', '－', false);
+}
+
+buildWidthConversion();
+
+module.exports = widthConversionTable;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hankaku.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/string/hankaku.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js"),
+    ALL_ZENKAKU_REG = __webpack_require__(/*! ../language/var/ALL_ZENKAKU_REG */ "./node_modules/sugar-language/language/var/ALL_ZENKAKU_REG.js"),
+    convertCharacterWidth = __webpack_require__(/*! ../language/internal/convertCharacterWidth */ "./node_modules/sugar-language/language/internal/convertCharacterWidth.js");
+
+Sugar.String.defineInstance({
+
+  'hankaku': function(str, mode) {
+    return convertCharacterWidth(str, mode, ALL_ZENKAKU_REG, 'hankaku');
+  }
+
+});
+
+module.exports = Sugar.String.hankaku;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasArabic.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasArabic.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasArabic;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasCyrillic.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasCyrillic.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasCyrillic;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasDevanagari.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasDevanagari.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasDevanagari;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasGreek.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasGreek.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasGreek;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasHan.js":
+/*!******************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasHan.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasHan;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasHangul.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasHangul.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasHangul;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasHebrew.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasHebrew.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasHebrew;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasHiragana.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasHiragana.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasHiragana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasKana.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasKana.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasKana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasKanji.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasKanji.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasKanji;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasKatakana.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasKatakana.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasKatakana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasLatin.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasLatin.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasLatin;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hasThai.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/string/hasThai.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.hasThai;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/hiragana.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/hiragana.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js"),
+    zenkaku = __webpack_require__(/*! ../language/internal/zenkaku */ "./node_modules/sugar-language/language/internal/zenkaku.js"),
+    shiftChar = __webpack_require__(/*! ../language/internal/shiftChar */ "./node_modules/sugar-language/language/internal/shiftChar.js");
+
+Sugar.String.defineInstance({
+
+  'hiragana': function(str, all) {
+    if (all !== false) {
+      str = zenkaku(str, 'k');
+    }
+    return str.replace(/[\u30A1-\u30F6]/g, function(c) {
+      return shiftChar(c, -96);
+    });
+  }
+
+});
+
+module.exports = Sugar.String.hiragana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isArabic.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/isArabic.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isArabic;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isCyrillic.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/sugar-language/string/isCyrillic.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isCyrillic;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isDevanagari.js":
+/*!************************************************************!*\
+  !*** ./node_modules/sugar-language/string/isDevanagari.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isDevanagari;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isGreek.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/string/isGreek.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isGreek;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isHan.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/sugar-language/string/isHan.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isHan;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isHangul.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/isHangul.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isHangul;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isHebrew.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/isHebrew.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isHebrew;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isHiragana.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/sugar-language/string/isHiragana.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isHiragana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isKana.js":
+/*!******************************************************!*\
+  !*** ./node_modules/sugar-language/string/isKana.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isKana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isKanji.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/string/isKanji.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isKanji;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isKatakana.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/sugar-language/string/isKatakana.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isKatakana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isLatin.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/string/isLatin.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isLatin;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/isThai.js":
+/*!******************************************************!*\
+  !*** ./node_modules/sugar-language/string/isThai.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js");
+
+__webpack_require__(/*! ../language/build/buildUnicodeScriptsCall */ "./node_modules/sugar-language/language/build/buildUnicodeScriptsCall.js");
+
+module.exports = Sugar.String.isThai;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/katakana.js":
+/*!********************************************************!*\
+  !*** ./node_modules/sugar-language/string/katakana.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js"),
+    shiftChar = __webpack_require__(/*! ../language/internal/shiftChar */ "./node_modules/sugar-language/language/internal/shiftChar.js");
+
+Sugar.String.defineInstance({
+
+  'katakana': function(str) {
+    return str.replace(/[\u3041-\u3096]/g, function(c) {
+      return shiftChar(c, 96);
+    });
+  }
+
+});
+
+module.exports = Sugar.String.katakana;
+
+/***/ }),
+
+/***/ "./node_modules/sugar-language/string/zenkaku.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sugar-language/string/zenkaku.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Sugar = __webpack_require__(/*! sugar-core */ "./node_modules/sugar-core/sugar-core.js"),
+    zenkaku = __webpack_require__(/*! ../language/internal/zenkaku */ "./node_modules/sugar-language/language/internal/zenkaku.js");
+
+Sugar.String.defineInstance({
+
+  'zenkaku': function(str, args) {
+    return zenkaku(str, args);
+  }
+
+});
+
+module.exports = Sugar.String.zenkaku;
 
 /***/ }),
 
