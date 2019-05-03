@@ -29,6 +29,7 @@
 - makeFormFromJS.js フォームにデータを自動入力するサンプル
 - slidersample.html slider-pro slicker swiperを使ったスライダーのサンプル
 - sticky.html スティッキーヘッダーのサンプル(一定スクロール量を越えるとヘッダに固定されるタイプのヘッダー)
+- sugar.html JSライブラリSugarのサンプル
 - togglesample.html toggleClass, slideToggle, fadeToggle, CSSのみでのtoggleのサンプル
 - typeahead.html 入力補完用のライブラリ
 
@@ -40,6 +41,12 @@
         - common.scss(css) jquery-uiやselect2のcss読み込み
     - js  色々なライブラリをインポート
     - webpack.mix.js laravel-mixを使ったコンパイラ
+
+laravel-mixでのコンパイル
+```
+npm run dev
+```
+
 
 - public dataTable.htmlを受け付けるプログラムのサンプル
 - gulpfile.js 下記コマンドでwebpackを使ったコンパイル　

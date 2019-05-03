@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>Sugar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="./libs/js/main.js"></script>
+    <script type="text/javascript" >
+    $(document).ready(function() {
+        //staticなので答えは変数(文字列)
+        var targetDay = Sugar().Date.create().format('{yyyy}-{MM}');
+        console.log(targetDay)
+
+        //targetDay2はobject
+        var targetDayObj = new Sugar.Date();
+
+        //chainableなのでオブジェクト
+        console.log(targetDayObj)
+        console.log(targetDayObj.format('{yyyy}-{MM}'))
+
+        //オブジェクトの場合は最後にrawで出す
+        console.log(targetDayObj.addMonths(1).format('{yyyy}-{MM}').raw)
+
+
+        //任意の日付での処理
+        console.log(Sugar().Date.create('2019-05-03').addMonths(1).format('{yyyy}-{MM}-{dd}'));
+
+
+        //staticメソッドでの処理
+        console.log(Sugar.String.isEmpty('aaaa'))
+        console.log(Sugar.String.isEmpty(''))
+
+        //インスタンス作成
+        var str1 = new Sugar.String('forever love')
+        //objectなのでrawで出さないと実データは取れない(chainでメソッドを繋げられる)
+        console.log(str1)
+        //頭から二文字
+        console.log(str1.truncate(2).raw)
+
+        var students = [
+            {'pref':'chiba','age':23,'name':'yamada'},
+            {'pref':'tokyo','age':15,'name':'suzuki'},
+            {'pref':'kanagawa','age':33,'name':'watanabe'},
+            {'pref':'tokyo','age':65,'name':'satou'},
+            {'pref':'kanagawa','age':53,'name':'katou'},
+            {'pref':'chiba','age':43,'name':'saitou'},
+        ]
+
+        var studentsObj = new Sugar.Array(students)
+
+        //chain連動
+        studentsObj.groupBy('pref')
+                    .map(function(v,k){
+                        console.log(k)
+                        var nameObj = Sugar.Array(v).map(function(v2){return v2.age;}).average().raw
+                        console.log(nameObj)
+                    })
+
+        //staticメソッドでも同じ
+        Sugar.Array(students)
+             .groupBy('pref')
+             .map(function(v,k){
+                 console.log(k)
+                 var nameObj = Sugar.Array(v).map(function(v2){return v2.age;}).average().raw
+                 console.log(nameObj)
+             })
+
+
+    });
+
+    </script>
+    <body>
+        <div>Sugarやるためのhtml(consoleで処理について記述)</div>
+    </body>
+</html>
