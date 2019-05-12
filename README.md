@@ -41,6 +41,16 @@ npx parcel es6sample.html
 ex Server running at http://localhost:51478<br>
 http://localhost:51478 にアクセス
 
+- rollup
+    - lib/PersonClass exportするクラス
+    - bundle.js コンパイルされたJS
+    - es6load.js JSをimportする側(生成される側のjs)
+    - es6sample.html エントリーポイントするHTML
+```
+cd ./rollup
+npx rollup es6load.js --file bundle.js --format iife
+```
+
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
 - infinitescroll2.html 無限スクロール　オリジナル
