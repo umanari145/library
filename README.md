@@ -14,7 +14,10 @@
     - lib/PersonClass.js es6で書かれたexportするクラス
     - es6load.js importを使った他ファイルの読み込み
     - es6sample.html ブラウザへのデバッグ用のhtml
-
+```
+cd ./elixir
+npx gulp
+```
 
 - js/bundle.js main.jsがコンパイルされたもの(現在未使用)
 - js/main.js requireされたライブラリ(現在未使用)
@@ -25,7 +28,18 @@
     - es6class.js classの書き方
     - es6modules.js exportを使った関数
     - es6sample.html ブラウザへのデバッグ用のhtml
-    -
+
+- parcel 簡易コンパイル
+    - dist 成果物がここに吐かれる
+    - lib/PersonClass exportするクラス
+    - es6load.js JSをimportする側
+    - es6sample.html エントリーポイントするHTML
+```
+cd ./parcel
+npx parcel es6sample.html
+```
+ex Server running at http://localhost:51478<br>
+http://localhost:51478 にアクセス
 
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
@@ -38,7 +52,6 @@
 - sugar.html JSライブラリSugarのサンプル
 - togglesample.html toggleClass, slideToggle, fadeToggle, CSSのみでのtoggleのサンプル
 - typeahead.html 入力補完用のライブラリ
-
 - testtool テストデータの入力
 - resources コンパイルを使ったJSのサンプル
 - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル

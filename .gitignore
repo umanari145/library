@@ -1,6 +1,8 @@
 /**/vendor
 /logs
 /**/node_modules
+/**/.cache
+/**/dist
 /bower_components
 /public/config.php
 /public/logs
