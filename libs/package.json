@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "resolve-url-loader": "^2.3.1",
+    "sweetalert": "^2.1.2",
     "vue-template-compiler": "^2.6.10"
   }
 }

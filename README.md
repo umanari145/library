@@ -34,6 +34,8 @@ npx gulp
     - lib/PersonClass exportするクラス
     - es6load.js JSをimportする側
     - es6sample.html エントリーポイントするHTML
+
+
 ```
 cd ./parcel
 npx parcel es6sample.html
@@ -51,6 +53,7 @@ cd ./rollup
 npx rollup es6load.js --file bundle.js --format iife
 ```
 
+- sweetalert スタイリッシュなalert文(libsで読み込み)
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
 - infinitescroll2.html 無限スクロール　オリジナル
@@ -68,7 +71,7 @@ npx rollup es6load.js --file bundle.js --format iife
 - libs
     - css select2やjquery-uiのCSS
         - common.scss(css) jquery-uiやselect2のcss読み込み
-    - js  色々なライブラリをインポート
+    - js  色々なライブラリをインポート(具体的なlibraryはresouces.jsを参照)
     - webpack.mix.js laravel-mixを使ったコンパイラ
 
 laravel-mixでのコンパイル

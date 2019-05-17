@@ -17,6 +17,10 @@ const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic');
 //lean-modal
 var leanModal = require("lean-modal");
 
+//swwetalert
+import swal from 'sweetalert';
+
+
 const Sugar = require('Sugar');
 const SugarLanguage =  require("sugar-language")
 
