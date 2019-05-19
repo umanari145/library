@@ -2,6 +2,10 @@
 主にJavaScriptの実験など
 
 - ajax.html jquery1.5以降のajaxの書き方
+- babel bableのサンプル
+```
+ npx babel main.js  --out-file compiled.js --presets=es2015
+```
 - when.html 並列ではあるが、順番は守りたい時のajaxの書き方
 - promise.html 非同期処理をPromiseで使うパターン
 - non_promise.html 非同期処理、Promiseを使わないパターン(Promiseを書かない時との比較)
