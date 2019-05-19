@@ -4,7 +4,7 @@
 //1 import {libs.Person} from './libs/Person'
 //              ~
 
-import {libs.Person} from './libs/Person'
+import * as libs from './libs'
 
 let person = new libs.Person()
 let mes:string = person.getMessage()

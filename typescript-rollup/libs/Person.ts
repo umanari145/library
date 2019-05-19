@@ -10,7 +10,7 @@ export class Person {
 
     public getMessage(): string{
         let msg = `こんにちは ${this.name} さん
-私の年齢は${this.age}です。`
+    私の年齢は${this.age}です。`
         return msg
     }
 }

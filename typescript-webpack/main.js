@@ -86,15 +86,15 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./libs/Person.ts":
-/*!************************!*\
-  !*** ./libs/Person.ts ***!
-  \************************/
+/***/ "./libs/index.ts":
+/*!***********************!*\
+  !*** ./libs/index.ts ***!
+  \***********************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n//\nvar libs;\n(function (libs) {\n    class Person {\n        constructor() {\n            this.name = \"takashi\";\n            this.age = 33;\n        }\n        getMessage() {\n            let msg = `こんにちは ${this.name} さん\n私の年齢は${this.age}です。`;\n            return msg;\n        }\n    }\n    libs.Person = Person;\n})(libs = exports.libs || (exports.libs = {}));\n\n\n//# sourceURL=webpack:///./libs/Person.ts?");
+eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nclass default_1 {\n}\nexports.default_1 = default_1;\n\n\n//# sourceURL=webpack:///./libs/index.ts?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\n//\nva
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n//\n//main.ts:1:13 - error TS1005: ',' expected.\n//\n//1 import {libs.Person} from './libs/Person'\n//              ~\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst Person_1 = __webpack_require__(/*! ./libs/Person */ \"./libs/Person.ts\");\nlet person = new Person_1.libs.Person();\nlet mes = person.getMessage();\nconsole.log(mes);\nconsole.log('aabbb');\n\n\n//# sourceURL=webpack:///./main.ts?");
+eval("\n//\n//main.ts:1:13 - error TS1005: ',' expected.\n//\n//1 import {libs.Person} from './libs/Person'\n//              ~\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst libs = __webpack_require__(/*! ./libs */ \"./libs/index.ts\");\nlet person = new libs.Person();\nlet mes = person.getMessage();\nconsole.log(mes);\nconsole.log('aabbb');\n\n\n//# sourceURL=webpack:///./main.ts?");
 
 /***/ })
 
