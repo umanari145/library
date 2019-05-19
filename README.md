@@ -77,6 +77,7 @@ npx rollup es6load.js --file bundle.js --format iife
     - sample(2).js 生成物
     - libs モジュール
     - main.ts エントリーポイントのJS
+    - index.html 読み込まれるJS require.jsの活用法も合わせて
 ```
 # -t コンパイルする形式
 # -sourceMap typescriptのままデバッグできるようになる
@@ -84,6 +85,17 @@ npx rollup es6load.js --file bundle.js --format iife
 npx tsc -t ES5 --module umd --sourceMap main.ts
 
 ```
+
+- typescript2 webpack.cofig.jsを活用
+    - libs モジュール
+    - main.ts エントリーポイントのJS
+    - webpack.config.js
+    - index.html 読み込まれるJS
+```
+npx webpack
+
+```    
+
 - libs
     - css select2やjquery-uiのCSS
         - common.scss(css) jquery-uiやselect2のcss読み込み
