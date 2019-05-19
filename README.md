@@ -68,6 +68,18 @@ npx rollup es6load.js --file bundle.js --format iife
 - testtool テストデータの入力
 - resources コンパイルを使ったJSのサンプル
 - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
+- typescript
+    - sample(2).ts コンパイラの元
+    - sample(2).js 生成物
+    - libs モジュール
+    - main.ts エントリーポイントのJS
+```
+# -t コンパイルする形式
+# -sourceMap typescriptのままデバッグできるようになる
+# --module commonjsを使えるように
+npx tsc -t ES5 --module umd --sourceMap main.ts
+
+```
 - libs
     - css select2やjquery-uiのCSS
         - common.scss(css) jquery-uiやselect2のcss読み込み
