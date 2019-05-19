@@ -93,7 +93,10 @@ npx tsc -t ES5 --module umd --sourceMap main.ts
     - index.html 読み込まれるJS
 ```
 npx webpack
-
+```    
+- typescript-rollup rollup+typesciptの構成。基本構成は他と同じ
+```
+ npx rollup -c
 ```    
 
 - libs
