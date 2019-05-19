@@ -86,7 +86,7 @@ npx tsc -t ES5 --module umd --sourceMap main.ts
 
 ```
 
-- typescript2 webpack.cofig.jsを活用
+- typescript-webpack typescript+webpackの活用
     - libs モジュール
     - main.ts エントリーポイントのJS
     - webpack.config.js
