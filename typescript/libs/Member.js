@@ -9,17 +9,15 @@
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var Person = /** @class */ (function () {
-        function Person() {
-            this.name = "takashi";
-            this.age = 33;
+    var Member = /** @class */ (function () {
+        function Member() {
+            this.talk = 'talkだよ';
         }
-        Person.prototype.getMessage = function () {
-            var msg = "\u3053\u3093\u306B\u3061\u306F " + this.name + " \u3055\u3093\n\u79C1\u306E\u5E74\u9F62\u306F" + this.age + "\u3067\u3059\u3002";
-            return msg;
+        Member.prototype.getTalk = function () {
+            return this.talk;
         };
-        return Person;
+        return Member;
     }());
-    exports.Person = Person;
+    exports.Member = Member;
 });
-//# sourceMappingURL=Person.js.map
+//# sourceMappingURL=Member.js.map
