@@ -56,7 +56,11 @@ http://localhost:51478 にアクセス
 cd ./rollup
 npx rollup es6load.js --file bundle.js --format iife
 ```
-
+- requirejs
+    - libs 読み込まれる側のJS
+    - main.js JSのエントリーポイント
+    - require.js ライブラリ
+    - sample1.html html
 - sweetalert スタイリッシュなalert文(libsで読み込み)
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
@@ -76,7 +80,7 @@ npx rollup es6load.js --file bundle.js --format iife
     - sample(2).ts コンパイラの元
     - sample(2).js 生成物
     - libs モジュール
-    - main.ts エントリーポイントのJS
+    - main(2).ts エントリーポイントのJS
     - index.html 読み込まれるJS require.jsの活用法も合わせて
 ```
 # -t コンパイルする形式
