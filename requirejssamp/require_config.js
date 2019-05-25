@@ -1,6 +1,6 @@
 var require = {
     paths: {
-        'dateutil':'libs/dateutil'
+        'dateutil':'libs/dateutil',
         'strutil':'libs/strutil'
     }
 }
