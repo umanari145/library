@@ -1,0 +1,1 @@
+define("libs/dateutil",[],function(){return{sampleEcho:function(){console.log("dateutils")}}}),define("libs/strutil",[],function(){return{sampleEcho:function(){console.log("strutils")}}}),require(["./libs/dateutil","./libs/strutil"],function(i,n){i.sampleEcho(),n.sampleEcho()}),define("main",function(){});
