@@ -56,11 +56,19 @@ http://localhost:51478 にアクセス
 cd ./rollup
 npx rollup es6load.js --file bundle.js --format iife
 ```
-- requirejs
-    - libs 読み込まれる側のJS
-    - main.js JSのエントリーポイント
+- requirejssamp
+    - libs 読み込まれる側のJS(dateutil,strutilが実ファイル)
     - require.js ライブラリ
-    - sample1.html html
+    - sample1(main).html シンプルなrequire.jsパターン
+    - sample2(main2).html 内部requireパターン
+    - sample3(main3).html config使用系
+    - require_config.js main3の設定
+    - sample4(build).html 1ファイルにまとめたパターン
+```
+ npx r.js -o name=main  out=build.js
+ #設定ファイルでも可
+```
+
 - sweetalert スタイリッシュなalert文(libsで読み込み)
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
