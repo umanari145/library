@@ -86,15 +86,46 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./libs/Person.ts":
+/*!************************!*\
+  !*** ./libs/Person.ts ***!
+  \************************/
+/*! exports provided: Person */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Person", function() { return Person; });
+class Person {
+    constructor() {
+        this.name = "takashi";
+        this.age = 33;
+    }
+    getMessage() {
+        let msg = `こんにちは ${this.name} さん
+    私の年齢は${this.age}です。`;
+        return msg;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./libs/index.ts":
 /*!***********************!*\
   !*** ./libs/index.ts ***!
   \***********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: Person */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nclass default_1 {\n}\nexports.default_1 = default_1;\n\n\n//# sourceURL=webpack:///./libs/index.ts?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Person__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Person */ "./libs/Person.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Person", function() { return _Person__WEBPACK_IMPORTED_MODULE_0__["Person"]; });
+
+
+
+
 
 /***/ }),
 
@@ -102,12 +133,20 @@ eval("\nObject.defineProperty(exports, \"__esModule\", { value: true });\nclass 
 /*!*****************!*\
   !*** ./main.ts ***!
   \*****************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\n//\n//main.ts:1:13 - error TS1005: ',' expected.\n//\n//1 import {libs.Person} from './libs/Person'\n//              ~\nObject.defineProperty(exports, \"__esModule\", { value: true });\nconst libs = __webpack_require__(/*! ./libs */ \"./libs/index.ts\");\nlet person = new libs.Person();\nlet mes = person.getMessage();\nconsole.log(mes);\nconsole.log('aabbb');\n\n\n//# sourceURL=webpack:///./main.ts?");
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _libs_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./libs/index */ "./libs/index.ts");
+
+let person = new _libs_index__WEBPACK_IMPORTED_MODULE_0__["Person"]();
+let mes = person.getMessage();
+console.log(mes);
+console.log('aabbb');
+
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=main.js.map
