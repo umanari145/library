@@ -1,5 +1,5 @@
+import {Person} from './Person'
 
-
-export namespace libs{
-    export {default as Person} from './Person'
+export {
+    Person
 }

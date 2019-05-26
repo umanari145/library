@@ -1,12 +1,6 @@
-//
-//main.ts:1:13 - error TS1005: ',' expected.
-//
-//1 import {libs.Person} from './libs/Person'
-//              ~
+import * as Libs from './libs/index.js'
 
-import {libs} from './libs/index'
-
-let person = new libs.Person()
+let person = new Libs.Person()
 let mes:string = person.getMessage()
 console.log(mes)
 console.log('aabbb')
