@@ -26,6 +26,11 @@ npx gulp
 
 - js/bundle.js main.jsがコンパイルされたもの(現在未使用)
 - js/main.js requireされたライブラリ(現在未使用)
+
+- js_scraping (puppeteerを使ったログイン)
+    - config.json 設定ファイル(通常はgit外かも)
+    - main.js エントリーポイント
+
 - es6sample ECMAScript2015について
     - lib/PersonClass.js exportするクラス
     - es6sample.js let,const,アロー演算子,classの新しい書き方など
