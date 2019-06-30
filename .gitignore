@@ -2,6 +2,7 @@
 /logs
 /**/node_modules
 /**/.cache
+/**/.env
 /**/dist
 /**/*.map
 /bower_components

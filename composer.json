@@ -4,6 +4,8 @@
         "j4mie/idiorm": "1.4.*",
         "nesbot/carbon": "~1.18",
         "monolog/monolog": "@stable",
-        "emonkak/underbar.php": "dev-master"
+        "emonkak/underbar.php": "dev-master",
+        "aws/aws-sdk-php": "^3.103",
+        "vlucas/phpdotenv": "^3.4"
     }
 }

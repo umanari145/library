@@ -1,4 +1,36 @@
-<!DOCTYPE html>
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/AWSS3Util.php';
+
+$dotenv = Dotenv\Dotenv::create(__DIR__);
+$dotenv->load();
+
+$aws3Util = new AWSS3Util([
+    'aws_access_key' => getenv('ACCESS_KEY'),
+    'aws_secret_key' => getenv('SECRET_KEY'),
+    'region' => getenv('REGION')
+]);
+
+if (isset($_POST['regist'])) {
+    $image64Obj = $_POST['file_source'];
+    $rawFileName = $_POST['sample_image'];
+    $splInfo = new SplFileInfo($rawFileName);
+    $extension = $splInfo->getExtension();
+
+    $image64Obj = preg_replace('/data.+base64,/', '', $image64Obj);
+    $fileNameNoExt = str_replace('.', '', microtime(true));
+    $fileNameIncExt = sprintf("%s.%s", $fileNameNoExt, $extension);
+
+    $tmpFilePath = sprintf("/tmp/%s", $fileNameIncExt);
+    file_put_contents($tmpFilePath, base64_decode($image64Obj));
+    $aws3Util->putS3Contents(getenv('BUCKET_NAME'), 'sample_image/' . $fileNameIncExt, $tmpFilePath);
+}
+
+
+
+
+?>
 <html>
 <head>
 <meta charset="utf-8" />
@@ -22,6 +54,7 @@
             var fr = new FileReader();
             fr.onload = function(e) {
                 $('.image_hanei').attr('src', e.target.result)
+                $('.file_source').val(e.target.result)
             }
             fr.readAsDataURL(fileObj)
             console.log('aaaa');
@@ -31,6 +64,7 @@
             var element = $(event.currentTarget)
             element.parent().find('.fileinput').val('')
             element.parent().find('.image_hanei').attr('src', '')
+            element.parent().find('.file_source').val('')
             return false
         })
 
@@ -49,13 +83,15 @@
 }
 </style>
 <body>
-    <form action="./">
+    <form action="" method="POST">
         <input type="file" name="sample_image" class="fileinput" >
         <button class="upload_button">UPLOAD</button>
         <button class="delete_button">DELETE</button>
+        <input type="hidden" name="file_source" class="file_source" value="">
         <div class="image_wrapper">
             <img src="" class="image_hanei">
         </div>
+        <input type="submit" name="regist" value="登録">
     </form>
 </body>
 </html>
