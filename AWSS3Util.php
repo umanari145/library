@@ -181,7 +181,26 @@ class AWSS3Util
             ]);
         } catch (S3Exception $e) {
             var_dump($e->getMessage());
-            exit();
         }
+    }
+
+    /**
+     *
+     * S3への保存(バイナリデータを直で)
+     *
+     * @param string $bucket    バケット名
+     * @param string $awsKey    AWSのファイル名までのファイル
+     * @param mixed $body       バイナリデータ
+     * @param string $mimeType  mime_type
+     */
+    public function putS3ContentsBinary($bucket, $awsKey, $body, $mimeType)
+    {
+        return $this->s3Client->putObject([
+                'Bucket' => $bucket,
+                'Key'    => $awsKey,
+                'Body' => $body,
+                'ContentType'=> 'image/' . $mimeType,
+                'ACL' => 'public-read'
+            ]);
     }
 }
