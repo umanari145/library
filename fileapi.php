@@ -15,19 +15,12 @@ $aws3Util = new AWSS3Util([
 if (isset($_POST['regist'])) {
     $image64Obj = $_POST['file_source'];
     $rawFileName = $_POST['sample_image'];
-    $splInfo = new SplFileInfo($rawFileName);
-    $extension = $splInfo->getExtension();
-
-    $image64Obj = preg_replace('/data.+base64,/', '', $image64Obj);
-    $fileNameNoExt = str_replace('.', '', microtime(true));
-    $fileNameIncExt = sprintf("%s.%s", $fileNameNoExt, $extension);
-
-    $tmpFilePath = sprintf("/tmp/%s", $fileNameIncExt);
-    file_put_contents($tmpFilePath, base64_decode($image64Obj));
-    $aws3Util->putS3Contents(getenv('BUCKET_NAME'), 'sample_image/' . $fileNameIncExt, $tmpFilePath);
+    $imageParts = explode(";base64,", $image64Obj);
+    $imageTypeAux = explode("image/", $imageParts[0]);
+    $mimeType = $imageTypeAux[1];
+    $body = base64_decode($imageParts[1]);
+    $aws3Util->putS3ContentsBinary(getenv('BUCKET_NAME'), 'sample_image/' . $rawFileName, $body, $mimeType);
 }
-
-
 
 
 ?>
