@@ -203,4 +203,12 @@ class AWSS3Util
                 'ACL' => 'public-read'
             ]);
     }
+
+    /**
+ * stream処理の開始
+ */
+    public function startWrapper()
+    {
+        $this->s3Client->registerStreamWrapper();
+    }
 }

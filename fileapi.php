@@ -112,7 +112,14 @@ if (isset($_POST['regist'])) {
         <input type="submit" name="regist" value="登録">
     </form>
 
-    <!--fileapiではないがimg srcでバイナリデータを読み込む-->
-    <img src="<?php echo 'http://localhost/library/imageBinary.php';?>" style="width:500px;">
+    <div>
+        <!--fileapiではないがimg srcでバイナリデータを読み込む-->
+        <img src="<?php echo 'http://localhost/library/imageBinary.php';?>" style="width:500px;">
+    </div>
+
+    <div>
+        <!--fileapiではないがimg srcでバイナリデータを読み込むs3版-->
+        <img src="<?php echo 'http://localhost/library/imageBinaryS3.php';?>" style="width:500px;margin-top:10px;">
+    </div>
 </body>
 </html>
