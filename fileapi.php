@@ -35,6 +35,16 @@ if (isset($_POST['regist'])) {
             return false
         })
 
+        $('.drop_zone').on('dragover', (event) => {
+            event.preventDefault();
+            alert("領域あり")
+        })
+
+        $('.drop_zone').on('drop', (event) => {
+            event.preventDefault();
+            alert('領域')
+        })
+
         $('input[type="file"][name="sample_image"]').on('change', (event)=> {
             var obj = $(event.currentTarget)
 
@@ -64,6 +74,12 @@ if (isset($_POST['regist'])) {
     })
 </script>
 <style type="text/css">
+.drop_zone{
+  width: 500px;
+  height:500px;
+  border: 5px dashed #000000;
+}
+
 .image_wrapper{
   width: 200px;
   height:200px;
@@ -81,10 +97,22 @@ if (isset($_POST['regist'])) {
         <button class="upload_button">UPLOAD</button>
         <button class="delete_button">DELETE</button>
         <input type="hidden" name="file_source" class="file_source" value="">
+
+        <div class="drop_zone">
+            ドロップ
+        </div>
+
+
         <div class="image_wrapper">
             <img src="" class="image_hanei">
         </div>
+
+
+
         <input type="submit" name="regist" value="登録">
     </form>
+
+    <!--fileapiではないがimg srcでバイナリデータを読み込む-->
+    <img src="<?php echo 'http://localhost/library/imageBinary.php';?>" style="width:500px;">
 </body>
 </html>
