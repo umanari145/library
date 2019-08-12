@@ -215,6 +215,7 @@ class AWSS3Util
      */
     public function bulkPutS3ContentsBinary($bucket, $imageData)
     {
+        $commands = [];
         foreach ($imageData as $eachImageData) {
 
             $commands[] = $this->s3Client->getCommand('PutObject', [
@@ -223,15 +224,51 @@ class AWSS3Util
                     'Body' => $eachImageData['body'],
                     'ContentType'=> 'image/' . $eachImageData['mimeType'],
                     'ACL' => 'public-read'
-                ]);
+            ]);
         }
 
         $pool = new CommandPool($this->s3Client, $commands);
-        // Initiate the pool transfers
         $promise = $pool->promise();
         // Force the pool to complete synchronously
         $promise->wait();
     }
+
+    /**
+     * S3からファイルを保存
+     *
+     * @param string $bucket  S3のバケット(トップのディレクトリのようなもの)
+     * @param string $fileDir ファイルディレクトリ
+     * @param string $imageData アップロードデータ
+     */
+    public function bulkSaveS3Contents($bucket, $fileDir, $imageData)
+    {
+        $commands = [];
+        foreach ($imageData as $eachImageData) {
+
+            $fileArr = explode("/", $eachImageData);
+            $lastIndex = count($fileArr);
+            $fileName = $fileArr[$lastIndex - 1];
+
+            if (!file_exists($fileDir)) {
+                mkdir($fileDir, 0777, true);
+            }
+
+            $filePath = sprintf("%s/%s", $fileDir, $fileName);
+
+            $commands[] = $this->s3Client->getCommand('GetObject', [
+                'Bucket' => $bucket,
+                'Key'    => $eachImageData,
+                'SaveAs' => $filePath
+            ]);
+        }
+
+        $pool = new CommandPool($this->s3Client, $commands);
+        $promise = $pool->promise();
+        // Force the pool to complete synchronously
+        $promise->wait();
+
+    }
+
 
 
     /**

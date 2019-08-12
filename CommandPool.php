@@ -12,19 +12,39 @@ $aws3Util = new AWSS3Util([
     'region' => getenv('REGION')
 ]);
 
-$dir = __DIR__ . '/sample_image/*';
-$imageData = [];
-foreach (glob($dir) as $file_path) {
-    $file_info = new SplFileInfo($file_path);
-    $file_name = $file_info->getFilename();
-    $extension = $file_info->getExtension();
-    $image_binary = file_get_contents($file_path);
+//bulkUpdate($aws3Util);
+bulkDownload($aws3Util);
 
-    $imageData[] = [
-        'key'  => 'sample_image/' . $file_name,
-        'body' => $image_binary,
-        'mimeType' => $extension
-    ];
- }
+function bulkDownload($aws3Util)
+{
+    $saveFileDir = __DIR__ . '/sample_image';
+    $fileLists = $aws3Util->getS3FileList(getenv('BUCKET_NAME'), 'sample_image');
 
- $aws3Util->bulkPutS3ContentsBinary(getenv('BUCKET_NAME'), $imageData);
+    $imageData = [];
+    foreach ($fileLists as $file) {
+        if (!empty($file)) {
+             $imageData[] = 'sample_image/' . $file;
+        }
+    }
+    $aws3Util->bulkSaveS3Contents(getenv('BUCKET_NAME'), $saveFileDir, $imageData);
+}
+
+
+function bulkUpdate($aws3Util)
+{
+    $dir = __DIR__ . '/sample_image/*';
+    $imageData = [];
+    foreach (glob($dir) as $file_path) {
+        $file_info = new SplFileInfo($file_path);
+        $file_name = $file_info->getFilename();
+        $extension = $file_info->getExtension();
+        $image_binary = file_get_contents($file_path);
+
+        $imageData[] = [
+            'key'  => 'sample_image/' . $file_name,
+            'body' => $image_binary,
+            'mimeType' => $extension
+        ];
+    }
+    $aws3Util->bulkPutS3ContentsBinary(getenv('BUCKET_NAME'), $imageData);
+}
