@@ -2,6 +2,7 @@
 
 use Aws\S3\S3Client;
 use Aws\S3\Exception\S3Exception;
+use Aws\CommandPool;
 
 class AWSS3Util
 {
@@ -205,8 +206,37 @@ class AWSS3Util
     }
 
     /**
- * stream処理の開始
- */
+     *
+     * 一括S3への保存(バイナリデータを直で)
+     *
+     * @param string $bucket    バケット名
+     * @param mixed  $imageData key => binaryデータ
+     * @param string $mimeType  mime_type
+     */
+    public function bulkPutS3ContentsBinary($bucket, $imageData)
+    {
+        foreach ($imageData as $eachImageData) {
+
+            $commands[] = $this->s3Client->getCommand('PutObject', [
+                    'Bucket' => $bucket,
+                    'Key'    => $eachImageData['key'],
+                    'Body' => $eachImageData['body'],
+                    'ContentType'=> 'image/' . $eachImageData['mimeType'],
+                    'ACL' => 'public-read'
+                ]);
+        }
+
+        $pool = new CommandPool($this->s3Client, $commands);
+        // Initiate the pool transfers
+        $promise = $pool->promise();
+        // Force the pool to complete synchronously
+        $promise->wait();
+    }
+
+
+    /**
+    * stream処理の開始
+    */
     public function startWrapper()
     {
         $this->s3Client->registerStreamWrapper();
