@@ -14,6 +14,7 @@
 - async_await.html api連携でのサンプル
 - imageBinary.php  画像バイナリデータをhttpレスポンスを返す(読み込みはfileapi.php)
 - imageBinaryS3.php  画像バイナリデータをhttpレスポンスを返す。S3経由(読み込みはfileapi.php)
+- CommandPool.php S3へのバルクアップロード&バルクダウンロード
 - dataTable.html 一般ページャー　https://datatables.net/　活用
 - dataTable(2).html 無限スクロールサンプル　https://datatables.net/　活用
 - datepicker_select2.html datepickerとselect2の活用
