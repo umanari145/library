@@ -1,3 +1,5 @@
+
+console.log("---------letとconst---------")
 let name = "太朗"
 console.log(name)
 //再宣言は下記のようなエラーが起きる Uncaught SyntaxError: Identifier 'name' has already been declared
@@ -10,7 +12,7 @@ console.log(sampleId)
 //再代入はエラー
 //Uncaught TypeError: Assignment to constant variable.
 //sampleId  = "11111"
-
+console.log("---------ブロックスコープ、初期値、関数、アロー関数---------")
 //ブロックスコープ
 {
   let x = 1
@@ -38,15 +40,31 @@ const add = function(a, b) {
 console.log(add(10,11))
 
 //アロー関数
-const add2 = (a, b) => {
-  return a+b
-}
+/*
+const double = function(x){
+    return x + x
+}*/
+//上記と全く同じ
+const double = x => (x+x)
+console.log(double(2))
 
-console.log(add2(20,21))
+/*
+const add2 = function(a, b) {
+    return a + b
+}*/
+//上記と全く同じ
+const add2 = (a, b) => (a + b)
+console.log(add2(2,3))
 
-//アロー関数 return省略
-const add3 = (a, b) =>  a+b
-console.log(add3(30,31))
+/*
+const rand = function() {
+    return Math.random()
+}*/
+//上記と全く同じ
+const rand = () => Math.random()
+console.log(rand())
+
+console.log("---------thisの範囲,bindなど---------")
 
 const person = {
   name: '太郎',
@@ -57,13 +75,19 @@ const person = {
 }
 person.lazy_hello()
 
+setTimeout(function(){
+    console.log("---------thisの範囲,bindなど(遅延のためここに出てくる)---------")
+}, 1000)
+
+
+
 const person2 = {
   name: '太郎',
   lazy_hello:function(){
     setTimeout(function(){
       //thisが指しているのはwindowなため画面に出ない
       console.log(`${this.name}を画面に出力します。2`)
-    }, 1000)
+  }, 2000)
   }
 }
 person2.lazy_hello()
@@ -74,7 +98,7 @@ const person3 = {
     setTimeout(function(){
       //bindによってスコープをコントロール
       console.log(`${this.name}を画面に出力します。3`)
-    }.bind(this), 1000)
+  }.bind(this), 2000)
   }
 }
 person3.lazy_hello()
@@ -85,7 +109,7 @@ const person4 = {
     setTimeout(() =>
       //アロー関数だとスコープが参照元になる
       console.log(`${this.name}を画面に出力します。4`)
-    , 1000)
+    , 2000)
   }
 }
 person4.lazy_hello()

@@ -1,5 +1,8 @@
+console.log("---------exportとimport---------")
+
 import { sum } from './es6modules.js';
 console.log(sum(1,2))
+
 
 //defaultクラスの読み込み
 import PersonClass from './lib/personClass.js'
