@@ -35,7 +35,7 @@ npx gulp
     - main.js エントリーポイント
 
 - es6sample ECMAScript2015について
-    - lib/PersonClass.js exportするクラス
+    - lib/PersonClass.js,MemberClass,currency exportするクラス
     - es6sample.js let,const,アロー演算子,classの新しい書き方など
     - es6load.js importを使った他ファイルの読み込み
     - es6class.js classの書き方
