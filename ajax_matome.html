@@ -5,59 +5,70 @@
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-    $.ajax({
-        //異常系を修正する場合はわざとurlを崩したり、エラーを出すなど
-        url:'/library/ajaxpost.php',
-        type:'POST',
-        data:{
+
+$.ajax({
+    //異常系を修正する場合はわざとurlを崩したり、エラーを出すなど
+    url:'/library/ajaxpost.php',
+    type:'POST',
+    data:{
+        'user_id':'aaaa',
+        'password':'bbbb'
+    }
+}).done((data) => {
+    //成功時
+    console.log(data)
+    console.log('ajax success')
+}).fail((data) => {
+    //失敗時
+    console.log('ajax fail 404, 500エラーなど');
+}).always((data) => {
+    //try-catchのfinallyに近い
+    //ここは常に通る
+    console.log('ajax always')
+})
+
+
+function getPref() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+          url:'/library/ajaxpost.php',
+          type:'POST',
+          data:{
             'user_id':'aaaa',
             'password':'bbbb'
-        }
-    }).done((data) => {
-        //成功時
-        console.log(data)
-        console.log('ajax success')
-    }).fail((data) => {
-        //失敗時
-        console.log('ajax fail 404, 500エラーなど');
-    }).always((data) => {
-        //try-catchのfinallyに近い
-        //ここは常に通る
-        console.log('ajax always')
-    })
-
-
-    function getPref() {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-              url:'/library/ajaxpost.php',
-              type:'POST',
-              data:{
-                'user_id':'aaaa',
-                'password':'bbbb'
-              }
-            }).done((data) => {
-              resolve(data)
-            }).fail((data) => {
-              reject(data)
-            })
+          }
+        }).done((data) => {
+          resolve(data)
+        }).fail((data) => {
+          reject(data)
         })
-    }
+    })
+}
 
-    console.log('promise');
+console.log('promise');
 
-    getPref()
-    .then((data) => {
-        console.log("promise success")
-        console.log(data)
-    }).catch((err) => {
-        console.log("promise error 404 500 error")
-        console.log(err)
-    }).finally(()=>{
-        console.log("promise finally")
-    });
-
+getPref()
+.then((data) => {
+    console.log("promise success")
+    console.log(data)
+}).catch((err) => {
+    console.log("promise error 404 500 error")
+    console.log(err)
+}).finally(()=>{
+    console.log("promise finally")
 });
+
+async function getPrefProcess() {
+    //読んで字のごとくawait結果をまつ
+    const result =  await getPref();
+    console.log("async await")
+    console.log(result)
+}
+
+getPrefProcess()
+
+
+})
 </script>
 <body>
     <div id="pref_area"></div>
