@@ -60,6 +60,7 @@ getPref()
         }
     }
 }).then((data) => {
+    //多段プロミス
     let length = data['result'].length
     let cityStr = ''
     for(var i = 0; i < length; i++) {
