@@ -58,15 +58,48 @@ getPref()
     console.log("promise finally")
 });
 
+//promiseを返す
+//https://qiita.com/suin/items/97041d3e0691c12f4974
 async function getPrefProcess() {
     //読んで字のごとくawait結果をまつ
-    const result =  await getPref();
-    console.log("async await")
-    console.log(result)
+    try{
+        console.log("async_await1 start")
+        const result =  await getPref();
+        console.log(result)
+    } catch(error) {
+        console.log('async_awit1 error');
+        console.log(error)
+    } finally {
+        console.info('async_await1 finally');
+    }
 }
 
 getPrefProcess()
 
+
+//async_awit promiseを返す throw
+async function getPrefProcess2() {
+
+    try{
+        console.log("async_await2 start")
+        const result =  await getPref();
+        console.log(result)
+    } catch(error) {
+        console.log('async_awit2 error throw');
+        throw error;
+    }
+}
+
+
+getPrefProcess2()
+.then(()=>{
+    console.log("async_awit wrapper2 then")
+}).catch((err)=>{
+    console.log("async_awit wrapper2 catch")
+    console.log(err)
+}).finally(()=>{
+    console.log("async_awit wrapper2 finally")
+})
 
 })
 </script>

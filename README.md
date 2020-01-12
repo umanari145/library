@@ -2,6 +2,7 @@
 主にJavaScriptの実験など
 
 - ajax.html jquery1.5以降のajaxの書き方
+- ajax_matome.html ajax,promise,async_awitのサンプルパターンなど
 - babel bableのサンプル
 ```
  npx babel main.js  --out-file compiled.js --presets=es2015
