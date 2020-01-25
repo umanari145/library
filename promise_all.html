@@ -30,18 +30,18 @@ $(function() {
       })
   })
 
-Promise.all([
+  Promise.all([
     func1,
     func2
-]).then((res1)=>{
+  ]).then((res1)=>{
     console.log(res1[0])
     console.log(res1[1])
-}).catch((err)=>{
+  }).catch((err)=>{
     alert("失敗しました。");
-})
-.finally(()=>{
+  })
+  .finally(()=>{
     console.log('処理が完了しました。')
-})
+  })
 
 })
 </script>
