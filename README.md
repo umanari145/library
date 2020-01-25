@@ -10,6 +10,7 @@
 - when.html 並列ではあるが、順番は守りたい時のajaxの書き方
 - fileapi.html FILEAPIを活用した画像アップロード
 - promise.html 非同期処理をPromiseで使うパターン
+- promise_all.html 複数の非同期処理をPromiseで使うパターン(whenと同義)
 - non_promise.html 非同期処理、Promiseを使わないパターン(Promiseを書かない時との比較)
 - async_await_basic.html async_awaitを使った基本サンプル
 - async_await.html api連携でのサンプル

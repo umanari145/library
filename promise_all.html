@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+
+  var func1 = new Promise((resolve, reject) => {
+      $.ajax({
+          type:'GET',
+          url:'/library/ajaxpost2.json',
+          dataType:'json'
+      }).done((data) => {
+          resolve(data)
+      }).fail((data) => {
+          reject(data)
+      })
+  })
+
+  var func2 =  new Promise((resolve, reject) => {
+      $.ajax({
+          type:'GET',
+          url:'/library/ajaxpost3.json',
+          dataType:'json'
+      }).done((data) => {
+          resolve(data)
+      }).fail((data) => {
+          reject(data)
+      })
+  })
+
+Promise.all([
+    func1,
+    func2
+]).then((res1)=>{
+    console.log(res1[0])
+    console.log(res1[1])
+}).catch((err)=>{
+    alert("失敗しました。");
+})
+.finally(()=>{
+    console.log('処理が完了しました。')
+})
+
+})
+</script>
+<body>
+	<div id="form_block">
+</body>
+</html>
