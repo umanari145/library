@@ -83,6 +83,7 @@ npx rollup es6load.js --file bundle.js --format iife
 - sweetalert スタイリッシュなalert文(libsで読み込み)
 - html2canvas.min.js　htmlの画像
 - htmltojpeg.php HTML→base64→PHP側でデコード→S3にアップロード
+- http_request HTTPリクエストを飛ばす処理をまとめ
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
 - infinitescroll2.html 無限スクロール　オリジナル
