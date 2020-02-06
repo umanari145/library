@@ -24,6 +24,8 @@ $.ajax({
 }).always((data) => {
     //try-catchのfinallyに近い
     //ここは常に通る
+    console.log(data)
+    //dataにはdone or failのdataと同じものが入る
     console.log('ajax always')
 })
 
@@ -104,6 +106,7 @@ getPrefProcess2()
 })
 </script>
 <body>
+    consoleをチェック(http_requestも参考に！)
     <div id="pref_area"></div>
     <div id="city_area"></div>
 </body>

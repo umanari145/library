@@ -4,11 +4,33 @@
 <meta charset="utf-8" />
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
-//生Javascript
 
 $(function() {
-    //jqueryAjax
 
+    let ajaxPrefProp = {
+        url:'/library/ajaxpost.php',
+        type:'POST',
+        data:{
+            'user_id':'aaaa',
+            'password':'bbbb'
+        }
+    }
+    //jqueryAjax
+    function jqueryAjax() {
+        $.ajax(ajaxPrefProp)
+          .done((data) => {
+            console.log("--jqueryAjax success--");
+            console.log(data)
+          })
+          .fail((err) => {
+            console.log("--jqueryAjax fail--");
+            console.log(err)
+          })
+          .always((data) =>{
+            console.log("--jqueryAjax end--");
+            console.log(data);
+          })
+    }
 
     //fetch
 
@@ -16,10 +38,15 @@ $(function() {
     //axios
 
 
-    
+
+
+
+    console.log("--jqueryAjax start--");
+    jqueryAjax()
+
 })
 </script>
 <body>
-	<div id="form_block"></div>
+    consoleをチェック(ajax_matomeも参考に！)
 </body>
 </html>
