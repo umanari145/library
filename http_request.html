@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script type="text/javascript">
 
 $(function() {
@@ -46,10 +47,12 @@ $(function() {
                 'user_id':'aaaa',
                 'password':'bbbb'
             })
-        }).then((res) => {
+        })
+        .then((res) => {
             console.log('--fetch 1段目then--')
             return res.json();
-        }).then((res) => {
+        })
+        .then((res) => {
             //resolve時ここにくる
             console.log('--fetch 2段目(resolve)then--')
             console.log(JSON.stringify(res))
@@ -62,6 +65,28 @@ $(function() {
     }
 
     //axios
+    function axiosApi() {
+        let url = '/library/ajaxpost.php';
+
+        axios.post(url,{
+            'user_id':'aaaa',
+            'password':'bbbb'
+        })
+        .then((data) => {
+            //resolve時ここにくる
+            console.log('--axios then--')
+            console.log(data)
+        })
+        .catch((err) => {
+            //普通の404、500エラー
+            console.log('--axios error--')
+            console.log(err);
+        })
+        .finally((data) => {
+            //dataはない
+            console.log('--axios always--');
+        })
+    }
 
 
 
@@ -72,6 +97,9 @@ $(function() {
 
     console.log("--fetch start--");
     fetchApi();
+
+    console.log("--axios start--");
+    axiosApi();
 })
 </script>
 <body>
