@@ -11,10 +11,12 @@ $(function() {
     let ajaxPrefProp = {
         url:'/library/ajaxpost.php',
         type:'POST',
-        data:{
+        //正しくはContent-TypeとdataTypeを設定しないと自動判定して飛んでします
+        contentType: 'application/json',
+        data:JSON.stringify({
             'user_id':'aaaa',
             'password':'bbbb'
-        }
+        })
     }
     //jqueryAjax
     function jqueryAjax() {
