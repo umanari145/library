@@ -110,7 +110,6 @@ npx rollup es6load.js --file bundle.js --format iife
 # -sourceMap typescriptのままデバッグできるようになる
 # --module commonjs,umdなど
 npx tsc -t ES5 --module umd --sourceMap main.ts
-
 ```
 
 - typescript-webpack typescript+webpackの活用
@@ -118,12 +117,14 @@ npx tsc -t ES5 --module umd --sourceMap main.ts
     - main.ts エントリーポイントのJS
     - webpack.config.js
     - index.html 読み込まれるJS
+
 ```
 #--mode development 主に高速化
 npx run dev
 #--mode production デバッグがしやすい
 npx run prod
-```    
+```
+
 - typescript-rollup rollup+typesciptの構成。基本構成は他と同じ
 ```
  npx rollup -c
