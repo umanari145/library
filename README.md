@@ -101,6 +101,7 @@ npx rollup es6load.js --file bundle.js --format iife
 - testtool テストデータの入力
 - resources コンパイルを使ったJSのサンプル
 - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
+- validation.html Laravel風のJSバリデーションチェック
 - typescript
     - sample(2).ts コンパイラの元
     - sample(2).js 生成物
