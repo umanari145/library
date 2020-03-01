@@ -29,7 +29,8 @@
     "sugar": "^2.0.6",
     "sugar-language": "^2.0.6",
     "twbs-pagination": "^1.4.1",
-    "typeahead": "^0.2.2"
+    "typeahead": "^0.2.2",
+    "validatorjs": "^3.18.1"
   },
   "devDependencies": {
     "resolve-url-loader": "^2.3.1",

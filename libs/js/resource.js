@@ -24,9 +24,13 @@ import swal from 'sweetalert';
 const Sugar = require('Sugar');
 const SugarLanguage =  require("sugar-language")
 
+//validation
+import Validator from 'validatorjs';
+
 //スコープが閉じているのでグローバルオブジェクト(windowに格納)
 window.$ = window.jQuery = $;
 window.ClassicEditor = ClassicEditor;
 window.leanModal = leanModal;
 window.Sugar = Sugar;
 window.SugarLanguage = SugarLanguage;
+window.Validator = Validator;

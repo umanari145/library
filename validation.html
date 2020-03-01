@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script src="./libs/js/main.js"></script>
+<script type="text/javascript">
+
+    let data = {
+        name: 'aaaa',
+        age: 123,//'123'でもOK
+        email: 'sample@gmail.com'
+    };
+
+    data = {
+        name: '',
+        age: '',
+        email: ''
+    };
+
+    data = {
+        name: '',
+        age: 'aa',//これはOK
+        email: 'aaaa'
+    };
+
+
+    let rules = {
+        'name': 'required',
+        'age': 'required|integer',
+        'email': 'required|email',
+    };
+
+    let error_msg = {
+        "required.name": '名前が未入力です。',
+        "required.age": '年齢が未入力です。',
+        "integer.age": '年齢は数値で入力してください。',
+        "required.email": 'emailが未入力です。',
+        "email.email": '正しいemailを入力してください。',
+    }
+
+    let validation = new Validator(data, rules, error_msg);
+
+    console.log('エラーなしかいなか' + validation.passes());
+
+    console.table('全エラー出力');
+    console.table(validation.errors.all());
+
+    console.log('email エラーなしかいなか' + validation.errors.has('email'));
+
+    console.table('emailエラー出力');
+    console.table(validation.errors.get('email'));
+
+</script>
+<body>
+	<p>validationをconsoleでチェック</p>
+</body>
+</html>
