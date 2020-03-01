@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>Array_convert(配列加工に関して)</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="./libs/js/main.js"></script>
+    <script type="text/javascript" >
+
+        function init_students() {
+            var students = [
+                {'id':1, 'pref':'chiba','age':23,'name':'yamada','domain':'gmail.com'},
+                {'id':2,'pref':'tokyo','age':15,'name':'suzuki','domain':'yahoo.co.jp'},
+                {'id':3,'pref':'kanagawa','age':33,'name':'watanabe','domain':'gmail.com'},
+                {'id':4,'pref':'tokyo','age':65,'name':'satou','domain':'microsoft.com'},
+                {'id':5,'pref':'kanagawa','age':53,'name':'katou','domain':'microsoft.com'},
+                {'id':6,'pref':'chiba','age':43,'name':'saitou','domain':'yahoo.co.jp'},
+            ]
+            return students;
+        }
+
+        function forEachSample() {
+            let students = init_students();
+            students.forEach((v,i) => {
+                v['email'] = `${v.name}@${v.domain}`
+            })
+            console.log("--foreach---");
+            console.table(students);
+        }
+
+        function MapSample() {
+            let students = init_students();
+            students.map((v,i) => {
+                v['email'] = `${v.name}@${v.domain}`
+            })
+            console.log("--map---");
+            console.table(students);
+        }
+
+        function findSample() {
+            let students = init_students();
+            targetStudent = students.find((v,i) => {
+                return v.id == 3;
+            })
+            console.log("--find---");
+            console.table(targetStudent);
+        }
+
+        function filterSample() {
+            let students = init_students();
+            targetStudents = students.filter((v,i) => {
+                return v.domain == 'gmail.com';
+            })
+            console.log("--filter---");
+            console.table(targetStudents);
+        }
+
+        function multiSample() {
+            let students = init_students();
+
+            targetStudents = students.filter((v,i) => {
+                return v.domain == 'gmail.com';
+            }).map((v, i) => {
+                v['email'] = `${v.name}@${v.domain}`
+                return v;
+            })
+            console.log("--filter+map---");
+            console.table(targetStudents);
+        }
+
+        forEachSample();
+        MapSample();
+        findSample();
+        filterSample();
+        multiSample();
+
+
+    </script>
+    <body>
+        <div>配列可能やるためのhtml(consoleで処理について記述)</div>
+    </body>
+</html>
