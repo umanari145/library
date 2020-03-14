@@ -9,8 +9,8 @@
     <script type="text/javascript" >
     $(document).ready(function() {
         //staticなので答えは変数(文字列)
-        var targetDay = Sugar().Date.create().format('{yyyy}-{MM}');
-        console.log(targetDay)
+        var testDay = Sugar.Date.create('next Friday');
+        console.log(testDay)
 
         //targetDay2はobject
         var targetDayObj = new Sugar.Date();
@@ -22,14 +22,19 @@
         //オブジェクトの場合は最後にrawで出す
         console.log(targetDayObj.addMonths(1).format('{yyyy}-{MM}').raw)
 
+        //省略した書き方
+        var targetDay = Sugar().Date.create('2019-05-03').addMonths(1).format('{yyyy}-{MM}');
+        console.log(targetDay)
 
         //任意の日付での処理
         console.log(Sugar().Date.create('2019-05-03').addMonths(1).format('{yyyy}-{MM}-{dd}'));
 
-
         //staticメソッドでの処理
+        console.log('--String Static--')
         console.log(Sugar.String.isEmpty('aaaa'))
         console.log(Sugar.String.isEmpty(''))
+        console.log(Sugar.String.toNumber('1,234'))
+        console.log(Sugar.Number.format('1234'))
 
         //インスタンス作成
         var str1 = new Sugar.String('forever love')

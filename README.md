@@ -81,7 +81,7 @@ npx rollup es6load.js --file bundle.js --format iife
  npx r.js -o name=main  out=build.js
  #設定ファイルでも可
 ```
-
+- libs/js/original/utility.js 汎用的なJS主に文字加工に関して
 - sweetalert スタイリッシュなalert文(libsで読み込み)
 - html2canvas.min.js　htmlの画像
 - htmltojpeg.php HTML→base64→PHP側でデコード→S3にアップロード
