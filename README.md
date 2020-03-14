@@ -96,6 +96,7 @@ npx rollup es6load.js --file bundle.js --format iife
 - slidersample.html slider-pro slicker swiperを使ったスライダーのサンプル
 - sticky.html スティッキーヘッダーのサンプル(一定スクロール量を越えるとヘッダに固定されるタイプのヘッダー)
 - sugar.html JSライブラリSugarのサンプル
+- sugar.html JSライブラリSugarのサンプル(グローバル空間への拡張)
 - togglesample.html toggleClass, slideToggle, fadeToggle, CSSのみでのtoggleのサンプル
 - typeahead.html 入力補完用のライブラリ
 - testtool テストデータの入力
