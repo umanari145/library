@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>Sugar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="./libs/js/main.js"></script>
+    <script type="text/javascript" >
+    $(document).ready(function() {
+        //下記のようにかくとグローバルオブジェクトへの拡張
+        Sugar.extend();
+        //ちなみに文字だけに拡張したい場合は
+        //ちなみに特定のオブジェクトだけに拡張したい場合はSugar.extend({namespaces: [Array, Date]});
+        var hoge = '1234'
+        console.log(hoge.toNumber())
+
+        var testDay =  Date.create('next Friday');
+        console.log(testDay)
+        console.log(testDay.format('{yyyy}-{MM}'))
+
+        //rawいらない
+        console.log(testDay.addMonths(1).format('{yyyy}-{MM}'))
+
+
+        console.log('aaaa'.isEmpty())
+        console.log(''.isEmpty())
+        console.log((1234).format())
+
+        var students = [
+            {'pref':'chiba','age':23,'name':'yamada'},
+            {'pref':'tokyo','age':15,'name':'suzuki'},
+            {'pref':'kanagawa','age':33,'name':'watanabe'},
+            {'pref':'tokyo','age':65,'name':'satou'},
+            {'pref':'kanagawa','age':53,'name':'katou'},
+            {'pref':'chiba','age':43,'name':'saitou'},
+        ]
+
+        //chain連動は既存の使い方じゃないとダメかも・・要調査
+        Sugar.Array(students)
+             .groupBy('pref')
+             .map(function(v,k){
+                 console.log(k)
+                 var nameObj = Sugar.Array(v).map(function(v2){return v2.age;}).average().raw
+                 console.log(nameObj)
+             })
+
+        //通常のメソッド
+         var studentsObj = new Sugar.Array(students)
+
+         //chain連動
+         studentsObj.groupBy('pref')
+                     .map(function(v,k){
+                         console.log(k)
+                         var nameObj = Sugar.Array(v).map(function(v2){return v2.age;}).average().raw
+                         console.log(nameObj)
+                     })
+
+
+
+        //staticメソッドでも同じようにグローバル拡張でも使える
+        Sugar.Array(students)
+             .groupBy('pref')
+             .map(function(v,k){
+                 console.log(k)
+                 var nameObj = Sugar.Array(v).map(function(v2){return v2.age;}).average().raw
+                 console.log(nameObj)
+             })
+
+    });
+
+    </script>
+    <body>
+        <div>Sugarやるためのhtml(consoleで処理について記述)</div>
+    </body>
+</html>

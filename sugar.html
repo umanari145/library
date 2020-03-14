@@ -8,6 +8,11 @@
     <script src="./libs/js/main.js"></script>
     <script type="text/javascript" >
     $(document).ready(function() {
+
+        /**
+         * 単発のメソッドは原則static呼び出して使えるが、
+         * chain系を使いたい場合はobjectにする
+         */
         //staticなので答えは変数(文字列)
         var testDay = Sugar.Date.create('next Friday');
         console.log(testDay)
@@ -23,6 +28,7 @@
         console.log(targetDayObj.addMonths(1).format('{yyyy}-{MM}').raw)
 
         //省略した書き方
+        //これはインスタンスを生成してそのあとチエーンを実行
         var targetDay = Sugar().Date.create('2019-05-03').addMonths(1).format('{yyyy}-{MM}');
         console.log(targetDay)
 
@@ -51,7 +57,7 @@
             {'pref':'kanagawa','age':53,'name':'katou'},
             {'pref':'chiba','age':43,'name':'saitou'},
         ]
-
+        //console.table(students)
         var studentsObj = new Sugar.Array(students)
 
         //chain連動
@@ -72,6 +78,8 @@
              })
         //zentohanなど
         console.log(SugarLanguage.String('１２３４').hankaku().raw)
+
+
 
     });
 
