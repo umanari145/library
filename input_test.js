@@ -10,7 +10,30 @@ class TestClass{
     }
 
     /**
-     * HTMLに出力するHTMLを出す
+     * すでにHTMLにある入力状態をJSON形式で出力
+     */
+    getSerializeData() {
+        this.setHrefLink()
+
+        let serializeData = $(`${this.formObj}`).serializeArray()
+        var returnJson = {};
+        for (var idx = 0; idx < serializeData.length; idx++) {
+            returnJson[serializeData[idx].name] = serializeData[idx].value
+        }
+        const string = JSON.stringify(returnJson)
+        let blob = new Blob([string], {type: 'text/plain'});
+        document.getElementById("test_data_download").href = window.URL.createObjectURL(blob);
+
+        //$('#test_data_download').click()では動かないので注意;
+        $('#test_data_download')[0].click();
+    }
+
+    setHrefLink() {
+        $('body').append(`<a href="#" style="display:none;" id="test_data_download" download="test_data.json">ダウンロード</a>`)
+    }
+
+    /**
+     * すでにHTMLにある入力状態を復元するHTMLを記述
      */
     getFormsInputHtml() {
 
@@ -31,17 +54,17 @@ class TestClass{
             var formName = $(e).attr('name') || ''
             var formVal = $(e).val()
 
-            if (formName !== '' && formVal !== '') {
+            if (formName !== '') {
                 var tagName2 = tagName.toLowerCase()
                 var selecter = `${tagName2}[name="${formName}"]`
-                if (['radio','checkbox'].indexOf(type) < 0) {
-                    jsMessage += `$('${selecter}').val('${formVal}').change()\n`
-                } else if (type == 'radio') {
-                    jsMessage += `$('${selecter}[value="${formVal}"]').prop('checked', true).change()\n`
-                } else if (type == 'checkbox') {
-                    jsMessage += `$('${selecter}[value="${formVal}"]').prop('checked', true).change()\n`
+                if (['radio','checkbox'].indexOf(type) >= 0) {
+                    if ($(e).prop('checked')) {
+                        jsMessage += `$('${selecter}[value="${formVal}"]').prop('checked', true).change()\n`
+                    }
                 } else if (tagName2 == 'textarea') {
-                    jsMessage += `$('${selecter}).val('${formVal}').change()\n`
+                    jsMessage += `$('${selecter}').val('${formVal}').change()\n`
+                } else {
+                    jsMessage += `$('${selecter}').val('${formVal}').change()\n`
                 }
             }
         })
