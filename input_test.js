@@ -17,10 +17,19 @@ class TestClass{
 
         let serializeData = $(`${this.formObj}`).serializeArray()
         var returnJson = {};
+        /*本来は下記を使うとJSONに近くなるが、配列が上手く加工するのがめんどくさいので
+        保留
         for (var idx = 0; idx < serializeData.length; idx++) {
-            returnJson[serializeData[idx].name] = serializeData[idx].value
-        }
-        const string = JSON.stringify(returnJson)
+            let arrName = serializeData[idx].name;
+            let arrValue = serializeData[idx].value;
+            if (arrName.match(/\[\]$/g) != null) {
+                //エラー
+                returnJson[arrName].push(arrValue)
+            } else {
+                returnJson[arrName] = arrValue
+            }
+        }*/
+        const string = JSON.stringify(serializeData)
         let blob = new Blob([string], {type: 'text/plain'});
         document.getElementById("test_data_download").href = window.URL.createObjectURL(blob);
 
@@ -28,6 +37,9 @@ class TestClass{
         $('#test_data_download')[0].click();
     }
 
+    /**
+     * downloadリンクを付与
+     */
     setHrefLink() {
         $('body').append(`<a href="#" style="display:none;" id="test_data_download" download="test_data.json">ダウンロード</a>`)
     }
@@ -69,6 +81,16 @@ class TestClass{
             }
         })
         console.log(jsMessage)
+    }
+
+    /**
+     * [setData description]
+     */
+    setData() {
+
+    }
+
+    setInput() {
     }
 }
 var testClass = new TestClass('form[name="inputform"]');
