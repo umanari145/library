@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <head>
+        <title>test</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="./libs/js/main.js"></script>
+    <script src="./input_test.js"></script>
+    <body>
+        <div>Testtool</div>
+        <form name="inputform">
+            <div>
+                <div>
+                    <input type="text" name="name" value="">
+                </div>
+
+                <div>
+                    <label for="sex_1">
+                        <input id="sex_1" type="radio" name="sex" value="1">男
+                    </label>
+                    <label for="sex_2">
+                        <input id="sex_2" type="radio" name="sex" value="2">女
+                    </label>
+                </div>
+
+                <div>
+                    <select name="occupation">
+                        <option value=""></option>
+                        <option value="1">自営業者</option>
+                        <option value="2">会社員</option>
+                        <option value="3">公務員</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="is_admin">
+                        <input type="checkbox" id="is_admin" name="is_admin" value="1">許可する
+                    </label>
+                </div>
+
+                <div>
+                    <textarea name="comment" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
