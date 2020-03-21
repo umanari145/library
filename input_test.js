@@ -1,4 +1,7 @@
 
+
+
+
 class TestClass{
 
     /**
@@ -13,8 +16,8 @@ class TestClass{
      * すでにHTMLにある入力状態をJSON形式で出力
      */
     getSerializeData() {
-        this.setHrefLink()
 
+        $('body').append(`<a href="#" style="display:none;" id="test_data_download" download="test_data.json">ダウンロード</a>`)
         let serializeData = $(`${this.formObj}`).serializeArray()
         var returnJson = {};
         /*本来は下記を使うとJSONに近くなるが、配列が上手く加工するのがめんどくさいので
@@ -37,15 +40,10 @@ class TestClass{
         $('#test_data_download')[0].click();
     }
 
-    /**
-     * downloadリンクを付与
-     */
-    setHrefLink() {
-        $('body').append(`<a href="#" style="display:none;" id="test_data_download" download="test_data.json">ダウンロード</a>`)
-    }
 
     /**
      * すでにHTMLにある入力状態を復元するHTMLを記述
+     * 例 $('input[name="name"]').val('山田太郎').change()
      */
     getFormsInputHtml() {
 
@@ -83,14 +81,5 @@ class TestClass{
         console.log(jsMessage)
     }
 
-    /**
-     * [setData description]
-     */
-    setData() {
-
-    }
-
-    setInput() {
-    }
 }
 var testClass = new TestClass('form[name="inputform"]');
