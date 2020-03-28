@@ -6,8 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="./libs/js/main.js"></script>
     <script src="./input_test.js?time=<?php echo time();?>"></script>
-    <script type='text/javascript'>
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="./screen_shot_html2canvas.js?time=<?php echo time();?>"></script>
     <style media="screen">
         div{
             margin-top: 20px;
@@ -15,12 +15,11 @@
     </style>
     <body>
         <div>Testtool</div>
-        <form name="inputform">
-            <div>
+        <form name="inputform" id="inputForm">
+            <div id="inputArea">
                 <div>
                     <input type="text" name="name" value="">
                 </div>
-
                 <div>
                     <label for="sex_1">
                         <input id="sex_1" type="radio" name="sex" value="1">男

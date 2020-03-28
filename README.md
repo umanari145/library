@@ -104,6 +104,7 @@ npx rollup es6load.js --file bundle.js --format iife
 - resources コンパイルを使ったJSのサンプル
 - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
 - validation.html Laravel風のJSバリデーションチェック
+- screen_shot_html2canvas.js スクリーンショット画像化
 - typescript
     - sample(2).ts コンパイラの元
     - sample(2).js 生成物
