@@ -106,9 +106,6 @@ function convertZentoHan(num) {
         num = num.replace(/[０-９]/g, function(s) {
             return String.fromCharCode(s.charCodeAt(0) - 65248);
         });
-        num = num.replace(/[^0-9]/g, '');
-        num = num.replace(/^0+/g, '');
-        num = num.replace(/(\d)(?=(\d\d\d)+$)/g, '$1,');
         return num
     }
 }
