@@ -88,6 +88,7 @@ function trimPriceStr(priceStr) {
     if (typeof (priceStr) == "string" || priceStr instanceof String) {
         priceStr = priceStr.replace(/¥/g,'');
         priceStr = priceStr.replace(/,/g,'');
+        priceStr = convertZentoHan(priceStr);
         if (priceStr == '') {
             priceStr = 0;
         }
