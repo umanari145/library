@@ -39,7 +39,15 @@
         console.log('--String Static--')
         console.log(Sugar.String.isEmpty('aaaa'))
         console.log(Sugar.String.isEmpty(''))
-        console.log(Sugar.String.toNumber('1,234'))
+
+        var arr = ['a', 1, "2", "２", null, "¥2,345" , undefined];
+
+        console.log(Sugar.String.toNumber('a'));//NaNが普通に出る
+//        console.log(Sugar.String.toNumber(1));//replaceで落ちるのでNG
+        console.log(Sugar.String.toNumber("2"));
+        console.log(Sugar.String.toNumber("２"));//全角は数字に変換できる
+        console.log(Sugar.String.toNumber('1,234'));
+
         console.log(Sugar.Number.format('1234'))
 
         //インスタンス作成

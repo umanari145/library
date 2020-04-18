@@ -1,7 +1,12 @@
 
+console.log('parseIntの有効性')
 
+var arr = ['a', 1, "2", "２", null, "" , undefined]
+for(var i = 0; i < arr.length; i++) {
+    console.log(parseInt(arr[i]))
+}
 
-var arr = ['a', 1, "2", null, "" , undefined]
+console.log('数値変換');
 
 for(var i = 0; i < arr.length; i++) {
     console.log(toInt(arr[i]))
