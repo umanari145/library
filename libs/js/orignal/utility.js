@@ -1,4 +1,12 @@
 
+
+console.log('NaNの考察')
+
+var arr = ['a', 1, "2", "２", null, "" , undefined]
+for(var i = 0; i < arr.length; i++) {
+    console.log(arr[i] + ":" +isNaN(arr[i]));
+}
+
 console.log('parseIntの有効性')
 
 var arr = ['a', 1, "2", "２", null, "" , undefined]
