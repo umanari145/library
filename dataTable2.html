@@ -8,26 +8,41 @@
     <script src="./libs/js/main.js"></script>
     <script type="text/javascript" >
     $(document).ready(function() {
-        $('#address').DataTable({
-            "bServerSide": true,
-            "sScrollY": "300px",
-            "sDom":"ti",
-            "sAjaxSource": "/library/public/address.php",
-            "scroller": {
-                loadingIndicator: true
-            },
-           "language": {
-               "emptyTable" : "データが登録されていません。",
-               "info" : "_TOTAL_ 件中 _START_ 件から _END_ 件までを表示",
-               "infoEmpty" : "",
-               "loadingRecords" : "ロード中",
-               "processing" : "処理中...",
-           }});
+
+        $('#search').on('click', function(){
+
+            getAddress();
+        })
+
+
+        function getAddress() {
+
+            var zip = $('#zip').val() || '';
+
+            $('#address').DataTable({
+                "bServerSide": true,
+                "sScrollY": "300px",
+                "sDom":"ti",
+                "sAjaxSource": "/library/public/address.php?zip=" + zip,
+                "scroller": {
+                    loadingIndicator: true
+                },
+               "destroy": true,
+               "language": {
+                   "emptyTable" : "データが登録されていません。",
+                   "info" : "_TOTAL_ 件中 _START_ 件から _END_ 件までを表示",
+                   "infoEmpty" : "",
+                   "loadingRecords" : "ロード中",
+                   "processing" : "処理中...",
+             }});
+         }
     });
 
     </script>
     <body>
         <div>一覧</div>
+        <input type="text" name="zip" id="zip">
+        <button id="search">検索</button>
         <table id="address" class="dataTable">
             <thead>
                 <tr>
