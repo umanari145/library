@@ -30,6 +30,9 @@ const moment = require('moment');
 //validation
 import Validator from 'validatorjs';
 
+//typeahead
+require('typeahead.js');
+
 //スコープが閉じているのでグローバルオブジェクト(windowに格納)
 window.$ = window.jQuery = $;
 window.ClassicEditor = ClassicEditor;

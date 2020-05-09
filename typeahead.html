@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="twitter_typeahead.css">
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
-<script src="./bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+<script src="/library/libs/js/main.js"></script>
 <script type="text/javascript">
     $(function() {
 
@@ -25,7 +24,6 @@
         };
 
         var states = [ '山田','山本' ];
-
         $('.zip .typeahead').typeahead({
             hint: true,
             highlight: true,
@@ -34,7 +32,8 @@
           {
             name: 'states',
             source: substringMatcher(states)
-          });
+          }
+        );
     });
 </script>
 <style type="text/css">

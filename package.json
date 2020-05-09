@@ -18,10 +18,13 @@
   },
   "homepage": "https://github.com/umanari145/library#readme",
   "devDependencies": {
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-if": "^2.0.2",
     "gulp-uglify": "^3.0.1",
     "jquery": "^3.3.1",
+    "selenium-webdriver": "^4.0.0-alpha.7",
+    "util": "^0.12.2",
     "webpack": "^4.16.2",
     "webpack-cli": "^2.1.5"
   },
