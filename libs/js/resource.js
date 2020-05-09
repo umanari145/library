@@ -20,9 +20,12 @@ var leanModal = require("lean-modal");
 //swwetalert
 import swal from 'sweetalert';
 
-
+//sugar
 const Sugar = require('Sugar');
 const SugarLanguage =  require("sugar-language")
+
+//moment
+const moment = require('moment');
 
 //validation
 import Validator from 'validatorjs';
@@ -31,6 +34,7 @@ import Validator from 'validatorjs';
 window.$ = window.jQuery = $;
 window.ClassicEditor = ClassicEditor;
 window.leanModal = leanModal;
+window.moment = moment;
 window.Sugar = Sugar;
 window.SugarLanguage = SugarLanguage;
 window.Validator = Validator;

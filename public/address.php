@@ -39,10 +39,10 @@ try {
     ORM::configure('password', DB_PASS);
     ORM::configure('driver_options', array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
     ORM::configure('logging', true);
-
     ORM::configure('logger', function ($log_string) use ($logger) {
         $logger->addInfo('sql ' . $log_string);
     });
+
 } catch (Exception $e) {
     $app->halt(500, $e->getMessage());
 }
@@ -59,9 +59,8 @@ switch ($_SERVER ['REQUEST_METHOD']) {
         if ($sEcho === "1") {
             $limit = 1000;
         }
-
         $offset = (isset($_GET['iDisplayStart']) && preg_match('/^\d+$/', $_GET['iDisplayStart']) === 1) ? $_GET['iDisplayStart']:0;
-        $addressinfo = getAddress($offset, $limit);
+        $addressinfo = getAddress($zip, $offset, $limit);
         $jsonData = formatDataTables($addressinfo);
         header('content-type: application/json; charset=utf-8');
         echo json_encode($jsonData);
@@ -69,7 +68,7 @@ switch ($_SERVER ['REQUEST_METHOD']) {
      break;
 }
 
-function getAddress($offset, $limit)
+function getAddress($zip, $offset, $limit)
 {
     $datas =[];
 
@@ -93,9 +92,9 @@ function formatDataTables($addressinfo)
     });
 
     return [
-        'iTotalRecords' => "100000",
+        'iTotalRecords' => count($data),
         'aaData' => $data,
-        "iTotalDisplayRecords"=>"100000",
+        "iTotalDisplayRecords"=> count($data),
         "aoColumns"=>["zip","pref","city","town"],
         "sEcho"=> $sEcho
     ];

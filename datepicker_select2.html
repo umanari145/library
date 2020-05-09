@@ -3,11 +3,21 @@
     <link rel="stylesheet" href="./css/bundle.css" />
     <script src="./libs/js/main.js"></script>
 </head>
+<script type="text/javascript">
+
+    $(function(){
+      $('.datepicker').datepicker();
+      $('.select2').select2();
+    });
+
+    var timeStr = moment().format("YYYY-MM-DD");
+    console.log(timeStr);
+
+</script>
 <body>
   <div id="hogehoge">
-      aaaa
   </div>
-  <input type="text" name="birthday" class="datepicker">
+  <input type="text" name="birthday" class="datepicker" autocomplete="off">
   <br>
   <select name="sample" class="select2" value="">
     <option value="01">chiba</option>
