@@ -5,9 +5,37 @@
     <title>都道府県一覧</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script type="text/javascript" src="./libs/main.js" ></script>
-    <script type="text/javascript" >
+    <script type="text/javascript" src="./libs/js/main.js" ></script>
 
+    <script type="text/javascript" >
+    $(function(){
+        $('#pagination-container').pagination({
+            dataSource: '/library/public/address.php',
+            locator: 'items',
+            totalNumber: 120,
+            pageSize: 20,
+            ajax: {
+                beforeSend: function() {
+                    $('#data-container').html('Loading data from flickr.com ...');
+                }
+            },
+            callback: function(data, pagination) {
+                var html = simpleTemplating(data);
+                $('#data-container').html(html);
+            }
+        })
+
+        function simpleTemplating(data) {
+            var html = '<ul>';
+            $.each(data, function(index, item){
+                html += '<tr>';
+                console.log(item);
+                html += '</tr>';
+            });
+            html += '</ul>';
+            return html;
+        }
+    });
     </script>
     <body>
         <div>一覧</div>
@@ -20,7 +48,13 @@
                     <th>town</th>
                 </tr>
             </thead>
+            <tbody id="data-container">
+
+            </tbody>
         </table>
-        <h:link outcome="index.xhtml">トップページへ戻る</h:link>
+        <div id="pagination-container">
+
+        </div>
+
     </body>
 </html>

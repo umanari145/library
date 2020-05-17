@@ -33,6 +33,7 @@ import Validator from 'validatorjs';
 //typeahead
 require('typeahead.js');
 
+
 //スコープが閉じているのでグローバルオブジェクト(windowに格納)
 window.$ = window.jQuery = $;
 window.ClassicEditor = ClassicEditor;
@@ -41,3 +42,7 @@ window.moment = moment;
 window.Sugar = Sugar;
 window.SugarLanguage = SugarLanguage;
 window.Validator = Validator;
+
+//jqueryがグローバルに展開されている必要があるため
+//ここでrequireを入れる必要がある
+require('paginationjs');
