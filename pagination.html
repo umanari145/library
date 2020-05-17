@@ -10,9 +10,11 @@
     <script type="text/javascript" >
     $(function(){
         $('#pagination-container').pagination({
-            dataSource: '/library/public/address.php',
-            locator: 'items',
-            totalNumber: 120,
+            dataSource: '/library/public/address.php?paginationjs=true',
+            locator: 'data',
+            totalNumberLocator: function(response) {
+                return response['total'];
+            },
             pageSize: 20,
             ajax: {
                 beforeSend: function() {
@@ -27,12 +29,14 @@
 
         function simpleTemplating(data) {
             var html = '<ul>';
-            $.each(data, function(index, item){
-                html += '<tr>';
-                console.log(item);
-                html += '</tr>';
+            $.each(data, function(index, data){
+                html += `<tr>
+<td>${data[0]}</td>
+<td>${data[1]}</td>
+<td>${data[2]}</td>
+<td>${data[3]}</td>
+</tr>`;
             });
-            html += '</ul>';
             return html;
         }
     });

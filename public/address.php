@@ -49,19 +49,36 @@ try {
 
 switch ($_SERVER ['REQUEST_METHOD']) {
      case 'GET':
-        //暫定的にzipをoffsetとして扱う
-        $zip = (isset($_GET['zip']) && preg_match('/^\d{1,7}$/', $_GET['zip']) === 1) ? $_GET['zip']:'';
-        $offset = (isset($_GET['offset']) && preg_match('/^\d+$/', $_GET['offset']) === 1) ? $_GET['offset']:0;
+        if (isset($_GET['paginationjs'])) {
+            //paginationjs使用
+            $zip = (isset($_GET['zip']) && preg_match('/^\d{1,7}$/', $_GET['zip']) === 1) ? $_GET['zip']:'';
 
-        $sEcho = (isset($_GET['sEcho']) && preg_match('/^\d+$/', $_GET['sEcho']) === 1) ? $_GET['sEcho']:1;
+            $limit = (isset($_GET['pageSize']) && preg_match('/^\d+$/', $_GET['pageSize']) === 1) ? $_GET['pageSize']:100;
+            if ($sEcho === "1") {
+                $limit = 1000;
+            }
+            $offset = (isset($_GET['pageNumber']) && preg_match('/^\d+$/', $_GET['pageNumber']) === 1) ? ($_GET['pageNumber'] - 1) * $limit :0;
+            $addressinfo = getAddress($zip, $offset, $limit);
+            $jsonData['data'] = _::map($addressinfo, function ($address) {
+                return array_values($address);
+            });
+            $jsonData['total'] = getAddressCount($zip);
+        } else {
+            //dataTable使用
+            //暫定的にzipをoffsetとして扱う
+            $zip = (isset($_GET['zip']) && preg_match('/^\d{1,7}$/', $_GET['zip']) === 1) ? $_GET['zip']:'';
+            $offset = (isset($_GET['offset']) && preg_match('/^\d+$/', $_GET['offset']) === 1) ? $_GET['offset']:0;
 
-        $limit = (isset($_GET['iDisplayLength']) && preg_match('/^\d+$/', $_GET['iDisplayLength']) === 1) ? $_GET['iDisplayLength']:100;
-        if ($sEcho === "1") {
-            $limit = 1000;
+            $sEcho = (isset($_GET['sEcho']) && preg_match('/^\d+$/', $_GET['sEcho']) === 1) ? $_GET['sEcho']:1;
+
+            $limit = (isset($_GET['iDisplayLength']) && preg_match('/^\d+$/', $_GET['iDisplayLength']) === 1) ? $_GET['iDisplayLength']:100;
+            if ($sEcho === "1") {
+                $limit = 1000;
+            }
+            $offset = (isset($_GET['iDisplayStart']) && preg_match('/^\d+$/', $_GET['iDisplayStart']) === 1) ? $_GET['iDisplayStart']:0;
+            $addressinfo = getAddress($zip, $offset, $limit);
+            $jsonData = formatDataTables($addressinfo);
         }
-        $offset = (isset($_GET['iDisplayStart']) && preg_match('/^\d+$/', $_GET['iDisplayStart']) === 1) ? $_GET['iDisplayStart']:0;
-        $addressinfo = getAddress($zip, $offset, $limit);
-        $jsonData = formatDataTables($addressinfo);
         header('content-type: application/json; charset=utf-8');
         echo json_encode($jsonData);
         exit();
@@ -83,6 +100,19 @@ function getAddress($zip, $offset, $limit)
            ->offset($offset)
            ->find_array();
     return $datas;
+}
+
+
+function getAddressCount($zip)
+{
+    $query = ORM::for_table('postcode')
+             ->select_many('zip', 'pref', 'city', 'town');
+
+    if (!empty($zip)) {
+        $query->where_like('zip', $zip.'%');
+    }
+
+    return $query->count();
 }
 
 function formatDataTables($addressinfo)
