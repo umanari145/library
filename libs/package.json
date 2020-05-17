@@ -34,6 +34,8 @@
     "validatorjs": "^3.18.1"
   },
   "devDependencies": {
+    "less": "^3.11.1",
+    "less-loader": "^6.1.0",
     "resolve-url-loader": "^2.3.1",
     "sweetalert": "^2.1.2",
     "vue-template-compiler": "^2.6.10"

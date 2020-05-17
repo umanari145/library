@@ -11,6 +11,7 @@
 - when.html 並列ではあるが、順番は守りたい時のajaxの書き方
 - fileapi.html FILEAPIを活用した画像アップロード
 - operator.js 三項演算子、エルビス演算子など
+- pagination.html paginationjsを使ったページャーのパターン
 - promise.html 非同期処理をPromiseで使うパターン
 - promise_all.html 複数の非同期処理をPromiseで使うパターン(whenと同義)
 - non_promise.html 非同期処理、Promiseを使わないパターン(Promiseを書かない時との比較)

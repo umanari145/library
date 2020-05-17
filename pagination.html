@@ -5,27 +5,40 @@
     <title>都道府県一覧</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="./libs/css/common.css" />
     <script type="text/javascript" src="./libs/js/main.js" ></script>
-
     <script type="text/javascript" >
     $(function(){
-        $('#pagination-container').pagination({
-            dataSource: '/library/public/address.php?paginationjs=true',
-            locator: 'data',
-            totalNumberLocator: function(response) {
-                return response['total'];
-            },
-            pageSize: 20,
-            ajax: {
-                beforeSend: function() {
-                    $('#data-container').html('Loading data from flickr.com ...');
-                }
-            },
-            callback: function(data, pagination) {
-                var html = simpleTemplating(data);
-                $('#data-container').html(html);
-            }
+
+
+        searchAddress();
+        $('#search').click(function(){
+            searchAddress();
         })
+
+
+        function searchAddress() {
+            var zip = $('#zip').val()||'';
+
+            $('#pagination-container').pagination({
+                dataSource: '/library/public/address.php?paginationjs=true&zip=' + zip,
+                locator: 'data',
+                totalNumberLocator: function(response) {
+                    return response['total'];
+                },
+                pageSize: 20,
+                ajax: {
+                    beforeSend: function() {
+                        $('#data-container').html('Loading data from flickr.com ...');
+                    }
+                },
+                callback: function(data, pagination) {
+                    var html = simpleTemplating(data);
+                    $('#data-container').html(html);
+                }
+            })
+        }
+
 
         function simpleTemplating(data) {
             var html = '<ul>';
@@ -43,20 +56,24 @@
     </script>
     <body>
         <div>一覧</div>
-        <table id="address" class="dataTable">
-            <thead>
-                <tr>
-                    <th>zip</th>
-                    <th>pref</th>
-                    <th>city</th>
-                    <th>town</th>
-                </tr>
-            </thead>
-            <tbody id="data-container">
+        <input type="text" id="zip">
+        <button id="search">検索</button>
+        <div class="table_wrapper"  style="height:580px;">
+            <table id="address" class="dataTable">
+                <thead>
+                    <tr>
+                        <th>zip</th>
+                        <th>pref</th>
+                        <th>city</th>
+                        <th>town</th>
+                    </tr>
+                </thead>
+                <tbody id="data-container">
 
-            </tbody>
-        </table>
-        <div id="pagination-container">
+                </tbody>
+            </table>
+        </div>
+        <div id="pagination-container" style="margin-top:20px;">
 
         </div>
 
