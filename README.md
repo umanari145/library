@@ -15,6 +15,7 @@
 - promise.html 非同期処理をPromiseで使うパターン
 - promise_all.html 複数の非同期処理をPromiseで使うパターン(whenと同義)
 - non_promise.html 非同期処理、Promiseを使わないパターン(Promiseを書かない時との比較)
+- old_object_oridented.html 旧式の関数型のオブジェクト生成&インスタンス化
 - async_await_basic.html async_awaitを使った基本サンプル
 - async_await.html api連携でのサンプル
 - imageBinary.php  画像バイナリデータをhttpレスポンスを返す(読み込みはfileapi.php)

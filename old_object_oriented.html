@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript">
+    //クラスにあたるものを関数で定義することが一般的です。
+    function Table(){
+       //インスタンス変数は下記のように定義します。
+       this.name;
+       this.age;
+       //メソッドもプロパティの一種なので
+       //下記のように定義します。
+       this.dispMessage = function(){
+          console.log("私の名前は" +  this.name + "です。年齢は" + this.age + "です。" );
+       }
+    };
+
+    //ここでインスタンスを作成します。
+    var objTable1 = new Table();
+    var objTable2 = new Table();
+
+    objTable1.name = "tarou";
+    objTable1.age = 20;
+
+    objTable2.name = "jirou";
+    objTable2.age = 30;
+
+    objTable1.dispMessage();
+    //私の名前はtarouです。年齢は20です。
+    objTable2.dispMessage();
+    //私の名前はjirouです。年齢は30です。
+</script>
+<body>
+
+</body>
+</html>
