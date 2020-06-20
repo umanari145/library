@@ -54,20 +54,6 @@ $(function() {
             console.log('--fetch 1段目then--')
             return res.json();
         })
-//      returnでpromiseが帰ってきた以下の処理を外だし
-//
-//        .then((res) => {
-//            //resolve時ここにくる
-//            console.log('--fetch 2段目(resolve)then--')
-//            console.log(JSON.stringify(res))
-//        })
-//        .catch((err) => {
-//            //reject時ここにくる
-//            console.log("--fetch 2段目(reject) err end--")
-//            console.log(err)
-//        }).finally((data) =>{
-//            console.log('--fetch always--');
-//        });
 
     }
 
@@ -79,26 +65,7 @@ $(function() {
             'user_id':'aaaa',
             'password':'bbbb'
         })
-//      returnでpromiseが帰ってきた以下の処理を外だし
-//
-//        .then((data) => {
-//            //resolve時ここにくる
-//            console.log('--axios then--')
-//            console.log(data)
-//        })
-//        .catch((err) => {
-//            //普通の404、500エラー
-//            console.log('--axios error--')
-//            console.log(err);
-//        })
-//        .finally((data) => {
-//            //dataはない
-//            console.log('--axios always--');
-//        });
-
-
     }
-
 
     console.log("--jqueryAjax start--");
     jqueryAjax()
@@ -134,6 +101,21 @@ $(function() {
         //dataはない
         console.log('--axios always--');
     });
+
+
+    async function getPrefProcess() {
+        try{
+            console.log("async_await start")
+            const result =  await axiosApi();
+            console.log(result)
+        } catch(error) {
+            console.log('async_awit1 error');
+            console.log(error)
+        } finally {
+            console.info('async_await1 finally');
+        }
+    }
+    getPrefProcess()
 })
 </script>
 <body>
