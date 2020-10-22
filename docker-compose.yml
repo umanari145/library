@@ -1,0 +1,41 @@
+version: '3'
+services:
+  php7:
+    image: php:7.3-apache
+    ports:
+        - "80:80"
+    volumes:
+        - .:/var/www/html
+    networks:
+     - js
+     
+  node:
+    image: node:8.16.0-alpine
+    volumes:
+        - .:/var/www/html
+    tty: true
+    ports:
+        - "3000:3000"
+    networks:
+      - js
+
+  db:
+    image: "mysql:latest"
+    container_name: "db"
+    ports:
+     - "3306:3306"
+    environment:
+      MYSQL_DATABASE: postcode
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      # 初期データを投入するSQLが格納されているdir
+      - ./docker/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - js
+
+
+networks:
+  js:
+    driver: "bridge"
