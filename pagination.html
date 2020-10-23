@@ -21,7 +21,7 @@
             var zip = $('#zip').val()||'';
 
             $('#pagination-container').pagination({
-                dataSource: '/library/public/address.php?paginationjs=true&zip=' + zip,
+                dataSource: '/public/address.php?paginationjs=true&zip=' + zip,
                 locator: 'data',
                 totalNumberLocator: function(response) {
                     return response['total'];

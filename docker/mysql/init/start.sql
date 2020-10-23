@@ -10,4 +10,9 @@ create table postcode (
 
 ALTER TABLE postcode ADD INDEX idx_zip(zip);
 
-load data local infile '/docker-entrypoint-initdb.d/KEN_ALL.CSV' INTO table postcode FIELDS terminated by ',' enclosed by '"' escaped by '"'
+LOAD DATA LOCAL infile '/docker-entrypoint-initdb.d/KEN_ALL.CSV' INTO table postcode FIELDS terminated by ',' enclosed by '"' escaped by '"';
+
+GRANT ALL PRIVILEGES ON postcode.* TO user@localhost IDENTIFIED BY 'password' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+

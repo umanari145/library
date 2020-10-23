@@ -6,5 +6,4 @@
 /**/dist
 /**/*.map
 /bower_components
-/public/config.php
 /public/logs
