@@ -5,6 +5,7 @@
 - ajax_matome.html ajax,promise,async_awitのサンプルパターンなど
 - Array_convert.html JS標準で搭載されている配列加工手法
 - babel bableのサンプル
+- canvas canvasを使った画像の配置
 ```
  npx babel main.js  --out-file compiled.js --presets=es2015
 ```

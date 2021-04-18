@@ -1,0 +1,17 @@
+<html>
+<body>
+Test<br />
+<canvas id="board"></canvas>
+</body>
+<script>
+window.onload = function(){
+    const board = document.getElementById("board");
+    const ctx = board.getContext("2d");
+    const imageObj = new Image();
+    imageObj.src = "image.jpeg";  // 画像のURLを指定
+    imageObj.onload = function() {
+        ctx.drawImage(imageObj, 0, 0);
+    };
+};
+</script>
+</html>
