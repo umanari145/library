@@ -2,27 +2,164 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-      $.ajax({
-          url:'/library/ajaxpost.php',
+
+  function plainAjax() {
+    //プレーンなajax
+    $.ajax({
+          url:'/ajaxpost.php',
           type:'POST',
           data:{
             'user_id':'aaaa',
             'password':'bbbb'
           }
-      }).done((data) => {
-        //成功時
-        console.log(data)
-        console.log('success')
-      }).fail((data) => {
-        //失敗時
-        console.log('fail')
-      }).always((data)
-        //try-catchのfinallyに近い
-        console.log('always')
-      })
+    }).done((data) => {
+      //成功時
+      console.log(data)
+      console.log('success')
+    }).fail((data) => {
+      //失敗時
+      console.log('fail')
+    }).always((data) => {
+      //try-catchのfinallyに近い
+      console.log('always');
+    });
+  }
+
+  function wwwEncodeAjax() {
+    //content-type:での設定
+    //ちゃんと決めないと自動で判定される
+    //'application/x-www-form-urlencoded'→エンコーディングされたURLでデータが受診される
+    //PHP側で$_POSTで受け取れるのはx-www-form-urlencoded
+
+    let postData = {
+      'user_id':'aaaa',
+      'password':'bbbb',
+      'searchArr':[
+        "本日は晴天なり", "テストテスト"
+      ],
+      'keywordArr': {
+          'menseki':12,
+          'tempArr':["2", "3"],
+          'tempHash':{
+            "key1":"value1",
+            "key2":"value2",
+          },
+          'userData': [{
+              "user_name":"yamada",
+              "password":"yamada_pass",
+            },
+            {
+              "user_name":"suzuki",
+              "password":"suzuki_pass"
+            }
+          ]
+      }
+    };
+
+    //欠点としてx-www-form-urlencodedでは下記のようなデータが受け取れない      
+    /*postData =[
+      {
+        "user_name":"yamada",
+        "password":"yamada_pass",
+      },
+      {
+        "user_name":"suzuki",
+        "password":"suzuki_pass"
+      }
+    ];*/
+
+    $.ajax({
+          url:'/ajaxpost_www.php',
+          type:'POST',
+          contentType: 'application/x-www-form-urlencoded',
+          data:postData
+    }).done((data) => {
+      //成功時
+      console.log("---wwwEncodeAjax start");
+      console.log(data)
+      console.log('success')
+    }).fail((data) => {
+      //失敗時
+      console.log('fail')
+    }).always((data) => {
+      //try-catchのfinallyに近い
+      console.log("---wwwEncodeAjax end");
+      console.log('always')
+    });
+  }
+
+  function jsonAjax() {
+    //content-type:での設定
+    //'application/json'→JSON型で送信
+    //PHP側ではfile_get_contents("php://input")で取得
+
+    let postData = {
+      'user_id':'aaaa',
+      'password':'bbbb',
+      'searchArr':[
+        "本日は晴天なり", "テストテスト"
+      ],
+      'keywordArr': {
+          'menseki':12,
+          'tempArr':["2", "3"],
+          'tempHash':{
+            "key1":"value1",
+            "key2":"value2",
+          },
+          'userData': [{
+              "user_name":"yamada",
+              "password":"yamada_pass",
+            },
+            {
+              "user_name":"suzuki",
+              "password":"suzuki_pass"
+            }
+          ]
+      }
+    };
+
+    //jsonでは以下のようなデータでも受け取れる
+    /*postData =[
+      {
+        "user_name":"yamada",
+        "password":"yamada_pass",
+      },
+      {
+        "user_name":"suzuki",
+        "password":"suzuki_pass"
+      }
+    ];*/
+
+    $.ajax({
+          url:'/ajaxpost_json.php',
+          type:'POST',
+          //axiosなどは↓で送るのでこちらが主流？
+          contentType: 'application/json',
+          //application/jsonの場合はいかがセット
+          data:JSON.stringify(postData)
+    }).done((data) => {
+      //成功時
+      console.log("---json start");
+      console.log(data)
+      console.log('success')
+    }).fail((data) => {
+      //失敗時
+      console.log('fail')
+    }).always((data) => {
+      console.log("---json end");
+      //try-catchのfinallyに近い
+      console.log('always')
+    });
+  }
+
+  //plainAjax();
+
+  wwwEncodeAjax();
+  jsonAjax();
+
 })
 </script>
 <body>

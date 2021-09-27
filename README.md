@@ -2,6 +2,11 @@
 主にJavaScriptの実験など
 
 - ajax.html jquery1.5以降のajaxの書き方
+    - application/x-www-form-urlencoded とapplication/json の違いなど
+        - https://qiita.com/Kunikata/items/2b410f3cc535e4104906
+        - https://qiita.com/amamamaou/items/b6cb39739bba4abf4544
+        - https://egapool.hatenablog.com/entry/2015/07/28/225658
+
 - ajax_matome.html ajax,promise,async_awitのサンプルパターンなど
 - Array_convert.html JS標準で搭載されている配列加工手法
 - babel bableのサンプル
@@ -88,7 +93,7 @@ npx rollup es6load.js --file bundle.js --format iife
 - sweetalert スタイリッシュなalert文(libsで読み込み)
 - html2canvas.min.js　htmlの画像
 - htmltojpeg.php HTML→base64→PHP側でデコード→S3にアップロード
-- http_request HTTPリクエストを飛ばす処理をまとめ
+- http_request HTTPリクエストを飛ばす処理をまとめ(ajax,axios,fetch,async-await)
 - infinitescroll.html 無限スクロール　jquery.infinitescroll.min.js　活用
     - page2.html スクロール後のページは数字をつけ、あらかじめ作っておく必要がある。
 - infinitescroll2.html 無限スクロール　オリジナル
