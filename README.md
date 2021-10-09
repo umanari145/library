@@ -16,6 +16,16 @@
 ```
 - when.html 並列ではあるが、順番は守りたい時のajaxの書き方
 - fileapi.html FILEAPIを活用した画像アップロード
+- formatter
+    - formatterSample.js フォーマット用のサンプル
+```
+./node_modules/prettier/bin-prettier.js  formatSample.js --write
+```
+```
+ ./node_modules/eslint/bin/eslint.js --fix formatter/formatSample.js 
+```
+- .prettierrc Prettierの設定ファイル
+- .eslint ESLintツール
 - operator.js 三項演算子、エルビス演算子など
 - pagination.html paginationjsを使ったページャーのパターン
 - promise.html 非同期処理をPromiseで使うパターン
