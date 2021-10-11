@@ -22,8 +22,27 @@
 ./node_modules/prettier/bin-prettier.js  formatSample.js --write
 ```
 ```
- ./node_modules/eslint/bin/eslint.js --fix formatter/formatSample.js 
+./node_modules/eslint/bin/eslint.js (--fix)formatter/formatSample.js 
 ```
+   --fixを入れると整形までがセットになる
+```
+{
+    //トップディレクトリであることのフラグ
+    "root": true,
+    "env": {
+      // browserで使うかnodeで使うか
+      "browser": true,
+      //esいくつのバージョンで使うか
+      "es6": true
+    },
+    //基本設定(eslint:recommendedはディフォルトのパターン)
+    "extends":["eslint:recommended", "prettier"]
+  }
+
+```
+- 参考
+    - https://qiita.com/mysticatea/items/f523dab04a25f617c87d
+    - https://maku.blog/p/j6iu7it/#root-true
 - .prettierrc Prettierの設定ファイル
 - .eslint ESLintツール
 - operator.js 三項演算子、エルビス演算子など
