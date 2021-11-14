@@ -138,7 +138,7 @@ $(function() {
           type:'POST',
           //axiosなどは↓で送るのでこちらが主流？
           contentType: 'application/json',
-          //application/jsonの場合はいかがセット
+          //文字列以下して送れば、配列の構造が問題にならない(ただしPHPがわで復元する必要あり)
           data:JSON.stringify(postData)
     }).done((data) => {
       //成功時
