@@ -4,7 +4,7 @@ let name = "太朗"
 console.log(name)
 //再宣言は下記のようなエラーが起きる Uncaught SyntaxError: Identifier 'name' has already been declared
 //let name = "二郎"
-//再宣言は問題ない
+//再代入は問題ない
 name = "二郎"
 
 const sampleId = "9211"
@@ -18,7 +18,7 @@ console.log("---------ブロックスコープ、初期値、関数、アロー�
   let x = 1
   console.log(x)
 }
-//エラー
+//もしスコープの外で宣言するとエラー
 //Uncaught ReferenceError: x is not defined
 //console.log(x)
 
@@ -113,3 +113,15 @@ const person4 = {
   }
 }
 person4.lazy_hello()
+
+//分割代入
+const func1 = ()=> {
+  let obj = {};
+  obj.hobby = "basketball";
+  obj.age = 23;
+  return obj;
+}
+
+let {hobby, age} = func1();
+
+console.log(`--趣味-${hobby}--年齢 ${age}才--`);
