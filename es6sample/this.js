@@ -29,3 +29,17 @@ objsample.test()
 let obj2 = new objsample2("id12345", "yamada tarou");
 obj2.test();
 console.log("------------------thisの範囲について(終了)--------------------------")
+
+$(function(){
+    $("#sampleId").click(function(){
+        console.log("---thisはクリックしたオブジェクト内部--");    
+        console.log(this);
+    })
+    //これ以外にjQueryで使う場合は関数内のオブジェクト
+
+    $("#sampleId2").click(() => {
+        console.log("---thisはオブジェクト全般--");    
+        console.log(this);
+    })
+    //これ以外にjQueryで使う場合は関数内のオブジェクト
+});

@@ -84,6 +84,7 @@ npx gulp
     - es6sample.html ブラウザへのデバッグ用のhtml
     - scope.js スコープとvar,letに関しての挙動の違い
     - this.js thisの参照について(es6sample.jsでもthisについて扱っている)
+    https://qiita.com/takeharu/items/9935ce476a17d6258e27
 
 - parcel 簡易コンパイル
     - dist 成果物がここに吐かれる
