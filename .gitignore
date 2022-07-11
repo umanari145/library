@@ -7,3 +7,4 @@
 /**/*.map
 /bower_components
 /public/logs
+/parcel/.parcel-cache

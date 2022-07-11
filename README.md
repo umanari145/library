@@ -16,8 +16,8 @@
  # 通常は.babelrcを使うが上記のようなコマンドでも可能
 ```
 presetsに関して<br>
-https://akabeko.me/blog/2017/03/babel-preset-env/
-
+https://akabeko.me/blog/2017/03/babel-preset-env/<br>
+https://hakozaru.com/posts/understanding-babel
 
 - canvas canvasを使った画像の配置
 
@@ -25,13 +25,11 @@ https://akabeko.me/blog/2017/03/babel-preset-env/
 - fileapi.html FILEAPIを活用した画像アップロード
 - formatter
     - formatterSample.js フォーマット用のサンプル
+フォーマット(--writeなしだと実行はせず、実行結果を出力してくれる)
 ```
-./node_modules/prettier/bin-prettier.js  formatSample.js --write
+npx prettier formatter/formatSample.js --write
 ```
-```
-./node_modules/eslint/bin/eslint.js (--fix)formatter/formatSample.js 
-```
-   --fixを入れると整形までがセットになる
+
 ```
 {
     //トップディレクトリであることのフラグ
@@ -66,19 +64,11 @@ https://akabeko.me/blog/2017/03/babel-preset-env/
 - dataTable.html 一般ページャー　https://datatables.net/　活用
 - dataTable(2).html 無限スクロールサンプル　https://datatables.net/　活用
 - datepicker_select2.html datepickerとselect2の活用
-- elixir(laravel-elixirのサンプル。laravel-elixir,laravel-elixir-webpack-officialでのコンパイル。```npx gulp```でgulpfile.jsが読み込まれる)
-    - lib/PersonClass.js es6で書かれたexportするクラス
-    - es6load.js importを使った他ファイルの読み込み
-    - es6sample.html ブラウザへのデバッグ用のhtml
-```
-cd ./elixir
-npx gulp
-```
 
 - js/bundle.js main.jsがコンパイルされたもの(現在未使用)
 - js/main.js requireされたライブラリ(現在未使用)
 
-- js_scraping (puppeteerを使ったログイン)
+- js_scraping (puppeteerを使ったログイン、スクショ)
     - config.json 設定ファイル(通常はgit外かも)
     - main.js エントリーポイント
 
@@ -101,8 +91,7 @@ npx gulp
 
 
 ```
-cd ./parcel
-npx parcel es6sample.html
+npx parcel parcel/es6sample.html
 ```
 ex Server running at http://localhost:51478<br>
 http://localhost:51478 にアクセス
@@ -147,7 +136,6 @@ npx rollup es6load.js --file bundle.js --format iife
 - togglesample.html toggleClass, slideToggle, fadeToggle, CSSのみでのtoggleのサンプル
 - typeahead.html 入力補完用のライブラリ
 - input_test.js(php) 入力補助ツール
-- testtool テストデータの入力
 - resources コンパイルを使ったJSのサンプル
 - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
 - validation.html Laravel風のJSバリデーションチェック
