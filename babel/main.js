@@ -1,2 +1,0 @@
-
-let varsample="1"

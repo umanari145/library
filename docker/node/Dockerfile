@@ -1,3 +1,5 @@
-FROM node:8.16.0-alpine
+FROM node:18-alpine
+
+RUN npm install -g npm-check-updates
 
 WORKDIR /var/www/html

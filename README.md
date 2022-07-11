@@ -9,11 +9,18 @@
 
 - ajax_matome.html ajax,promise,async_awitのサンプルパターンなど
 - Array_convert.html JS標準で搭載されている配列加工手法
-- babel bableのサンプル
+- babel_source.js babelの元
+- babel_compiled.js babelの成果物
+```
+ npx babel babel_source.js --out-file babel_compiled.js --presets es2015
+ # 通常は.babelrcを使うが上記のようなコマンドでも可能
+```
+presetsに関して<br>
+https://akabeko.me/blog/2017/03/babel-preset-env/
+
+
 - canvas canvasを使った画像の配置
-```
- npx babel main.js  --out-file compiled.js --presets=es2015
-```
+
 - when.html 並列ではあるが、順番は守りたい時のajaxの書き方
 - fileapi.html FILEAPIを活用した画像アップロード
 - formatter
@@ -192,4 +199,15 @@ npm run dev
 - gulpfile.js 下記コマンドでwebpackを使ったコンパイル　
 ```
 npm run gulp webpack
+```
+
+libraryのupdate<br>
+update library
+```
+# コンテナで既にインストール済み
+npm install -g npm-check-updates
+# アップデート確認
+ncu 
+# 実際のアップデート
+ncu -u
 ```
