@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./libs/js/main.js"></script>
 <script type="text/javascript" >
 $(document).ready(function() {
 
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
             //カーソルが一番下にいったとき
             if ($(document).height() - $(window).height() == $(window).scrollTop()) {
-             //loading and 新データ読み込み
+                alert('下まで到達しました！何らかのイベントがあると発火します。')
             }
         });
 });

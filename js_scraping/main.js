@@ -4,11 +4,10 @@ const {SITE_URL,DESKTOP_INFO} = require('./config.json');
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 
-
-
 (async () => {
     const browser = await puppeteer.launch({
-        headless: true
+        headless: true,
+        args: ['--use-gl=egl'],
     })
     const page = await browser.newPage();
     await page.goto(SITE_URL);

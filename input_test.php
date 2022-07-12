@@ -6,7 +6,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script src="./libs/js/main.js"></script>
     <script src="./input_test.js?time=<?php echo time();?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="./screen_shot_html2canvas.js?time=<?php echo time();?>"></script>
     <style media="screen">
         div{

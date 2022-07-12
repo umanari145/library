@@ -25,8 +25,7 @@ if (isset($_POST['raw_image'])) {
 <html>
 <head>
 <meta charset="utf-8" />
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
-<script src="./html2canvas.min.js" charset="utf-8"></script>
+<script src="./libs/js/main.js"></script>
 <script type="text/javascript">
     $(function(){
         $('.send').on('click',() =>{
@@ -70,7 +69,7 @@ if (isset($_POST['raw_image'])) {
             <input type="text" name="main_title" value="" class="main_title" placeholder="コメントを入れてください。">
         </div>
         <input type="hidden" name="raw_image" id="hogehoge" value="">
-        <input type="submit" name="regist" class="send" value="送信する">
+        <input type="button" name="regist" class="send" value="送信する">
     </form>
 </body>
 </html>

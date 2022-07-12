@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./libs/js/main.js"></script>
 <script type="text/javascript">
 $(function() {
 
   var func1 = new Promise((resolve, reject) => {
       $.ajax({
           type:'GET',
-          url:'/library/ajaxpost2.json',
+          url:'/ajaxpost2.json',
           dataType:'json'
       }).done((data) => {
           resolve(data)
@@ -21,7 +21,7 @@ $(function() {
   var func2 =  new Promise((resolve, reject) => {
       $.ajax({
           type:'GET',
-          url:'/library/ajaxpost3.json',
+          url:'/ajaxpost3.json',
           dataType:'json'
       }).done((data) => {
           resolve(data)

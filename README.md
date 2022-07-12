@@ -134,7 +134,9 @@ npx rollup es6load.js --file bundle.js --format iife
 - sugar.html JSライブラリSugarのサンプル(グローバル空間への拡張)
 - togglesample.html toggleClass, slideToggle, fadeToggle, CSSのみでのtoggleのサンプル
 - typeahead.html 入力補完用のライブラリ
-- input_test.js(php) 入力補助ツール
+- input_test.js(php) 入力補助ツール console画面で、以下を入力
+    - testClass.getFormsInputHtml() 入力値のhtml入力JSを追加
+    - testClass.getSerializeData() JSONデータの吐き出し
 - resources コンパイルを使ったJSのサンプル
 - ckeditor.htm ビジュアルエディタckeditorを使ったサンプル
 - validation.html Laravel風のJSバリデーションチェック
