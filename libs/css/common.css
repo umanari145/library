@@ -1,5 +1,5 @@
 /*!
- * jQuery UI CSS Framework 1.12.1
+ * jQuery UI CSS Framework 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -50,7 +50,7 @@
 	left: 0;
 	position: absolute;
 	opacity: 0;
-	filter:Alpha(Opacity=0); /* support: IE8 */
+	-ms-filter: "alpha(opacity=0)"; /* support: IE8 */
 }
 
 .ui-front {
@@ -95,8 +95,9 @@
 	width: 100%;
 	height: 100%;
 }
+
 /*!
- * jQuery UI Accordion 1.12.1
+ * jQuery UI Accordion 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -118,8 +119,9 @@
 	border-top: 0;
 	overflow: auto;
 }
+
 /*!
- * jQuery UI Autocomplete 1.12.1
+ * jQuery UI Autocomplete 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -134,8 +136,9 @@
 	left: 0;
 	cursor: default;
 }
+
 /*!
- * jQuery UI Button 1.12.1
+ * jQuery UI Button 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -155,7 +158,6 @@
 	text-align: center;
 	-webkit-user-select: none;
 	-moz-user-select: none;
-	-ms-user-select: none;
 	user-select: none;
 
 	/* Support: IE <= 11 */
@@ -216,8 +218,9 @@ button.ui-button::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
+
 /*!
- * jQuery UI Checkboxradio 1.12.1
+ * jQuery UI Checkboxradio 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -250,8 +253,9 @@ button.ui-button::-moz-focus-inner {
 .ui-checkboxradio-disabled {
 	pointer-events: none;
 }
+
 /*!
- * jQuery UI Controlgroup 1.12.1
+ * jQuery UI Controlgroup 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -315,8 +319,9 @@ button.ui-button::-moz-focus-inner {
 	border-top-style: solid;
 }
 
+
 /*!
- * jQuery UI Datepicker 1.12.1
+ * jQuery UI Datepicker 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -500,8 +505,9 @@ button.ui-button::-moz-focus-inner {
 	left: .5em;
 	top: .3em;
 }
+
 /*!
- * jQuery UI Dialog 1.12.1
+ * jQuery UI Dialog 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -601,8 +607,9 @@ button.ui-button::-moz-focus-inner {
 .ui-draggable .ui-dialog-titlebar {
 	cursor: move;
 }
+
 /*!
- * jQuery UI Draggable 1.12.1
+ * jQuery UI Draggable 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -612,8 +619,9 @@ button.ui-button::-moz-focus-inner {
 .ui-draggable-handle {
 	touch-action: none;
 }
+
 /*!
- * jQuery UI Menu 1.12.1
+ * jQuery UI Menu 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -676,8 +684,9 @@ button.ui-button::-moz-focus-inner {
 	left: auto;
 	right: 0;
 }
+
 /*!
- * jQuery UI Progressbar 1.12.1
+ * jQuery UI Progressbar 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -698,14 +707,15 @@ button.ui-button::-moz-focus-inner {
 .ui-progressbar .ui-progressbar-overlay {
 	background: url("data:image/gif;base64,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");
 	height: 100%;
-	filter: alpha(opacity=25); /* support: IE8 */
+	-ms-filter: "alpha(opacity=25)"; /* support: IE8 */
 	opacity: 0.25;
 }
 .ui-progressbar-indeterminate .ui-progressbar-value {
 	background-image: none;
 }
+
 /*!
- * jQuery UI Resizable 1.12.1
+ * jQuery UI Resizable 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -781,8 +791,9 @@ button.ui-button::-moz-focus-inner {
 	right: -5px;
 	top: -5px;
 }
+
 /*!
- * jQuery UI Selectable 1.12.1
+ * jQuery UI Selectable 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -797,8 +808,9 @@ button.ui-button::-moz-focus-inner {
 	z-index: 100;
 	border: 1px dotted black;
 }
+
 /*!
- * jQuery UI Selectmenu 1.12.1
+ * jQuery UI Selectmenu 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -847,8 +859,9 @@ button.ui-button::-moz-focus-inner {
 	float: right;
 	margin-top: 0;
 }
+
 /*!
- * jQuery UI Sortable 1.12.1
+ * jQuery UI Sortable 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -858,8 +871,9 @@ button.ui-button::-moz-focus-inner {
 .ui-sortable-handle {
 	touch-action: none;
 }
+
 /*!
- * jQuery UI Slider 1.12.1
+ * jQuery UI Slider 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -877,7 +891,7 @@ button.ui-button::-moz-focus-inner {
 	z-index: 2;
 	width: 1.2em;
 	height: 1.2em;
-	cursor: default;
+	cursor: pointer;
 	touch-action: none;
 }
 .ui-slider .ui-slider-range {
@@ -892,8 +906,7 @@ button.ui-button::-moz-focus-inner {
 /* support: IE8 - See #6727 */
 .ui-slider.ui-state-disabled .ui-slider-handle,
 .ui-slider.ui-state-disabled .ui-slider-range {
-	-webkit-filter: inherit;
-	        filter: inherit;
+	filter: inherit;
 }
 
 .ui-slider-horizontal {
@@ -933,8 +946,9 @@ button.ui-button::-moz-focus-inner {
 .ui-slider-vertical .ui-slider-range-max {
 	top: 0;
 }
+
 /*!
- * jQuery UI Spinner 1.12.1
+ * jQuery UI Spinner 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -985,8 +999,9 @@ button.ui-button::-moz-focus-inner {
 .ui-spinner-down {
 	bottom: 0;
 }
+
 /*!
- * jQuery UI Tabs 1.12.1
+ * jQuery UI Tabs 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -1036,8 +1051,9 @@ button.ui-button::-moz-focus-inner {
 	padding: 1em 1.4em;
 	background: none;
 }
+
 /*!
- * jQuery UI Tooltip 1.12.1
+ * jQuery UI Tooltip 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -1055,8 +1071,9 @@ button.ui-button::-moz-focus-inner {
 body .ui-tooltip {
 	border-width: 2px;
 }
+
 /*!
- * jQuery UI CSS Framework 1.12.1
+ * jQuery UI CSS Framework 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -1065,8 +1082,9 @@ body .ui-tooltip {
  *
  * http://api.jqueryui.com/category/theming/
  */
+
 /*!
- * jQuery UI CSS Framework 1.12.1
+ * jQuery UI CSS Framework 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -1239,18 +1257,18 @@ a.ui-button:active,
 .ui-widget-content .ui-priority-secondary,
 .ui-widget-header .ui-priority-secondary {
 	opacity: .7;
-	filter:Alpha(Opacity=70); /* support: IE8 */
+	-ms-filter: "alpha(opacity=70)"; /* support: IE8 */
 	font-weight: normal;
 }
 .ui-state-disabled,
 .ui-widget-content .ui-state-disabled,
 .ui-widget-header .ui-state-disabled {
 	opacity: .35;
-	filter:Alpha(Opacity=35); /* support: IE8 */
+	-ms-filter: "alpha(opacity=35)"; /* support: IE8 */
 	background-image: none;
 }
 .ui-state-disabled .ui-icon {
-	filter:Alpha(Opacity=35); /* support: IE8 - See #6059 */
+	-ms-filter: "alpha(opacity=35)"; /* support: IE8 - See #6059 */
 }
 
 /* Icons
@@ -1263,35 +1281,38 @@ a.ui-button:active,
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_444444_256x240.png?a4c733ec4baef9ad3896d4e34a8a5448);
+	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_444444_256x240.png?d1b818587c3bc65058fe43800e4a191c)/*{iconsContent}*/;
 }
 .ui-widget-header .ui-icon {
-	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_444444_256x240.png?a4c733ec4baef9ad3896d4e34a8a5448);
+	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_444444_256x240.png?d1b818587c3bc65058fe43800e4a191c)/*{iconsHeader}*/;
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon,
 .ui-button:hover .ui-icon,
 .ui-button:focus .ui-icon {
-	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_555555_256x240.png?971364734f3b603e5d363a2634898b42);
+	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_555555_256x240.png?35d57320d9df28ec0d0d8bd1b5c75983)/*{iconsHover}*/;
 }
 .ui-state-active .ui-icon,
 .ui-button:active .ui-icon {
-	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_ffffff_256x240.png?bf27228a7d3957983584fa7698121ea1);
+	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_ffffff_256x240.png?92bef7e45fed3caba8dc9348edef4df2)/*{iconsActive}*/;
 }
 .ui-state-highlight .ui-icon,
 .ui-button .ui-state-highlight.ui-icon {
-	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_777620_256x240.png?208a290102a4ada58a04de354a1354d7);
+	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_777620_256x240.png?f423048bf942a7a33b33b1b982ecdb51)/*{iconsHighlight}*/;
 }
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
-	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_cc0000_256x240.png?0de3b51742ed3ac61435875bccd8973b);
+	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_cc0000_256x240.png?5cbbd560bcf30acb95dd3b0b0d61645a)/*{iconsError}*/;
 }
 .ui-button .ui-icon {
-	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_777777_256x240.png?73a1fd052c9d84c0ee0bea3ee85892ed);
+	background-image: url(/images/vendor/jquery-ui/themes/base/ui-icons_777777_256x240.png?f5d5fce2f36b5776eab8b314efc2dfd8)/*{iconsDefault}*/;
 }
 
 /* positioning */
-.ui-icon-blank { background-position: 16px 16px; }
+/* Three classes needed to override `.ui-button:hover .ui-icon` */
+.ui-icon-blank.ui-icon-blank.ui-icon-blank {
+	background-image: none;
+}
 .ui-icon-caret-1-n { background-position: 0 0; }
 .ui-icon-caret-1-ne { background-position: -16px 0; }
 .ui-icon-caret-1-e { background-position: -32px 0; }
@@ -1502,13 +1523,14 @@ a.ui-button:active,
 .ui-widget-overlay {
 	background: #aaaaaa/*{bgColorOverlay}*/ /*{bgImgUrlOverlay}*/ /*{bgOverlayXPos}*/ /*{bgOverlayYPos}*/ /*{bgOverlayRepeat}*/;
 	opacity: .3/*{opacityOverlay}*/;
-	filter: Alpha(Opacity=30)/*{opacityFilterOverlay}*/; /* support: IE8 */
+	-ms-filter: "alpha(opacity=30)"/*{opacityFilterOverlay}*/; /* support: IE8 */
 }
 .ui-widget-shadow {
 	box-shadow: 0/*{offsetLeftShadow}*/ 0/*{offsetTopShadow}*/ 5px/*{thicknessShadow}*/ #666666/*{bgColorShadow}*/;
 }
+
 /*!
- * jQuery UI CSS Framework 1.12.1
+ * jQuery UI CSS Framework 1.13.1
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -1517,6 +1539,7 @@ a.ui-button:active,
  *
  * http://api.jqueryui.com/category/theming/
  */
+
 .select2-container {
   box-sizing: border-box;
   display: inline-block;
@@ -1531,7 +1554,6 @@ a.ui-button:active,
   display: block;
   height: 28px;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
 }
@@ -1546,7 +1568,9 @@ a.ui-button:active,
 }
 
 .select2-container .select2-selection--single .select2-selection__clear {
-  position: relative;
+  background-color: transparent;
+  border: none;
+  font-size: 1em;
 }
 
 .select2-container[dir="rtl"] .select2-selection--single .select2-selection__rendered {
@@ -1560,21 +1584,20 @@ a.ui-button:active,
   display: block;
   min-height: 32px;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
 }
 
 .select2-container .select2-selection--multiple .select2-selection__rendered {
-  display: inline-block;
-  overflow: hidden;
-  padding-left: 8px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  display: inline;
+  list-style: none;
+  padding: 0;
 }
 
-.select2-container .select2-search--inline {
-  float: left;
+.select2-container .select2-selection--multiple .select2-selection__clear {
+  background-color: transparent;
+  border: none;
+  font-size: 1em;
 }
 
 .select2-container .select2-search--inline .select2-search__field {
@@ -1582,7 +1605,15 @@ a.ui-button:active,
   border: none;
   font-size: 100%;
   margin-top: 5px;
+  margin-left: 5px;
   padding: 0;
+  max-width: 100%;
+  resize: none;
+  height: 18px;
+  vertical-align: bottom;
+  font-family: sans-serif;
+  overflow: hidden;
+  word-break: keep-all;
 }
 
 .select2-container .select2-search--inline .select2-search__field::-webkit-search-cancel-button {
@@ -1614,12 +1645,11 @@ a.ui-button:active,
 .select2-results__option {
   padding: 6px;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
 }
 
-.select2-results__option[aria-selected] {
+.select2-results__option--selectable {
   cursor: pointer;
 }
 
@@ -1704,6 +1734,9 @@ a.ui-button:active,
   cursor: pointer;
   float: right;
   font-weight: bold;
+  height: 26px;
+  margin-right: 20px;
+  padding-right: 0px;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__placeholder {
@@ -1759,61 +1792,70 @@ a.ui-button:active,
   border: 1px solid #aaa;
   border-radius: 4px;
   cursor: text;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  position: relative;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__rendered {
-  box-sizing: border-box;
-  list-style: none;
-  margin: 0;
-  padding: 0 5px;
-  width: 100%;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__rendered li {
-  list-style: none;
-}
-
-.select2-container--default .select2-selection--multiple .select2-selection__placeholder {
-  color: #999;
-  margin-top: 5px;
-  float: left;
+.select2-container--default .select2-selection--multiple.select2-selection--clearable {
+  padding-right: 25px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__clear {
   cursor: pointer;
-  float: right;
   font-weight: bold;
-  margin-top: 5px;
+  height: 20px;
   margin-right: 10px;
+  margin-top: 5px;
+  position: absolute;
+  right: 0;
+  padding: 1px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
   background-color: #e4e4e4;
   border: 1px solid #aaa;
   border-radius: 4px;
-  cursor: default;
-  float: left;
-  margin-right: 5px;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-left: 5px;
   margin-top: 5px;
-  padding: 0 5px;
+  padding: 0;
+  padding-left: 20px;
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  white-space: nowrap;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+  cursor: default;
+  padding-left: 2px;
+  padding-right: 5px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  background-color: transparent;
+  border: none;
+  border-right: 1px solid #aaa;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   color: #999;
   cursor: pointer;
-  display: inline-block;
+  font-size: 1em;
   font-weight: bold;
-  margin-right: 2px;
+  padding: 0 4px;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover, .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:focus {
+  background-color: #f1f1f1;
   color: #333;
-}
-
-.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice,
-.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__placeholder,
-.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-search--inline {
-  float: right;
+  outline: none;
 }
 
 .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice {
@@ -1821,8 +1863,23 @@ a.ui-button:active,
   margin-right: auto;
 }
 
+.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__display {
+  padding-left: 5px;
+  padding-right: 2px;
+}
+
 .select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove {
-  margin-left: 2px;
+  border-left: 1px solid #aaa;
+  border-right: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.select2-container--default[dir="rtl"] .select2-selection--multiple .select2-selection__clear {
+  float: left;
+  margin-left: 10px;
   margin-right: auto;
 }
 
@@ -1840,14 +1897,12 @@ a.ui-button:active,
   display: none;
 }
 
-.select2-container--default.select2-container--open.select2-container--above .select2-selection--single,
-.select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple {
+.select2-container--default.select2-container--open.select2-container--above .select2-selection--single, .select2-container--default.select2-container--open.select2-container--above .select2-selection--multiple {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.select2-container--default.select2-container--open.select2-container--below .select2-selection--single,
-.select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -1867,18 +1922,6 @@ a.ui-button:active,
 .select2-container--default .select2-results > .select2-results__options {
   max-height: 200px;
   overflow-y: auto;
-}
-
-.select2-container--default .select2-results__option[role=group] {
-  padding: 0;
-}
-
-.select2-container--default .select2-results__option[aria-disabled=true] {
-  color: #999;
-}
-
-.select2-container--default .select2-results__option[aria-selected=true] {
-  background-color: #ddd;
 }
 
 .select2-container--default .select2-results__option .select2-results__option {
@@ -1914,7 +1957,19 @@ a.ui-button:active,
   padding-left: 6em;
 }
 
-.select2-container--default .select2-results__option--highlighted[aria-selected] {
+.select2-container--default .select2-results__option--group {
+  padding: 0;
+}
+
+.select2-container--default .select2-results__option--disabled {
+  color: #999;
+}
+
+.select2-container--default .select2-results__option--selected {
+  background-color: #ddd;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
   background-color: #5897fb;
   color: white;
 }
@@ -1948,7 +2003,8 @@ a.ui-button:active,
   cursor: pointer;
   float: right;
   font-weight: bold;
-  margin-right: 10px;
+  height: 26px;
+  margin-right: 20px;
 }
 
 .select2-container--classic .select2-selection--single .select2-selection__placeholder {
@@ -2036,16 +2092,12 @@ a.ui-button:active,
   border-radius: 4px;
   cursor: text;
   outline: 0;
+  padding-bottom: 5px;
+  padding-right: 5px;
 }
 
 .select2-container--classic .select2-selection--multiple:focus {
   border: 1px solid #5897fb;
-}
-
-.select2-container--classic .select2-selection--multiple .select2-selection__rendered {
-  list-style: none;
-  margin: 0;
-  padding: 0 5px;
 }
 
 .select2-container--classic .select2-selection--multiple .select2-selection__clear {
@@ -2056,34 +2108,50 @@ a.ui-button:active,
   background-color: #e4e4e4;
   border: 1px solid #aaa;
   border-radius: 4px;
-  cursor: default;
-  float: left;
-  margin-right: 5px;
+  display: inline-block;
+  margin-left: 5px;
   margin-top: 5px;
-  padding: 0 5px;
+  padding: 0;
+}
+
+.select2-container--classic .select2-selection--multiple .select2-selection__choice__display {
+  cursor: default;
+  padding-left: 2px;
+  padding-right: 5px;
 }
 
 .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove {
+  background-color: transparent;
+  border: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   color: #888;
   cursor: pointer;
-  display: inline-block;
+  font-size: 1em;
   font-weight: bold;
-  margin-right: 2px;
+  padding: 0 4px;
 }
 
 .select2-container--classic .select2-selection--multiple .select2-selection__choice__remove:hover {
   color: #555;
+  outline: none;
 }
 
 .select2-container--classic[dir="rtl"] .select2-selection--multiple .select2-selection__choice {
-  float: right;
   margin-left: 5px;
   margin-right: auto;
 }
 
+.select2-container--classic[dir="rtl"] .select2-selection--multiple .select2-selection__choice__display {
+  padding-left: 5px;
+  padding-right: 2px;
+}
+
 .select2-container--classic[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove {
-  margin-left: 2px;
-  margin-right: auto;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 }
 
 .select2-container--classic.select2-container--open .select2-selection--multiple {
@@ -2130,15 +2198,15 @@ a.ui-button:active,
   overflow-y: auto;
 }
 
-.select2-container--classic .select2-results__option[role=group] {
+.select2-container--classic .select2-results__option--group {
   padding: 0;
 }
 
-.select2-container--classic .select2-results__option[aria-disabled=true] {
+.select2-container--classic .select2-results__option--disabled {
   color: grey;
 }
 
-.select2-container--classic .select2-results__option--highlighted[aria-selected] {
+.select2-container--classic .select2-results__option--highlighted.select2-results__option--selectable {
   background-color: #3875d7;
   color: white;
 }
@@ -2484,5 +2552,6 @@ a.ui-button:active,
   *line-height: 36px;
   line-height: 36px\0;
 }
+
 
 /*# sourceMappingURL=common_less.css.map*/

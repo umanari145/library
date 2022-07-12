@@ -128,7 +128,6 @@ npx rollup es6load.js --file bundle.js --format iife
 - modal.html leanModalを使ったモーダルウィンドウ
 - custom_modal.html 独自モーダルウィンドウ
 - loading.html 簡易ローディングサンプル
-- makeFormFromJS.js フォームにデータを自動入力するサンプル
 - slidersample.html slider-pro slicker swiperを使ったスライダーのサンプル
 - sticky.html スティッキーヘッダーのサンプル(一定スクロール量を越えるとヘッダに固定されるタイプのヘッダー)
 - sugar.html JSライブラリSugarのサンプル
@@ -179,9 +178,9 @@ npx run prod
 
 laravel-mixでのコンパイル
 ```
-npm run dev
+cd ./libs 
+npx mix
 ```
-
 
 - public dataTable.htmlを受け付けるプログラムのサンプル
 - gulpfile.js 下記コマンドでwebpackを使ったコンパイル　

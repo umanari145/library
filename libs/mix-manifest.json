@@ -1,8 +1,5 @@
 {
     "/js/main.js": "/js/main.js",
-    "/css/common_less.css": "/css/common_less.css",
     "/css/common.css": "/css/common.css",
-    "/js/main.js.map": "/js/main.js.map",
-    "/css/common_less.css.map": "/css/common_less.css.map",
-    "/css/common.css.map": "/css/common.css.map"
+    "/css/common_less.css": "/css/common_less.css"
 }
