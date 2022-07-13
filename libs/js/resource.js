@@ -9,29 +9,33 @@ require( 'datatables.net-dt')
 require( 'datatables.net-scroller/js/dataTables.scroller.js');
 
 
-//html2tocanvas
 import html2canvas from 'html2canvas'
+
+//slick
+import 'slick-carousel/slick/slick.min.js';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 
 //ckeditor
 const ClassicEditor = require( '@ckeditor/ckeditor5-build-classic');
 
-//lean-modal
 var leanModal = require("lean-modal");
 
 //swwetalert
 import swal from 'sweetalert';
 
+
 //sugar
 const Sugar = require('Sugar');
 const SugarLanguage =  require("sugar-language")
 
-//moment
 const moment = require('moment');
 
-//validation
 import Validator from 'validatorjs';
 
-//typeahead
 require('typeahead.js');
 
 //スコープが閉じているのでグローバルオブジェクト(windowに格納)
@@ -43,6 +47,7 @@ window.Sugar = Sugar;
 window.SugarLanguage = SugarLanguage;
 window.Validator = Validator;
 window.html2canvas = html2canvas;
+window.Swiper = Swiper;
 
 //jqueryがグローバルに展開されている必要があるため
 //ここでrequireを入れる必要がある
