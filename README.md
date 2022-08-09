@@ -211,3 +211,19 @@ ncu
 # 実際のアップデート
 ncu -u
 ```
+
+- watch_script.js 監視スクリプト()
+```
+ npm run watch-script
+
+# "watch-script": "watch 'node watch_script.js' ./watch_target/"
+# 特定ディレクトリ修正時に↑script起動
+#> Watching ./watch_target/
+#detect ----watch---
+```
+
+```
+npm run browser-sync
+brower-sync でホットリロードを行う。
+docker内部だとおそらくport番号を全て同期しないと無理？
+```

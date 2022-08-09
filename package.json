@@ -6,7 +6,9 @@
   "scripts": {
     "gulp": "gulp",
     "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js --mix-config=libs/webpack.mix.js",
-    "cross-env-dev": "cross-env NODE_ENV=production node sample_cross_env.js"
+    "cross-env-dev": "cross-env NODE_ENV=production node sample_cross_env.js",
+    "watch-script": "watch 'node watch_script.js' ./watch_target/",
+    "browser-sync": "browser-sync start --server --files './es6sample/*'"
   },
   "repository": {
     "type": "git",
