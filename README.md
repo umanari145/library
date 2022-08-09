@@ -189,6 +189,17 @@ npx mix
 ```
 npm run gulp webpack
 ```
+- sample_cross_env.js
+```
+npm run cross-env-dev
+# package.jsonのscripts.cross-env-devを実行
+#
+# > library@1.0.0 cross-env-dev
+# > cross-env NODE_ENV=production node sample_cross_env.js
+
+# production
+# ちなみにcross-env NODE_ENV=production && node sample_cross_env.jsはNG
+```
 
 libraryのupdate<br>
 update library
