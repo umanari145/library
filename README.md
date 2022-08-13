@@ -82,6 +82,8 @@ npx prettier formatter/formatSample.js --write
     - scope.js スコープとvar,letに関しての挙動の違い
     - this.js thisの参照について(es6sample.jsでもthisについて扱っている)
     https://qiita.com/takeharu/items/9935ce476a17d6258e27
+    - pakage.json内に`{"type": "module"}`を記載するとnodeでもES6風の記載が可能
+
 
 - parcel 簡易コンパイル
     - dist 成果物がここに吐かれる
