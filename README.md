@@ -64,7 +64,7 @@ npx prettier formatter/formatSample.js --write
 - dataTable.html 一般ページャー　https://datatables.net/　活用
 - dataTable(2).html 無限スクロールサンプル　https://datatables.net/　活用
 - datepicker_select2.html datepickerとselect2の活用
-
+- dynamic_element.html 主に要素が追加される系の動的なテーブル
 - js/bundle.js main.jsがコンパイルされたもの(現在未使用)
 - js/main.js requireされたライブラリ(現在未使用)
 
