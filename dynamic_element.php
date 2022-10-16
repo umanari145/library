@@ -105,7 +105,6 @@ if (isset($_POST['submit'])) {
                         <input type="text" name="name[]" value="<?php echo $element['name'];?>">
                     </td>
                     <td>
-                        <input type="button" value="＋" class="add" >
                         <input type="button" value="×" class="remove">
                     </td>
                 </tr>
@@ -114,6 +113,7 @@ if (isset($_POST['submit'])) {
         </table>
     </div>
     <div>
+        <input type="button" value="＋" class="add">
         <input type="submit" name="submit" value="投稿">
     </div>
     </form>
@@ -131,7 +131,6 @@ if (isset($_POST['submit'])) {
                     <input type="text" name="name[]" value="">
                 </td>
                 <td>
-                    <input type="button" value="＋" class="add">
                     <input type="button" value="×" class="remove">
                 </td>
             </tr>
