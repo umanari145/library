@@ -31,7 +31,7 @@
     "eslint": "^8.19.0",
     "eslint-config-prettier": "^8.5.0",
     "fs": "^0.0.1-security",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-if": "^3.0.0",
     "gulp-uglify": "^3.0.2",
     "jquery": "^3.6.0",
