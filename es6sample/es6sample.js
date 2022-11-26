@@ -122,6 +122,21 @@ const func1 = ()=> {
   return obj;
 }
 
+// PHPで言うlist
 let {hobby, age} = func1();
-
+console.log(`--PHP-list風--`);
 console.log(`--趣味-${hobby}--年齢 ${age}才--`);
+
+console.log(`--ハッシュの受け方--`);
+// ハッシュの受け方
+const func2= ({name, age, email}) => {
+  console.log(`--名前は${name}です。--`);
+  console.log(`--年齢は${age}です。--`);
+  console.log(`--メールアドレスは${email}です。--`);
+}
+
+func2({
+  name: '山田太郎',
+  age: 34,
+  emai: 'sample@gmail.com'
+})
