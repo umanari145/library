@@ -21,6 +21,12 @@ console.log("---------ブロックスコープ、初期値、関数、アロー�
 //もしスコープの外で宣言するとエラー
 //Uncaught ReferenceError: x is not defined
 //console.log(x)
+const sample_obj = {
+  name: 'yamada',
+  age: 21
+};
+//constでも配列やobjはプロパティ変更は可能
+sample_obj.age= 34
 
 //初期値の設定
 function joinChannnel(name = "長渕")
