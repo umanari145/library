@@ -53,7 +53,11 @@ const double = function(x){
 //上記と全く同じ
 const double = x => (x+x)
 console.log(double(2))
-
+//{}の場合はreturnいる
+const double2 = (x) => {
+  return x * 2
+}
+console.log(double2(2))
 /*
 const add2 = function(a, b) {
     return a + b
@@ -146,3 +150,26 @@ func2({
   age: 34,
   emai: 'sample@gmail.com'
 })
+
+/**
+ * スプレッド構文 
+ */
+console.log('---スプレッド構文--')
+//配列の展開
+const sample_arr = [1, 2];
+console.log(sample_arr);
+
+//...ドット3つだとsample_arr[0], sample_arr[1]
+// などのように全てを展開するのと同じ仕様になる
+console.log(...sample_arr);
+
+const sampleFunc = (num1, num2) => console.log(num1 + num2);
+sampleFunc(sample_arr[0], sample_arr[1])
+// 同じ書き方
+sampleFunc(...sample_arr)
+
+const sample_arr2 = [1, 2, 3, 4, 5];
+
+const[num1_1, ...sample_arr3] = sample_arr2
+console.log(num1_1)
+console.log(sample_arr3) //2から5までが入る
