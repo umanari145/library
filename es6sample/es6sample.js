@@ -173,3 +173,16 @@ const sample_arr2 = [1, 2, 3, 4, 5];
 const[num1_1, ...sample_arr3] = sample_arr2
 console.log(num1_1)
 console.log(sample_arr3) //2から5までが入る
+
+// 配列のコピー
+const arr4 = [10, 20];
+const arr5 = [30, 40];
+//deepcopy
+const arr6 = [...arr4]
+arr6[1] = 11;
+console.log(arr4) // 影響がない
+console.log(arr6)
+
+// array_merge的な
+const arr7 = [...arr4, ...arr5];
+console.log(arr7)
