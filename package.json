@@ -46,7 +46,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-classic": "^34.2.0",
+    "@ckeditor/ckeditor5-build-classic": "^36.0.1",
     "datatables": "^1.10.18",
     "datatables.net": "^1.10.19",
     "datatables.net-dt": "^1.10.19",
