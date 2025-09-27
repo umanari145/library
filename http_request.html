@@ -2,14 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
 <script type="text/javascript">
 
 $(function() {
 
     let ajaxPrefProp = {
-        url:'/library/ajaxpost.php',
+        url:'/ajaxpost.php',
         type:'POST',
         //正しくはContent-TypeとdataTypeを設定しないと自動判定して飛んでします
         contentType: 'application/json',
@@ -38,7 +38,7 @@ $(function() {
     //fetch
     function fetchApi() {
 
-        let url = '/library/ajaxpost.php';
+        let url = '/ajaxpost.php';
 
         return fetch(url,{
             method:'POST',
@@ -59,7 +59,7 @@ $(function() {
 
     //axios
     function axiosApi() {
-        let url = '/library/ajaxpost.php';
+        let url = '/ajaxpost.php';
 
         return axios.post(url,{
             'user_id':'aaaa',
@@ -84,6 +84,21 @@ $(function() {
         console.log('--fetch always--');
     });
 
+    async function getPrefProcessFetch() {
+        try{
+            console.log("fetch_await start")
+            const result =  await fetchApi();
+            console.log(result)
+            console.log("fetch_await get")
+        } catch(error) {
+            console.log('fetch_await error');
+            console.log(error)
+        } finally {
+            console.info('fetch_await finally');
+        }
+    }
+    getPrefProcessFetch()
+
     console.log("--axios start--");
 
     axiosApi()
@@ -105,14 +120,15 @@ $(function() {
 
     async function getPrefProcess() {
         try{
-            console.log("async_await start")
+            console.log("axios start")
             const result =  await axiosApi();
             console.log(result)
+            console.log("axios get")
         } catch(error) {
-            console.log('async_awit1 error');
+            console.log('axios error');
             console.log(error)
         } finally {
-            console.info('async_await1 finally');
+            console.info('axios finally');
         }
     }
     getPrefProcess()
