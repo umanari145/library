@@ -20,6 +20,7 @@ function sample() {
     })
 }
 
+
 sample(5)
  .then((res) => {
     console.log('promise only')
@@ -41,9 +42,17 @@ async function sample2() {
     return result + 5
 }
 
+(async () => {
+    let res2 = await sample2(5)
+    console.log("awaitの正しい使い方")
+    console.log(res2)
+})()
+
+
+
 sample2(5)
  .then((res) => {
-    console.log('async_awit')
+    console.log('promiseを返しているのでこういう使い方もできんくはない')
     console.log(res)
  })
 
