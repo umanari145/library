@@ -106,8 +106,108 @@ getPrefProcess2()
 })
 </script>
 <body>
-    consoleをチェック(http_requestも参考に！)
+  <div style="max-width: 900px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif; line-height: 1.6;">
+    <h1 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Ajax, Promise, Async/Await まとめ</h1>
+    
+    <p style="background-color: #fff3cd; padding: 10px; border-radius: 5px;">consoleをチェック(http_requestも参考に！)</p>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">パターン1: 基本的なAjax</h2>
+    <p>jQuery の <code>$.ajax()</code> を使った基本的な非同期通信です。</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>$.ajax({
+    url: '/library/ajaxpost.php',
+    type: 'POST',
+    data: { 'user_id': 'aaaa', 'password': 'bbbb' }
+}).done((data) => {
+    // 成功時の処理
+}).fail((data) => {
+    // 失敗時の処理（404, 500エラーなど）
+}).always((data) => {
+    // 常に実行される（finally相当）
+})</code></pre>
+    <p><strong>特徴：</strong></p>
+    <ul>
+      <li><code>done()</code>: リクエスト成功時に実行</li>
+      <li><code>fail()</code>: リクエスト失敗時に実行（404, 500エラーなど）</li>
+      <li><code>always()</code>: 成功・失敗に関わらず常に実行（try-catchのfinallyに相当）</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">パターン2: Promise化したAjax</h2>
+    <p>Ajaxを <code>Promise</code> でラップして、より現代的な非同期処理を実現します。</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>function getPref() {
+    return new Promise((resolve, reject) => {
+        $.ajax({ /* ... */ })
+        .done((data) => { resolve(data) })
+        .fail((data) => { reject(data) })
+    })
+}
+
+getPref()
+.then((data) => {
+    // 成功時の処理
+}).catch((err) => {
+    // エラー時の処理
+}).finally(() => {
+    // 常に実行される
+})</code></pre>
+    <p><strong>特徴：</strong></p>
+    <ul>
+      <li><code>then()</code>: Promise が resolve された時に実行</li>
+      <li><code>catch()</code>: Promise が reject された時に実行</li>
+      <li><code>finally()</code>: 成功・失敗に関わらず常に実行</li>
+      <li>チェーン可能で複数の非同期処理を順序立てて実行できる</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">パターン3: Async/Await（基本）</h2>
+    <p><code>async/await</code> を使うことで、非同期処理を同期処理のように記述できます。</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>async function getPrefProcess() {
+    try {
+        const result = await getPref();
+        console.log(result);  // 成功時の処理
+    } catch(error) {
+        console.log(error);   // エラー時の処理
+    } finally {
+        // 常に実行される
+    }
+}</code></pre>
+    <p><strong>特徴：</strong></p>
+    <ul>
+      <li><code>await</code>: Promiseの結果を待つ（同期処理のように書ける）</li>
+      <li><code>try/catch</code>: エラーハンドリングが直感的</li>
+      <li>コードの可読性が高い</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">パターン4: Async/Await（エラーのthrow）</h2>
+    <p>async関数内で <code>throw</code> したエラーは、呼び出し元で <code>catch()</code> できます。</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>async function getPrefProcess2() {
+    try {
+        const result = await getPref();
+        console.log(result);
+    } catch(error) {
+        throw error;  // エラーを再スロー
+    }
+}
+
+getPrefProcess2()
+.then(() => { /* 成功時 */ })
+.catch((err) => { /* エラーをキャッチ */ })
+.finally(() => { /* 常に実行 */ })</code></pre>
+    <p><strong>特徴：</strong></p>
+    <ul>
+      <li>async関数はPromiseを返すため、<code>then/catch/finally</code>が使える</li>
+      <li>エラーを <code>throw</code> することで、呼び出し元でハンドリング可能</li>
+      <li>エラー処理の責任を呼び出し元に委譲できる</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">まとめ</h2>
+    <ul>
+      <li><strong>Ajax (.done/.fail/.always)</strong>: jQuery の従来の方法</li>
+      <li><strong>Promise (.then/.catch/.finally)</strong>: より柔軟で連鎖可能</li>
+      <li><strong>Async/Await</strong>: 最も読みやすく、現代的な書き方</li>
+    </ul>
+    <p>現代の開発では <strong>Async/Await</strong> が推奨されています。</p>
+
     <div id="pref_area"></div>
     <div id="city_area"></div>
+  </div>
 </body>
 </html>
