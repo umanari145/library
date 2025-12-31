@@ -159,10 +159,51 @@ $(function() {
 
   wwwEncodeAjax();
   jsonAjax();
-
+  alert('end');
 })
 </script>
 <body>
+  <div style="max-width: 900px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif; line-height: 1.6;">
+    <p>この2つのパターンには、<strong>データの送信形式</strong>に重要な違いがあります。</p>
 
+    <h2 style="color: #0366d6; margin-top: 30px;">パターン1: application/x-www-form-urlencoded</h2>
+
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>data: { name: "太郎", age: 25 }</code></pre>
+
+    <p>このデータは以下のように送信されます：</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>name=%E5%A4%AA%E9%83%8E&age=25</code></pre>
+
+    <p><strong>特徴：</strong></p>
+    <ul>
+      <li>HTMLフォームのデフォルト形式</li>
+      <li>キーと値をURLエンコードして<code>&amp;</code>で連結</li>
+      <li>PHPでは<code>$_POST['name']</code>で直接取得可能</li>
+      <li>シンプルなデータ向き</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">パターン2: application/json</h2>
+
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>data: JSON.stringify({ name: "太郎", age: 25 })</code></pre>
+
+    <p>このデータは以下のように送信されます：</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>{"name":"太郎","age":25}</code></pre>
+
+    <p><strong>特徴：</strong></p>
+    <ul>
+      <li>JSON形式で送信</li>
+      <li>複雑なデータ構造（ネストしたオブジェクト、配列）を扱いやすい</li>
+      <li>PHPでは<code>json_decode(file_get_contents('php://input'))</code>で取得</li>
+      <li>モダンなAPI（REST API等）で主流</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">どちらを選ぶべきか</h2>
+
+    <ul>
+      <li><strong>シンプルなフォーム送信</strong> → パターン1</li>
+      <li><strong>複雑なデータ構造やAPI通信</strong> → パターン2</li>
+    </ul>
+
+    <p>2025年末現代のWebアプリケーション開発では、axiosやfetchなどを使ったJSON形式（パターン2）が主流になっています。特にフロントエンドとバックエンドを分離したアーキテクチャでは、JSONの方が扱いやすいです。</p>
+  </div>
 </body>
 </html>
