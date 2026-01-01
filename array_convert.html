@@ -77,6 +77,138 @@
 
     </script>
     <body>
-        <div>配列可能やるためのhtml(consoleで処理について記述)</div>
+        <div style="max-width: 900px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif; line-height: 1.6;">
+            <h1 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">配列加工メソッド解説</h1>
+            
+            <p style="background-color: #fff3cd; padding: 10px; border-radius: 5px;">
+                <strong>Console</strong>で処理結果を確認してください
+            </p>
+
+            <h2 style="color: #0366d6; margin-top: 30px;">使用するサンプルデータ</h2>
+            <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>students = [
+    {id:1, pref:'chiba', age:23, name:'yamada', domain:'gmail.com'},
+    {id:2, pref:'tokyo', age:15, name:'suzuki', domain:'yahoo.co.jp'},
+    {id:3, pref:'kanagawa', age:33, name:'watanabe', domain:'gmail.com'},
+    {id:4, pref:'tokyo', age:65, name:'satou', domain:'microsoft.com'},
+    {id:5, pref:'kanagawa', age:53, name:'katou', domain:'microsoft.com'},
+    {id:6, pref:'chiba', age:43, name:'saitou', domain:'yahoo.co.jp'}
+]</code></pre>
+
+            <h2 style="color: #0366d6; margin-top: 30px;">1. forEach() - 配列の各要素に処理を実行</h2>
+            <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>students.forEach((v, i) => {
+    v['email'] = `${v.name}@${v.domain}`
+})</code></pre>
+            <p><strong>特徴：</strong></p>
+            <ul>
+                <li>配列の各要素に対して処理を実行</li>
+                <li><strong>元の配列を直接変更する</strong>（破壊的メソッド）</li>
+                <li>戻り値は <code>undefined</code>（新しい配列は作らない）</li>
+                <li>用途: 配列の各要素を変更したり、副作用を伴う処理を実行する場合</li>
+            </ul>
+            <p>結果: 全ての学生オブジェクトに <code>email</code> プロパティが追加される</p>
+
+            <h2 style="color: #0366d6; margin-top: 30px;">2. map() - 配列を変換して新しい配列を作成</h2>
+            <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>students.map((v, i) => {
+    v['email'] = `${v.name}@${v.domain}`
+})</code></pre>
+            <p><strong>特徴：</strong></p>
+            <ul>
+                <li>配列の各要素を変換して<strong>新しい配列を返す</strong></li>
+                <li>この例では元の配列を変更しているが、通常は新しいオブジェクトを返すのが推奨</li>
+                <li>戻り値: 変換後の要素を持つ新しい配列</li>
+                <li>用途: 配列の各要素を加工・変換する場合</li>
+            </ul>
+            <p><strong>より良い書き方の例：</strong></p>
+            <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>const newStudents = students.map((v, i) => {
+    return {...v, email: `${v.name}@${v.domain}`}
+})</code></pre>
+
+            <h2 style="color: #0366d6; margin-top: 30px;">3. find() - 条件に合う最初の要素を取得</h2>
+            <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>targetStudent = students.find((v, i) => {
+    return v.id == 3;
+})</code></pre>
+            <p><strong>特徴：</strong></p>
+            <ul>
+                <li>条件に合致する<strong>最初の要素を1つだけ</strong>返す</li>
+                <li>見つからない場合は <code>undefined</code> を返す</li>
+                <li>戻り値: マッチした要素（オブジェクト）または <code>undefined</code></li>
+                <li>用途: IDなどユニークな値で特定の要素を検索する場合</li>
+            </ul>
+            <p>結果: <code>{id:3, pref:'kanagawa', age:33, name:'watanabe', ...}</code></p>
+
+            <h2 style="color: #0366d6; margin-top: 30px;">4. filter() - 条件に合う要素を全て取得</h2>
+            <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>targetStudents = students.filter((v, i) => {
+    return v.domain == 'gmail.com';
+})</code></pre>
+            <p><strong>特徴：</strong></p>
+            <ul>
+                <li>条件に合致する<strong>全ての要素</strong>を含む新しい配列を返す</li>
+                <li>元の配列は変更されない（非破壊的）</li>
+                <li>戻り値: 条件を満たす要素の配列（空配列の可能性あり）</li>
+                <li>用途: 特定の条件で配列をフィルタリングする場合</li>
+            </ul>
+            <p>結果: domainが 'gmail.com' の学生だけの配列（yamada と watanabe）</p>
+
+            <h2 style="color: #0366d6; margin-top: 30px;">5. メソッドチェーン - 複数のメソッドを連結</h2>
+            <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>targetStudents = students.filter((v, i) => {
+    return v.domain == 'gmail.com';
+}).map((v, i) => {
+    v['email'] = `${v.name}@${v.domain}`
+    return v;
+})</code></pre>
+            <p><strong>特徴：</strong></p>
+            <ul>
+                <li>複数の配列メソッドを<strong>連続して実行</strong>できる</li>
+                <li>各メソッドの戻り値（配列）に対して次のメソッドを実行</li>
+                <li>処理の流れが読みやすい</li>
+                <li>用途: フィルタリング → 変換など、複数の処理を組み合わせる場合</li>
+            </ul>
+            <p>処理の流れ:</p>
+            <ol>
+                <li><code>filter()</code>: domainが 'gmail.com' の学生を抽出</li>
+                <li><code>map()</code>: 抽出された学生に email プロパティを追加</li>
+            </ol>
+
+            <h2 style="color: #0366d6; margin-top: 30px;">まとめ</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                <thead>
+                    <tr style="background-color: #f6f8fa;">
+                        <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">メソッド</th>
+                        <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">戻り値</th>
+                        <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">用途</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px;"><code>forEach()</code></td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">undefined</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">各要素に処理を実行（副作用）</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px;"><code>map()</code></td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">新しい配列</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">各要素を変換</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px;"><code>find()</code></td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">1つの要素</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">条件に合う最初の要素を取得</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #ddd; padding: 10px;"><code>filter()</code></td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">新しい配列</td>
+                        <td style="border: 1px solid #ddd; padding: 10px;">条件に合う全要素を抽出</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="margin-top: 20px;">
+                <strong>推奨される使い方：</strong><br>
+                • <code>forEach()</code>: 各要素に対してコンソール出力やDOM操作などの副作用を伴う処理<br>
+                • <code>map()</code>: 配列の各要素を変換して新しい配列を作成<br>
+                • <code>find()</code>: 特定の1つの要素を検索<br>
+                • <code>filter()</code>: 条件に合う複数の要素を抽出
+            </p>
+        </div>
     </body>
 </html>
