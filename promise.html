@@ -75,7 +75,247 @@ getPref()
 
 </script>
 <body>
-	<div id="pref_area"></div>
-    <div id="city_area"></div>
+  <div style="max-width: 900px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif; line-height: 1.6;">
+    <h1 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Promise チェーン（多段Promise）の実践</h1>
+    
+    <p style="background-color: #fff3cd; padding: 10px; border-radius: 5px;">
+      このページでは、実際のAPI（RESAS API）を使用して、Promiseチェーンによる連続したAPI呼び出しを実演します。
+    </p>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">このサンプルで学べること</h2>
+    <ul>
+      <li>実際のWeb APIを使った非同期処理</li>
+      <li>Promiseチェーン（多段Promise）の実装方法</li>
+      <li>1つ目のAPIレスポンスを使って2つ目のAPIを呼び出す方法</li>
+      <li>エラーハンドリングの実装</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">使用するAPI: RESAS（地域経済分析システム）</h2>
+    <p><strong>RESAS API</strong> は政府が提供する地域経済に関するオープンデータAPIです。</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>const apiUrl = "https://opendata.resas-portal.go.jp/api/v1/";
+
+// エンドポイント1: 都道府県一覧取得
+GET /prefectures
+
+// エンドポイント2: 市区町村一覧取得
+GET /cities?prefCode={都道府県コード}</code></pre>
+    <p>※ APIキーが必要です（<code>X-API-KEY</code>ヘッダー）</p>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">処理の流れ</h2>
+    <div style="padding: 15px; background-color: #e7f3ff; border-left: 4px solid #0366d6; border-radius: 4px;">
+      <ol style="margin: 0; padding-left: 20px;">
+        <li><strong>都道府県一覧を取得</strong>（API呼び出し1）</li>
+        <li>取得したデータから<strong>千葉県</strong>を検索</li>
+        <li>千葉県の<strong>prefCode</strong>を取得</li>
+        <li>そのprefCodeを使って<strong>市区町村一覧を取得</strong>（API呼び出し2）</li>
+        <li>市区町村名を画面に表示</li>
+      </ol>
+    </div>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">1. Promise化されたAjax関数</h2>
+    
+    <h3 style="color: #666; font-size: 1.1em; margin-top: 20px;">① 都道府県取得関数</h3>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>function getPref() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: apiUrl + 'prefectures',
+            type: 'GET',
+            headers: { 'X-API-KEY': apiKey }
+        })
+        .done((data) => {
+            resolve(data);  // 成功時: データを返す
+        })
+        .fail((data) => {
+            reject(data);   // 失敗時: エラーを返す
+        })
+    })
+}</code></pre>
+    <p><strong>ポイント：</strong></p>
+    <ul>
+      <li>jQueryの<code>$.ajax()</code>を<code>Promise</code>でラップ</li>
+      <li><code>done</code>で成功時に<code>resolve()</code>を呼ぶ</li>
+      <li><code>fail</code>で失敗時に<code>reject()</code>を呼ぶ</li>
+      <li>これにより<code>.then()</code>や<code>await</code>が使えるようになる</li>
+    </ul>
+
+    <h3 style="color: #666; font-size: 1.1em; margin-top: 20px;">② 市区町村取得関数</h3>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>function getShiku(pref_val) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: apiUrl + 'cities',
+            type: 'GET',
+            headers: { 'X-API-KEY': apiKey },
+            data: { 'prefCode': pref_val }  // パラメータ付き
+        })
+        .done((data) => {
+            resolve(data);
+        })
+        .fail((data) => {
+            reject(data);
+        })
+    })
+}</code></pre>
+    <p><strong>ポイント：</strong></p>
+    <ul>
+      <li>引数<code>pref_val</code>（都道府県コード）を受け取る</li>
+      <li>そのコードを使って特定の都道府県の市区町村を取得</li>
+      <li>同じくPromiseでラップして返す</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">2. Promiseチェーン（多段Promise）</h2>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>getPref()                              // ①都道府県取得
+.then((data) => {                      // ②都道府県データを受け取る
+    // 千葉県を検索
+    for(var i = 0; i < data['result'].length; i++) {
+        if (data['result'][i]['prefName'] == '千葉県') {
+            // 千葉県を表示
+            $('#pref_area').html(
+                data['result'][i]['prefName'] + ':' + 
+                data['result'][i]['prefCode']
+            );
+            // ③千葉県のprefCodeで市区町村を取得
+            return getShiku(data['result'][i]['prefCode']);
+        }
+    }
+})
+.then((data) => {                      // ④市区町村データを受け取る
+    // 市区町村名を表示
+    let cityStr = '';
+    for(var i = 0; i < data['result'].length; i++) {
+        cityStr += data['result'][i]['cityName'] + '&lt;br&gt;';
+    }
+    $('#city_area').html(cityStr);
+}, (err, msg) => {                     // ⑤エラー処理
+    console.log('サーバーとの通信に失敗しました。');
+})</code></pre>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">Promiseチェーンの仕組み</h2>
+    <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #0366d6; border-radius: 4px; margin-top: 15px;">
+      <h3 style="margin-top: 0; color: #0366d6;">重要なポイント：</h3>
+      <p style="margin: 10px 0;"><strong>1つ目の<code>.then()</code>内で<code>return</code>したものが、次の<code>.then()</code>に渡される</strong></p>
+      
+      <pre style="background-color: #fff; padding: 12px; border-radius: 4px; margin: 10px 0;"><code>// パターン1: Promiseを返す → 次のthenはそのPromiseの結果を受け取る
+.then((data) => {
+    return getShiku(12);  // Promise を返す
+})
+.then((cityData) => {
+    // ↑ getShiku(12) の結果が cityData に入る
+})
+
+// パターン2: 値を返す → 次のthenはその値を受け取る
+.then((data) => {
+    return 123;  // 単純な値を返す
+})
+.then((num) => {
+    // ↑ 123 が num に入る
+})</code></pre>
+    </div>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">実行結果</h2>
+    <div style="padding: 15px; background-color: #d4edda; border-left: 4px solid #28a745; border-radius: 4px;">
+      <p style="margin: 0;"><strong>都道府県エリア（#pref_area）:</strong></p>
+      <p style="margin: 5px 0 15px 0; font-size: 1.1em;">千葉県:12</p>
+      
+      <p style="margin: 0;"><strong>市区町村エリア（#city_area）:</strong></p>
+      <p style="margin: 5px 0 0 0;">千葉市中央区<br>千葉市花見川区<br>千葉市稲毛区<br>...(千葉県内の全市区町村)</p>
+    </div>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">エラーハンドリング</h2>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>.then((data) => {
+    // 成功時の処理
+}, (err, msg) => {
+    // エラー時の処理
+    console.log('サーバーとの通信に失敗しました。');
+})</code></pre>
+    <p><strong>2つの書き方：</strong></p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>// 方法1: thenの第2引数でエラー処理
+.then(成功処理, エラー処理)
+
+// 方法2: catchで一括エラー処理（推奨）
+.then(成功処理)
+.then(成功処理)
+.catch(エラー処理)  // どこかでエラーが起きたらここに来る</code></pre>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">Async/Await版の書き方</h2>
+    <p>同じ処理をAsync/Awaitで書くと、より読みやすくなります：</p>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>async function fetchChibaCities() {
+    try {
+        // ①都道府県取得
+        const prefData = await getPref();
+        
+        // ②千葉県を検索
+        const chiba = prefData['result'].find(
+            pref => pref['prefName'] == '千葉県'
+        );
+        
+        if (chiba) {
+            // 千葉県を表示
+            $('#pref_area').html(`${chiba.prefName}:${chiba.prefCode}`);
+            
+            // ③市区町村取得
+            const cityData = await getShiku(chiba.prefCode);
+            
+            // ④市区町村を表示
+            const cityStr = cityData['result']
+                .map(city => city.cityName)
+                .join('&lt;br&gt;');
+            $('#city_area').html(cityStr);
+        }
+    } catch(error) {
+        console.log('サーバーとの通信に失敗しました。');
+    }
+}
+
+fetchChibaCities();</code></pre>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">まとめ</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+      <thead>
+        <tr style="background-color: #f6f8fa;">
+          <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">項目</th>
+          <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">説明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><strong>Promise化</strong></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">Ajaxを<code>new Promise()</code>でラップ</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><strong>チェーン</strong></td>
+          <td style="border: 1px solid #ddd; padding: 10px;"><code>.then()</code>を連結して順次処理</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><strong>データの受け渡し</strong></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">前のthenの<code>return</code>が次のthenに渡される</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><strong>Promise返却</strong></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">thenでPromiseを返すと、自動的に展開される</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><strong>エラー処理</strong></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">thenの第2引数または<code>.catch()</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 20px; padding: 15px; background-color: #e7f3ff; border-left: 4px solid #0366d6; border-radius: 4px;">
+      <strong>💡 実践的なユースケース：</strong><br>
+      • ユーザー情報取得 → そのユーザーの注文履歴取得<br>
+      • 都道府県選択 → 市区町村リスト取得<br>
+      • 商品カテゴリー取得 → 特定カテゴリーの商品一覧取得<br>
+      • 認証 → 認証後のデータ取得
+    </p>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">実行結果表示エリア</h2>
+    <div style="padding: 15px; background-color: #f8f9fa; border: 1px solid #ddd; border-radius: 4px;">
+      <p style="margin: 0 0 10px 0;"><strong>都道府県:</strong></p>
+      <div id="pref_area" style="padding: 10px; background-color: #fff; border: 1px solid #ddd; border-radius: 3px; min-height: 30px;"></div>
+      
+      <p style="margin: 20px 0 10px 0;"><strong>市区町村:</strong></p>
+      <div id="city_area" style="padding: 10px; background-color: #fff; border: 1px solid #ddd; border-radius: 3px; min-height: 100px;"></div>
+    </div>
+  </div>
 </body>
 </html>
