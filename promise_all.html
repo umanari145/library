@@ -46,6 +46,237 @@ $(function() {
 })
 </script>
 <body>
-	<div id="form_block">
+  <div style="max-width: 900px; margin: 0 auto; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica', 'Arial', sans-serif; line-height: 1.6;">
+    <h1 style="border-bottom: 2px solid #ddd; padding-bottom: 10px;">Promise.all() - 複数の非同期処理を並列実行</h1>
+    
+    <p style="background-color: #fff3cd; padding: 10px; border-radius: 5px;">
+      <strong>Console</strong>で実行結果を確認してください
+    </p>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">このサンプルで学べること</h2>
+    <ul>
+      <li><code>Promise.all()</code> の使い方</li>
+      <li>複数のAPI呼び出しを<strong>並列実行</strong>する方法</li>
+      <li>全ての処理が完了してから次の処理を行う方法</li>
+      <li>どれか1つでもエラーになった場合のハンドリング</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">Promise.all() とは？</h2>
+    <div style="padding: 15px; background-color: #e7f3ff; border-left: 4px solid #0366d6; border-radius: 4px;">
+      <p style="margin: 0;"><code>Promise.all()</code> は、<strong>複数のPromiseを並列実行</strong>し、<strong>全てが完了するまで待つ</strong>メソッドです。</p>
+    </div>
+
+    <h3 style="color: #666; font-size: 1.1em; margin-top: 20px;">特徴：</h3>
+    <ul>
+      <li>✅ <strong>並列実行</strong>：複数の非同期処理を同時に開始</li>
+      <li>✅ <strong>全て完了を待つ</strong>：全てのPromiseが resolve されるまで待機</li>
+      <li>✅ <strong>配列で結果を取得</strong>：全ての結果を配列で受け取る</li>
+      <li>⚠️ <strong>1つでも失敗したら reject</strong>：どれか1つでもエラーになると全体がエラー</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">処理の流れ</h2>
+    <div style="padding: 15px; background-color: #f8f9fa; border: 2px solid #0366d6; border-radius: 4px;">
+      <ol style="margin: 0; padding-left: 20px;">
+        <li><strong>func1</strong> と <strong>func2</strong> の2つのPromiseを定義</li>
+        <li>各Promiseが異なるJSONファイルを取得（/ajaxpost2.json と /ajaxpost3.json）</li>
+        <li><code>Promise.all([func1, func2])</code> で<strong>両方を同時に実行</strong></li>
+        <li>両方の処理が完了したら <code>.then()</code> に進む</li>
+        <li>結果を配列として受け取る（<code>res1[0]</code>, <code>res1[1]</code>）</li>
+      </ol>
+    </div>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">コード解説</h2>
+
+    <h3 style="color: #666; font-size: 1.1em; margin-top: 20px;">1. Promise の定義</h3>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>// Promise 1: ajaxpost2.json を取得
+var func1 = new Promise((resolve, reject) => {
+    $.ajax({
+        type: 'GET',
+        url: '/ajaxpost2.json',
+        dataType: 'json'
+    })
+    .done((data) => {
+        resolve(data);  // 成功時
+    })
+    .fail((data) => {
+        reject(data);   // 失敗時
+    })
+})
+
+// Promise 2: ajaxpost3.json を取得
+var func2 = new Promise((resolve, reject) => {
+    $.ajax({
+        type: 'GET',
+        url: '/ajaxpost3.json',
+        dataType: 'json'
+    })
+    .done((data) => {
+        resolve(data);
+    })
+    .fail((data) => {
+        reject(data);
+    })
+})</code></pre>
+    <p><strong>ポイント：</strong></p>
+    <ul>
+      <li>それぞれ独立したPromiseオブジェクトを作成</li>
+      <li>各Promiseが異なるJSONファイルを取得</li>
+      <li>Ajaxを<code>new Promise()</code>でラップ</li>
+    </ul>
+
+    <h3 style="color: #666; font-size: 1.1em; margin-top: 20px;">2. Promise.all() で並列実行</h3>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>Promise.all([
+    func1,  // Promise 1
+    func2   // Promise 2
+])
+.then((res1) => {
+    // 両方とも成功した場合のみここに来る
+    console.log(res1[0]);  // func1 の結果
+    console.log(res1[1]);  // func2 の結果
+})
+.catch((err) => {
+    // どちらか1つでも失敗したらここに来る
+    alert("失敗しました。");
+})
+.finally(() => {
+    // 成功・失敗に関わらず必ず実行
+    console.log('処理が完了しました。');
+})</code></pre>
+    <p><strong>ポイント：</strong></p>
+    <ul>
+      <li><code>Promise.all()</code> の引数は<strong>Promiseの配列</strong></li>
+      <li><code>.then()</code> の引数は<strong>結果の配列</strong>（Promiseの順番と対応）</li>
+      <li><code>res1[0]</code> は func1 の結果、<code>res1[1]</code> は func2 の結果</li>
+      <li>どちらか1つでもエラーになると <code>.catch()</code> へ</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">実行タイミングの比較</h2>
+    
+    <h3 style="color: #666; font-size: 1.1em; margin-top: 20px;">❌ 順次実行（遅い）</h3>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>// func1 が完了してから func2 を開始
+await func1;  // 1秒待つ
+await func2;  // さらに1秒待つ
+// 合計: 2秒</code></pre>
+    
+    <h3 style="color: #666; font-size: 1.1em; margin-top: 20px;">✅ 並列実行（速い）</h3>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>// func1 と func2 を同時に開始
+await Promise.all([func1, func2]);
+// 合計: 1秒（長い方に合わせる）</code></pre>
+
+    <div style="padding: 15px; background-color: #d4edda; border-left: 4px solid #28a745; border-radius: 4px; margin-top: 15px;">
+      <p style="margin: 0;"><strong>⚡ パフォーマンス向上</strong></p>
+      <p style="margin: 5px 0 0 0;">関連性のない複数のAPI呼び出しは、<code>Promise.all()</code>を使って並列実行することで、処理時間を大幅に短縮できます。</p>
+    </div>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">Async/Await 版の書き方</h2>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>async function fetchMultipleData() {
+    try {
+        // Promise.all() は await できる
+        const results = await Promise.all([func1, func2]);
+        
+        console.log(results[0]);  // func1 の結果
+        console.log(results[1]);  // func2 の結果
+        
+    } catch(error) {
+        alert("失敗しました。");
+    } finally {
+        console.log('処理が完了しました。');
+    }
+}
+
+fetchMultipleData();</code></pre>
+    <p>Async/Awaitを使うと、さらに読みやすくなります。</p>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">分割代入を使ったモダンな書き方</h2>
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>// 配列の分割代入
+const [data1, data2] = await Promise.all([func1, func2]);
+
+console.log(data1);  // func1 の結果
+console.log(data2);  // func2 の結果</code></pre>
+    <p><code>results[0]</code>、<code>results[1]</code> より分かりやすい！</p>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">エラーハンドリングの挙動</h2>
+    <div style="padding: 15px; background-color: #fff3cd; border-left: 4px solid #ffc107; border-radius: 4px;">
+      <p style="margin: 0 0 10px 0;"><strong>⚠️ 重要な特徴</strong></p>
+      <p style="margin: 0;"><code>Promise.all()</code> は、<strong>どれか1つでも reject されると、即座に全体が reject</strong> されます。</p>
+    </div>
+
+    <pre style="background-color: #f6f8fa; padding: 16px; border-radius: 6px; overflow-x: auto;"><code>Promise.all([
+    Promise.resolve('成功1'),
+    Promise.reject('エラー!'),  // ← これが失敗
+    Promise.resolve('成功3')
+])
+.then((results) => {
+    // ここには来ない
+})
+.catch((error) => {
+    console.log(error);  // "エラー!" が出力される
+})</code></pre>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">関連メソッド</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+      <thead>
+        <tr style="background-color: #f6f8fa;">
+          <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">メソッド</th>
+          <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">挙動</th>
+          <th style="border: 1px solid #ddd; padding: 10px; text-align: left;">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><code>Promise.all()</code></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">全て成功で resolve<br>1つでも失敗で reject</td>
+          <td style="border: 1px solid #ddd; padding: 10px;">全てが必須の処理</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><code>Promise.allSettled()</code></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">全て完了まで待つ<br>成功/失敗の結果を全て返す</td>
+          <td style="border: 1px solid #ddd; padding: 10px;">一部失敗しても続行したい</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><code>Promise.race()</code></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">最初に完了した1つを返す</td>
+          <td style="border: 1px solid #ddd; padding: 10px;">タイムアウト実装など</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ddd; padding: 10px;"><code>Promise.any()</code></td>
+          <td style="border: 1px solid #ddd; padding: 10px;">最初に成功した1つを返す</td>
+          <td style="border: 1px solid #ddd; padding: 10px;">複数のフォールバック</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">実践的なユースケース</h2>
+    <ul>
+      <li>📊 <strong>ダッシュボード</strong>: 複数のAPI（ユーザー情報、統計、通知など）を一度に取得</li>
+      <li>🛒 <strong>ECサイト</strong>: 商品情報、在庫状況、レビューを並列取得</li>
+      <li>📱 <strong>プロフィール画面</strong>: プロフィール、投稿一覧、フォロワー数を同時取得</li>
+      <li>🔍 <strong>検索結果</strong>: 複数のデータソースから同時に検索</li>
+      <li>📁 <strong>ファイルアップロード</strong>: 複数ファイルを並列アップロード</li>
+    </ul>
+
+    <h2 style="color: #0366d6; margin-top: 30px;">まとめ</h2>
+    <div style="padding: 15px; background-color: #e7f3ff; border-left: 4px solid #0366d6; border-radius: 4px;">
+      <p style="margin: 0 0 10px 0;"><strong>Promise.all() を使うべき場面：</strong></p>
+      <ul style="margin: 0; padding-left: 20px;">
+        <li>複数の独立した非同期処理を実行する</li>
+        <li>全ての結果が必要</li>
+        <li>処理時間を短縮したい</li>
+      </ul>
+      <p style="margin: 15px 0 10px 0;"><strong>注意点：</strong></p>
+      <ul style="margin: 0; padding-left: 20px;">
+        <li>1つでもエラーになると全体がエラーになる</li>
+        <li>一部失敗しても続行したい場合は <code>Promise.allSettled()</code> を使う</li>
+      </ul>
+    </div>
+
+    <p style="margin-top: 20px; padding: 15px; background-color: #d4edda; border-left: 4px solid #28a745; border-radius: 4px;">
+      <strong>💡 パフォーマンスのヒント：</strong><br>
+      複数のAPI呼び出しが互いに依存していない場合は、必ず <code>Promise.all()</code> で並列実行しましょう。<br>
+      例: 5個のAPIを順次実行すると5秒、並列実行なら1秒で完了します（各API1秒と仮定）。
+    </p>
+
+    <div id="form_block"></div>
+  </div>
 </body>
 </html>
